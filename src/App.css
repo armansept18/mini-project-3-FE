@@ -38,8 +38,9 @@
 }
 
 .center {
-  padding-left: 30%;
+  padding: 10%;
   font-weight: bold;
+  height: 95%;
 }
 
 .bg-img {
