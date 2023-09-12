@@ -18,13 +18,3 @@ export const ProtectedPage = ({ children, needLogin = false }) => {
 
   return children;
 };
-
-// if (needLogin) {
-//   if (userSelector.role_id === 1) {
-//     // Admin can access both admin and cashier pages
-//     return;
-//   } else if (userSelector.role_id === 2) {
-//     // Cashier can only access the cashier page
-//     return nav("/home/cashier");
-//   }
-// }
