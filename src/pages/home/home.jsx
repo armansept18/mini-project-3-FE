@@ -1,9 +1,12 @@
-import { Button, Center } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Button, Center, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ModalCreateCashier } from "../../components/login/modals/modal-create-new-cashier";
 
 export const HomePage = () => {
+  const [isCreateCashierModalOpen, setCreateCashierModalOpen] = useState(false);
+
   const nav = useNavigate();
   const userSelector = useSelector((state) => state.auth);
 
@@ -16,21 +19,29 @@ export const HomePage = () => {
     nav("/home/cashier");
   };
 
-  useEffect(() => {
-    console.log("user selector", userSelector);
-  }, []);
+  const openCreateCashierModal = () => {
+    setCreateCashierModalOpen(true);
+  };
 
   return (
     <>
-      <Center
-        style={{ display: "flex", flexDirection: "column", marginTop: "10rem" }}
-      >
-        <div>Home Page</div>
-        <Button onClick={handleLogout} color={"red"}>
+      <Center display={"flex"} flexDir={"column"} mt={"2rem"}>
+        <Text fontWeight={"bold"} fontSize={"2xl"}>
+          HOME PAGE
+        </Text>
+        <Button onClick={handleLogout} color={"red"} mt={"1rem"}>
           LOGOUT
         </Button>
-        <Button onClick={toCashier}>TO CASHIER PAGE</Button>
+        <Button onClick={toCashier} mt={"1rem"} mb={"7rem"}>
+          TO CASHIER PAGE
+        </Button>
+        <Button onClick={openCreateCashierModal}>Create New Cashier</Button>
       </Center>
+
+      <ModalCreateCashier
+        isOpen={isCreateCashierModalOpen}
+        onClose={() => setCreateCashierModalOpen(false)}
+      />
     </>
   );
 };
