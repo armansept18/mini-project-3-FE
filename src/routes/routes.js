@@ -1,6 +1,8 @@
+import { ProductPage } from "../pages/product/productpage";
 import { LoginPage } from "../pages/auth/login";
-import { HomePage } from "../pages/home/home";
+import { HomePageAdmin } from "../pages/Landing page/admin";
 import { Redirect } from "../pages/redirect/redirect";
+import { DashboardPage } from "../pages/dashboard/dashboard";
 
 class RouteClass {
   constructor(path, element) {
@@ -11,7 +13,9 @@ class RouteClass {
 
 export const routes = [
   new RouteClass("login", <LoginPage />),
-  new RouteClass("home", <HomePage />),
+  new RouteClass("admin", <HomePageAdmin />),
+  new RouteClass("dashboard", <DashboardPage />),
+  new RouteClass("product", <ProductPage />),
 
   new RouteClass("*", <Redirect />),
 ];
