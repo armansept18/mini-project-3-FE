@@ -8,7 +8,8 @@ export const userLogin = (values) => {
         ...values,
       });
 
-      const user = res.data;
+      const user = res.data.user;
+      localStorage.setItem("auth", res.data.token);
 
       dispatch({
         type: types.login,
@@ -17,6 +18,7 @@ export const userLogin = (values) => {
 
       return { success: true, user };
     } catch (error) {
+      localStorage.removeItem("auth");
       return { success: false, error: error.message };
     }
   };

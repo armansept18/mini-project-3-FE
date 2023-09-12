@@ -22,18 +22,17 @@ import "../../../src/App.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import api from "../../api/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { types } from "../../redux/types";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { userLogin } from "../../middlewares/auth-middlewares";
-// import { useHistory } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const toast = useToast();
-  // const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -49,6 +48,7 @@ export const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const result = await dispatch(userLogin(values));
+
         if (result.success) {
           toast({
             title: "welcome",
@@ -58,7 +58,14 @@ export const LoginPage = () => {
             position: "top",
           });
 
-          return nav("home");
+          const tokenLocal = localStorage.getItem("auth");
+          const decoded = jwt_decode(tokenLocal);
+
+          if (decoded.role_id === 1) {
+            return nav("/home/admin");
+          } else {
+            return nav("/home/cashier");
+          }
         } else {
           toast({
             title: "Login Failed",
@@ -75,9 +82,6 @@ export const LoginPage = () => {
     },
   });
 
-  useEffect(() => {
-    console.log();
-  });
   return (
     <>
       <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
