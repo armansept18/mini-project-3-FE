@@ -62,9 +62,9 @@ export const LoginPage = () => {
           const decoded = jwt_decode(tokenLocal);
 
           if (decoded.role_id === 1) {
-            return nav("/home/admin");
+            return nav("/admin");
           } else {
-            return nav("/home/cashier");
+            return nav("/product");
           }
         } else {
           toast({
