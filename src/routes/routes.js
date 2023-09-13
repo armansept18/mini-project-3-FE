@@ -5,6 +5,8 @@ import { HomePage } from "../pages/home/home";
 import { Redirect } from "../pages/redirect/redirect";
 import Multistep from "../template/create-new-cashier";
 import { ProtectedPage } from "./protected-page";
+import { HomePageAdmin } from "../pages/Landing page/admin";
+import { DashboardPage } from "../pages/dashboard/dashboard";
 
 class RouteClass {
   constructor(path, element, needLogin = false) {
@@ -17,9 +19,9 @@ class RouteClass {
 
 export const routes = [
   new RouteClass("login", <LoginPage />),
-  new RouteClass("home/admin", <HomePage />, true),
-  new RouteClass("home/cashier", <CashierHomePage />, true),
-  new RouteClass("createCashier", <Multistep />),
+  new RouteClass("admin", <HomePageAdmin />),
+  new RouteClass("dashboard", <DashboardPage />),
+  new RouteClass("product", <ProductPage />),
 
   new RouteClass("*", <Redirect />),
 ];
