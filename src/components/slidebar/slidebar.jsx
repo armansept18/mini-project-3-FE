@@ -34,7 +34,7 @@ export const SlideBar = ({ isSlideOpen }) => {
 
   return (
     <>
-      <nav className="max-md:w-full max-md:top-0 max-md:fixed bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 ">
+      <nav className="max-md:w-full max-md:top-0 max-md:fixed max-md:bg-gray-900 md:bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 ">
         <div className=" md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
@@ -60,7 +60,6 @@ export const SlideBar = ({ isSlideOpen }) => {
             ADMIN
           </span>
           <hr className="my-4 md:min-w-full  border-b-4 mt-5" />
-
           <div
             className=" max-md:text-white md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
@@ -109,7 +108,6 @@ export const SlideBar = ({ isSlideOpen }) => {
               </div>
             </div>
           </div>
-
           {/* Collapse */}
           <div
             className={
