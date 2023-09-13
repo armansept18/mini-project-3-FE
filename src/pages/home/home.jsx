@@ -29,6 +29,10 @@ export const HomePage = () => {
         <Text fontWeight={"bold"} fontSize={"2xl"}>
           HOME PAGE
         </Text>
+        <Text>
+          hi {userSelector.first_name} as{" "}
+          {userSelector.role_id == 1 ? "admin" : "cashier"}
+        </Text>
         <Button onClick={handleLogout} color={"red"} mt={"1rem"}>
           LOGOUT
         </Button>
