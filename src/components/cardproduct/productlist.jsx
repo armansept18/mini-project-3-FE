@@ -15,7 +15,7 @@ export const CardProduct = ({ product }) => {
 
   return (
     <>
-      {product?.map((item, i) => {
+      {product.product?.map((item, i) => {
         return (
           <div
             className="bg-white flex justify-between w-full p-4  bg-gray-200 mt-2 items-center"
