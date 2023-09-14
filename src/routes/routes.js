@@ -7,7 +7,7 @@ import Multistep from "../template/create-new-cashier";
 import { ProtectedPage } from "./protected-page";
 import { HomePageAdmin } from "../pages/Landing page/admin";
 import { DashboardPage } from "../pages/dashboard/dashboard";
-import { CashierPage } from "../pages/Landing page/cashier";
+import { CashierPage } from "../pages/cashier/cashier";
 
 class RouteClass {
   constructor(path, element, needLogin = false) {
@@ -23,7 +23,8 @@ export const routes = [
   new RouteClass("admin", <HomePageAdmin />),
   new RouteClass("dashboard", <DashboardPage />),
   new RouteClass("product", <ProductPage />),
-  new RouteClass("cashier", <CashierPage />),
+  new RouteClass("employee", <CashierPage />),
+  // new RouteClass("employee", )
 
   new RouteClass("*", <Redirect />),
 ];

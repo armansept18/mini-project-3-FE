@@ -3,14 +3,21 @@ import { CgProfile } from "react-icons/cg";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useState } from "react"; // Import useState
 import { Avatar } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 export const NavBar = ({ openSlide }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const nav = useNavigate();
+  const userSelector = useSelector((state) => state.auth);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    nav("/login");
+  };
 
   return (
     <>
@@ -60,7 +67,7 @@ export const NavBar = ({ openSlide }) => {
                       <Avatar className="text-sm" size={"sm"} />
                     </div>
                     <div className="w-2"></div>
-                    <div>Andre</div>
+                    <div>{userSelector.first_name}</div>
                   </div>
                 </div>
                 <div className="p-2 flex justify-between ">
@@ -70,9 +77,6 @@ export const NavBar = ({ openSlide }) => {
                     </div>
                     {isDropdownOpen && (
                       <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2">
-                        <div onClick={handleLogout} className="cursor-pointer">
-                          Login
-                        </div>
                         <div onClick={handleLogout} className="cursor-pointer">
                           Logout
                         </div>

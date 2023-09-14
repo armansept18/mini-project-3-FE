@@ -34,7 +34,7 @@ export const SlideBar = ({ isSlideOpen }) => {
 
   return (
     <>
-      <nav className="max-md:w-full max-md:top-0 max-md:fixed max-md:bg-gray-900 md:bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 ">
+      <nav className="max-md:w-full max-md:top-0 max-md:fixed dark:bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 ">
         <div className=" md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
@@ -56,7 +56,7 @@ export const SlideBar = ({ isSlideOpen }) => {
               ></path>
             </svg>
           </button>
-          <span className="max-md:hidden text-white text-center md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
+          <span className="max-md:hidden dark:text-white text-center md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
             ADMIN
           </span>
           <hr className="my-4 md:min-w-full  border-b-4 mt-5" />
@@ -131,7 +131,7 @@ export const SlideBar = ({ isSlideOpen }) => {
               </div>
             </div>
             {/* Navigation */}
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none bg-gray-900">
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li
                 onClick={() => nav("/dashboard")}
                 className="cursor-pointer mb-4"
@@ -163,8 +163,8 @@ export const SlideBar = ({ isSlideOpen }) => {
                 </a>
               </li>
 
-              <li className="mb-4">
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <li className="mb-4" onClick={() => nav("/employee")}>
+                <a className="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <svg
                     className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true"
@@ -174,22 +174,9 @@ export const SlideBar = ({ isSlideOpen }) => {
                   >
                     <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
                   </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Employe</span>
-                </a>
-              </li>
-
-              <li className="mb-4">
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <svg
-                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 18"
-                  >
-                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
-                  </svg>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Employe</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">
+                    Employee
+                  </span>
                 </a>
               </li>
             </ul>
