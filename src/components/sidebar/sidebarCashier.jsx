@@ -9,6 +9,8 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { PiHamburgerBold, PiCoffeeBold } from "react-icons/pi";
+import { GiManualJuicer } from "react-icons/gi";
 
 export const SideBarCashier = ({ isSlideOpen }) => {
   // console.log(isSlideOpen);
@@ -125,17 +127,48 @@ export const SideBarCashier = ({ isSlideOpen }) => {
                 <div className="flex justify-between border-b-4 "></div>
               </div>
             </div>
-            {/* Navigation */}
+            {/* Navigation :)*/}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li
                 onClick={() => nav("/cashier-product")}
                 className="cursor-pointer mb-4"
               >
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <MdProductionQuantityLimits className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="flex-1 ml-3 whitespace-nowrap">Product</span>
+                  <PiCoffeeBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ml-3 whitespace-nowrap">COFFEE</span>
                 </a>
               </li>
+
+              <li
+                onClick={() => nav("/cashier-product")}
+                className="cursor-pointer mb-4"
+              >
+                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <GiManualJuicer className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ml-3 whitespace-nowrap">
+                    NON COFFEE
+                  </span>
+                </a>
+              </li>
+
+              <li
+                onClick={() => nav("/cashier-product")}
+                className="cursor-pointer mb-4"
+              >
+                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <PiHamburgerBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ml-3 whitespace-nowrap">FOOD</span>
+                </a>
+              </li>
+
+              <ul>
+                <li className="cursor-pointer flex justify-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <span>Burger</span>
+                </li>
+                <li className="cursor-pointer flex justify-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <span>Burger</span>
+                </li>
+              </ul>
             </ul>
           </div>
         </div>
