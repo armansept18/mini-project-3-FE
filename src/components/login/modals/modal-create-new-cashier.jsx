@@ -19,10 +19,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import api from "../../../api/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { receiveUser, userLogin } from "../../../middlewares/auth-middlewares";
 
 export const ModalCreateCashier = ({ isOpen, onClose }) => {
   const [show, setShow] = useState(false);
@@ -218,6 +219,8 @@ export const ModalCreateCashier = ({ isOpen, onClose }) => {
 
 const Submodal = ({ isOpen, onClose, handleFormik }) => {
   const userSelector = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const email = userSelector.email;
   // console.log("email: ", email);
   const toast = useToast();
@@ -226,13 +229,14 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
 
   const formik2 = useFormik({
     initialValues: {
-      email: email,
+      email: userSelector.email,
       password: "",
     },
     validationSchema: Yup.object().shape({
       password: Yup.string().required("password required"),
     }),
     onSubmit: async (value) => {
+      // console.log(value);
       try {
         const res = await api.post("/users/passwordValidation", {
           ...value,
@@ -260,6 +264,10 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
       }
     },
   });
+  useEffect(() => {
+    formik2.setFieldValue("email", userSelector.email);
+  }, [userSelector]);
+
   return (
     <>
       <Modal isCentered isOpen={isOpen} onClose={onclose}>

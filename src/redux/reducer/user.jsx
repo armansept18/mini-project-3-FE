@@ -11,7 +11,10 @@ export const userReducer = (state = init_state, action) => {
   if (action.type === types.login) {
     return {
       ...state,
-      ...action.payload,
+      id: action.payload.id,
+      first_name: action.payload.first_name,
+      email: action.payload.email,
+      role_id: action.payload.role_id,
     };
   } else if (action.type === types.logout) {
     return init_state;
