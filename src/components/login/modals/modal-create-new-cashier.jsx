@@ -79,7 +79,7 @@ export const ModalCreateCashier = ({ isOpen, onClose }) => {
       } catch (error) {
         toast({
           title: "failed create new cashier",
-          description: error?.message || "An error occurred",
+          description: "email already registered",
           status: "error",
           duration: 2000,
           isClosable: true,

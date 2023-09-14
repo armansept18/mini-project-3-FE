@@ -61,10 +61,11 @@ export const LoginPage = () => {
           const tokenLocal = localStorage.getItem("auth");
           const decoded = jwt_decode(tokenLocal);
 
+          console.log("decoded", decoded);
           if (decoded.role_id === 1) {
             return nav("/admin");
-          } else {
-            return nav("/product");
+          } else if (decoded.role_id === 2) {
+            return nav("/cashier-product");
           }
         } else {
           toast({

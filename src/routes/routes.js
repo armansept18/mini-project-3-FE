@@ -25,12 +25,12 @@ class RouteClass {
 
 export const routes = [
   new RouteClass("login", <LoginPage />),
-  new RouteClass("admin", <HomePageAdmin />),
-  new RouteClass("cashier", <CashierLandingPage />),
-  new RouteClass("dashboard", <DashboardPage />),
-  new RouteClass("admin-product", <ProductPageAdmin />),
-  new RouteClass("cashier-product", <ProductPageCashier />),
-  new RouteClass("employee", <CashierPage />),
+  new RouteClass("admin", <HomePageAdmin />, true),
+  new RouteClass("cashier", <CashierLandingPage />, true),
+  new RouteClass("dashboard", <DashboardPage />, true),
+  new RouteClass("admin-product", <ProductPageAdmin />, true),
+  new RouteClass("cashier-product", <ProductPageCashier />, true),
+  new RouteClass("employee", <CashierPage />, true),
 
   new RouteClass("*", <Redirect />),
 ];

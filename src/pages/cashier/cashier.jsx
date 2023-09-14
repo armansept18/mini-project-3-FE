@@ -1,3 +1,4 @@
+import { Employee } from "../../components/employee/employee";
 import {
   NavTemplateAdmin,
   NavTemplateCashier,
@@ -7,8 +8,8 @@ export const CashierPage = () => {
   return (
     <>
       <NavTemplateAdmin>
-        <div className="flex justify-center">
-          <div className="bg-gray-300 w-56 h-96">INI KASIR UY</div>
+        <div className="col-auto h-24 rounded max-md:mt-28 md:ml-64 md:max-w-7xl h-auto">
+          <Employee />
         </div>
       </NavTemplateAdmin>
     </>
