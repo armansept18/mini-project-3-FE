@@ -23,6 +23,7 @@ export const ProductPageAdmin = () => {
       <NavTemplateAdmin>
         <div className="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
           <CardProduct product={product} />
+
           <PaginationCakraUi product={product} fetchProduct={fetchProduct} />
         </div>
       </NavTemplateAdmin>

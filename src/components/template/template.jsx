@@ -1,3 +1,4 @@
+import { CardTransaction } from "../cardtransaction/cardtransaction";
 import { NavBarAdmin } from "../navbar/navbaradmin";
 import { NavBarCashier } from "../navbar/navbarcashier";
 import { SideBarAdmin } from "../sidebar/sidebarAdmin";
