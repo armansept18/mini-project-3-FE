@@ -1,7 +1,7 @@
 import {
   ProductPage,
   ProductPageAdmin,
-} from "../pages/product/productpageadmin";
+} from "../pages/product-admin/productpageadmin";
 import { LoginPage } from "../pages/auth/login";
 import { CashierHomePage } from "../pages/home/cashier-home-page";
 import { HomePage } from "../pages/home/home";
@@ -12,7 +12,11 @@ import { HomePageAdmin } from "../pages/Landing page/admin";
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { CashierPage } from "../pages/cashier/cashier";
 import { CashierLandingPage } from "../pages/Landing page/cashier";
-import { ProductPageCashier } from "../pages/product/productpagecashier";
+
+import { PageCoffee } from "../pages/product-cashier/coffee.jsx/pagecoffee";
+import { PageFood } from "../pages/product-cashier/food/pagefood";
+import { PageNonCoffee } from "../pages/product-cashier/noncoffee/noncoffee";
+import { PageSnack } from "../pages/product-cashier/snack/snack";
 
 class RouteClass {
   constructor(path, element, needLogin = false) {
@@ -29,8 +33,11 @@ export const routes = [
   new RouteClass("cashier", <CashierLandingPage />),
   new RouteClass("dashboard", <DashboardPage />),
   new RouteClass("admin-product", <ProductPageAdmin />),
-  new RouteClass("cashier-product", <ProductPageCashier />),
   new RouteClass("employee", <CashierPage />),
+  new RouteClass("coffee", <PageCoffee />),
+  new RouteClass("noncoffee", <PageNonCoffee />),
+  new RouteClass("food", <PageFood />),
+  new RouteClass("snack", <PageSnack />),
 
   new RouteClass("*", <Redirect />),
 ];

@@ -11,6 +11,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { PiHamburgerBold, PiCoffeeBold } from "react-icons/pi";
 import { GiManualJuicer } from "react-icons/gi";
+import { FaBowlFood } from "react-icons/fa6";
 
 export const SideBarCashier = ({ isSlideOpen }) => {
   // console.log(isSlideOpen);
@@ -21,7 +22,10 @@ export const SideBarCashier = ({ isSlideOpen }) => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    nav("/login");
+  };
 
   const sideBarStyle = {
     position: "fixed",
@@ -94,12 +98,6 @@ export const SideBarCashier = ({ isSlideOpen }) => {
                     <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2">
                       <div
                         onClick={handleLogout}
-                        className="cursor-pointer text-gray-900"
-                      >
-                        Login
-                      </div>
-                      <div
-                        onClick={handleLogout}
                         className="cursor-pointer cursor-pointer text-gray-900"
                       >
                         Logout
@@ -130,7 +128,7 @@ export const SideBarCashier = ({ isSlideOpen }) => {
             {/* Navigation :)*/}
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li
-                onClick={() => nav("/cashier-product")}
+                onClick={() => nav("/coffee")}
                 className="cursor-pointer mb-4"
               >
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -140,7 +138,7 @@ export const SideBarCashier = ({ isSlideOpen }) => {
               </li>
 
               <li
-                onClick={() => nav("/cashier-product")}
+                onClick={() => nav("/noncoffee")}
                 className="cursor-pointer mb-4"
               >
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -151,24 +149,19 @@ export const SideBarCashier = ({ isSlideOpen }) => {
                 </a>
               </li>
 
-              <li
-                onClick={() => nav("/cashier-product")}
-                className="cursor-pointer mb-4"
-              >
+              <li onClick={() => nav("/food")} className="cursor-pointer mb-4">
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <PiHamburgerBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <FaBowlFood className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   <span className="flex-1 ml-3 whitespace-nowrap">FOOD</span>
                 </a>
               </li>
 
-              <ul>
-                <li className="cursor-pointer flex justify-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <span>Burger</span>
-                </li>
-                <li className="cursor-pointer flex justify-center p-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <span>Burger</span>
-                </li>
-              </ul>
+              <li onClick={() => nav("/snack")} className="cursor-pointer mb-4">
+                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <PiHamburgerBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ml-3 whitespace-nowrap">SNACK</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -64,7 +64,7 @@ export const LoginPage = () => {
           if (decoded.role_id === 1) {
             return nav("/admin");
           } else {
-            return nav("/product");
+            return nav("/cashier");
           }
         } else {
           toast({
