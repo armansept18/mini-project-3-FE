@@ -6,7 +6,7 @@ import { Avatar } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-export const NavBar = ({ openSlide }) => {
+export const NavBarAdmin = ({ openSlide }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const nav = useNavigate();
   const userSelector = useSelector((state) => state.auth);

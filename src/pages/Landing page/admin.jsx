@@ -1,11 +1,11 @@
-import { NavBar } from "../../components/navbar/navbar";
-import { SlideBar } from "../../components/slidebar/slidebar";
 import { useState } from "react";
+import { NavTemplateAdmin } from "../../components/template/template";
 export const HomePageAdmin = () => {
   return (
     <>
-      <NavBar />
-      <SlideBar />
+      <NavTemplateAdmin>
+        <div className="flex justify-center">Welcome to admin page:)</div>
+      </NavTemplateAdmin>
     </>
   );
 };

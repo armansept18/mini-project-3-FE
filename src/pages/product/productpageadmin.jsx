@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { CardProduct } from "../../components/cardproduct/productlist";
-import { NavTemplate } from "../../components/template/template";
+import {
+  NavTemplate,
+  NavTemplateAdmin,
+} from "../../components/template/template";
 import api from "../../api/api";
 import { PaginationCakraUi } from "../../components/pagination/pagination";
 
-export const ProductPage = () => {
+export const ProductPageAdmin = () => {
   const [product, setProduct] = useState([]);
 
   const fetchProduct = async (page, pageSize) => {
@@ -17,12 +20,12 @@ export const ProductPage = () => {
   }, []);
   return (
     <>
-      <NavTemplate>
-        <div class="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
+      <NavTemplateAdmin>
+        <div className="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
           <CardProduct product={product} />
           <PaginationCakraUi product={product} fetchProduct={fetchProduct} />
         </div>
-      </NavTemplate>
+      </NavTemplateAdmin>
     </>
   );
 };

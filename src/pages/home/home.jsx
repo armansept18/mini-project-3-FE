@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ModalCreateCashier } from "../../components/login/modals/modal-create-new-cashier";
 
-export const HomePage = () => {
+export const HomePageAdmin = () => {
   const [isCreateCashierModalOpen, setCreateCashierModalOpen] = useState(false);
 
   const nav = useNavigate();

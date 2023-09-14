@@ -10,7 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
-export const SlideBar = ({ isSlideOpen }) => {
+export const SideBarAdmin = ({ isSlideOpen }) => {
   // console.log(isSlideOpen);
   const nav = useNavigate();
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -59,7 +59,7 @@ export const SlideBar = ({ isSlideOpen }) => {
           <span className="max-md:hidden dark:text-white text-center md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
             ADMIN
           </span>
-          <hr className="my-4 md:min-w-full  border-b-4 mt-5" />
+          <hr className="my-4 md:min-w-full  border-b-4 mt-5 bg-black" />
           <div
             className=" max-md:text-white md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
@@ -154,7 +154,7 @@ export const SlideBar = ({ isSlideOpen }) => {
               </li>
 
               <li
-                onClick={() => nav("/product")}
+                onClick={() => nav("/admin-product")}
                 className="cursor-pointer mb-4"
               >
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

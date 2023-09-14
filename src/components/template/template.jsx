@@ -1,14 +1,28 @@
-import { NavBar } from "../navbar/navbar";
-import { SlideBar } from "../slidebar/slidebar";
+import { NavBarAdmin } from "../navbar/navbaradmin";
+import { NavBarCashier } from "../navbar/navbarcashier";
+import { SideBarAdmin } from "../sidebar/sidebarAdmin";
+import { SideBarCashier } from "../sidebar/sidebarCashier";
 
-export const NavTemplate = ({ children }) => {
+export const NavTemplateAdmin = ({ children }) => {
   return (
     <>
-      <NavBar />
+      <NavBarAdmin />
       <div>
         <div>{children}</div>
       </div>
-      <SlideBar />
+      <SideBarAdmin />
+    </>
+  );
+};
+
+export const NavTemplateCashier = ({ children }) => {
+  return (
+    <>
+      <NavBarCashier />
+      <div>
+        <div>{children}</div>
+      </div>
+      <SideBarCashier />
     </>
   );
 };

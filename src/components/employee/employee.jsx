@@ -1,3 +1,3 @@
 export const Employee = () => {
-    return<></>
-}
+  return <></>;
+};

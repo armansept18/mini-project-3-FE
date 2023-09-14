@@ -1,4 +1,7 @@
-import { ProductPage } from "../pages/product/productpage";
+import {
+  ProductPage,
+  ProductPageAdmin,
+} from "../pages/product/productpageadmin";
 import { LoginPage } from "../pages/auth/login";
 import { CashierHomePage } from "../pages/home/cashier-home-page";
 import { HomePage } from "../pages/home/home";
@@ -8,6 +11,8 @@ import { ProtectedPage } from "./protected-page";
 import { HomePageAdmin } from "../pages/Landing page/admin";
 import { DashboardPage } from "../pages/dashboard/dashboard";
 import { CashierPage } from "../pages/cashier/cashier";
+import { CashierLandingPage } from "../pages/Landing page/cashier";
+import { ProductPageCashier } from "../pages/product/productpagecashier";
 
 class RouteClass {
   constructor(path, element, needLogin = false) {
@@ -21,10 +26,11 @@ class RouteClass {
 export const routes = [
   new RouteClass("login", <LoginPage />),
   new RouteClass("admin", <HomePageAdmin />),
+  new RouteClass("cashier", <CashierLandingPage />),
   new RouteClass("dashboard", <DashboardPage />),
-  new RouteClass("product", <ProductPage />),
+  new RouteClass("admin-product", <ProductPageAdmin />),
+  new RouteClass("cashier-product", <ProductPageCashier />),
   new RouteClass("employee", <CashierPage />),
-  // new RouteClass("employee", )
 
   new RouteClass("*", <Redirect />),
 ];
