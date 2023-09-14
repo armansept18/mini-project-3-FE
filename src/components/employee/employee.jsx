@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { TableEmployee } from "../table/table-employee";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { ModalCreateCashier } from "../login/modals/modal-create-new-cashier";
+import { ModalCreateCashier } from "../modals/modal-create-new-cashier";
 
 export const Employee = () => {
   const [isCreateCashierModalOpen, setCreateCashierModalOpen] = useState(false);

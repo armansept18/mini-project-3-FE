@@ -2,7 +2,7 @@ import { Button, Center, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ModalCreateCashier } from "../../components/login/modals/modal-create-new-cashier";
+import { ModalCreateCashier } from "../../components/modals/modal-create-new-cashier";
 
 export const HomePageAdmin = () => {
   const [isCreateCashierModalOpen, setCreateCashierModalOpen] = useState(false);

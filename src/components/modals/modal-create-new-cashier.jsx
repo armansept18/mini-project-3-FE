@@ -21,9 +21,9 @@ import {
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import api from "../../../api/api";
+import api from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveUser, userLogin } from "../../../middlewares/auth-middlewares";
+import { receiveUser, userLogin } from "../../middlewares/auth-middlewares";
 
 export const ModalCreateCashier = ({ isOpen, onClose }) => {
   const [show, setShow] = useState(false);
