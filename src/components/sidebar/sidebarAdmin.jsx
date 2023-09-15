@@ -19,7 +19,10 @@ export const SideBarAdmin = ({ isSlideOpen }) => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    nav("/login");
+  };
 
   const sideBarStyle = {
     position: "fixed",
@@ -90,12 +93,6 @@ export const SideBarAdmin = ({ isSlideOpen }) => {
                   </div>
                   {isDropdownOpen && (
                     <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2">
-                      <div
-                        onClick={handleLogout}
-                        className="cursor-pointer text-gray-900"
-                      >
-                        Login
-                      </div>
                       <div
                         onClick={handleLogout}
                         className="cursor-pointer cursor-pointer text-gray-900"

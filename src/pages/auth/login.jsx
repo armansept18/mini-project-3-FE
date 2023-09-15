@@ -57,7 +57,7 @@ export const LoginPage = () => {
       try {
         const result = await dispatch(userLogin(values));
         const isDisable = result.user.isDisable;
-        console.log("disable", isDisable);
+        console.log("result", result);
 
         if (isDisable) {
           toast({
@@ -99,6 +99,14 @@ export const LoginPage = () => {
         }
       } catch (err) {
         console.log(err);
+        toast({
+          title: "Login Failed",
+          description: "Invalid email or password. Please try again.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
       }
     },
   });

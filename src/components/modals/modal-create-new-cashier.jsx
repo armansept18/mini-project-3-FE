@@ -260,6 +260,14 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
         onClose();
         return { success: true, res };
       } catch (error) {
+        toast({
+          title: "failed to create cashier",
+          description: "Invalid admin email or password. Please try again.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
         return console.log(error?.message);
       }
     },
@@ -286,7 +294,7 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
               isInvalid={formik2.errors.password && formik2.touched.password}
             >
               <FormLabel fontWeight={"normal"} mt="2%">
-                Admin Password
+                {userSelector.first_name}'s Password
               </FormLabel>
               <InputGroup size="md">
                 <Input

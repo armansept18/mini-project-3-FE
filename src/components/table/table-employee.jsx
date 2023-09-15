@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useToast,
+} from "@chakra-ui/react";
 import { ModalDisableCashier } from "../modals/modal-disable-cashier";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 export const TableEmployee = ({ onClose }) => {
   const [cashier, setCashier] = useState([]);
@@ -60,59 +72,97 @@ export const TableEmployee = ({ onClose }) => {
     }
   };
 
+  const deleteCashier = async (emailToDelete) => {
+    try {
+      await api.delete(`/users/delete/${emailToDelete}`);
+
+      setCashier((prevCashier) =>
+        prevCashier.filter((employee) => employee.email !== emailToDelete)
+      );
+      toast({
+        title: "Cashier Deleted",
+        description: "The cashier has been deleted successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.log("error deleting cashier", error);
+      toast({
+        title: "Error",
+        description: "An error occurred while deleting the cashier.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   useEffect(() => {
     fetchCashier();
   }, []);
   useEffect(() => {
     fetchCashier();
-  }, [onClose]);
+  }, [onClose, deleteCashier]);
 
   return (
-    <>
-      <table class="border-collapse border border-slate-500 md:table-fixed">
-        <thead>
-          <tr>
-            <th className="border border-slate-600 p-1.5">#</th>
-            <th class="border border-slate-600 p-1.5">First Name</th>
-            <th class="border border-slate-600 p-1.5">Last Name</th>
-            <th class="border border-slate-600 p-1.5">Email</th>
-            <th class="border border-slate-600 p-1.5">Gender</th>
-            <th class="border border-slate-600 p-1.5">Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
+    <Box overflowX="auto">
+      <Table
+        variant="simple"
+        size={["sm", "md", "lg"]} // Responsive table size based on screen size
+        spacing={3} // Add spacing between columns and rows
+      >
+        <Thead>
+          <Tr>
+            <Th>No.</Th>
+            <Th>First Name</Th>
+            <Th>Last Name</Th>
+            <Th>Email</Th>
+            <Th>Gender</Th>
+            <Th display={"flex"} justifyContent={"center"}>
+              Action
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
           {cashier.map((employee, index) => (
-            <tr key={index}>
-              <td className="border border-slate-700 p-1.5">{index + 1}</td>
-              <td class="border border-slate-700 p-1.5">
-                {employee.first_name}
-              </td>
-              <td class="border border-slate-700 p-1.5">
-                {employee.last_name}
-              </td>
-              <td class="border border-slate-700 p-1.5">{employee.email}</td>
-              <td class="border border-slate-700 p-1.5">{employee.gender}</td>
-              <td class="border border-slate-700 p-2">
-                <Button
-                  colorScheme={employee.isDisable ? "green" : "red"}
-                  size={"xs"}
-                  onClick={() =>
-                    toggleDisable(employee.email, employee.isDisable)
-                  }
-                >
-                  {employee.isDisable ? "Enable" : "Disable"}
-                </Button>
-              </td>
-            </tr>
+            <Tr key={index}>
+              <Td>{index + 1}</Td>
+              <Td>{employee.first_name}</Td>
+              <Td>{employee.last_name}</Td>
+              <Td>{employee.email}</Td>
+              <Td>{employee.gender}</Td>
+              <Td>
+                <Flex justify={"space-around"} alignItems={"center"}>
+                  <Button
+                    colorScheme={employee.isDisable ? "green" : "red"}
+                    size={["xs", "sm", "sm"]} // Responsive button size based on screen size
+                    boxShadow={"xl"}
+                    onClick={() =>
+                      toggleDisable(employee.email, employee.isDisable)
+                    }
+                  >
+                    {employee.isDisable ? "Enable" : "Disable"}
+                  </Button>
+                  <Button
+                    ml={"3"}
+                    size={"sm"}
+                    boxShadow={"lg"}
+                    onClick={() => deleteCashier(employee.email)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                </Flex>
+              </Td>
+            </Tr>
           ))}
-        </tbody>
-      </table>
+        </Tbody>
+      </Table>
       <ModalDisableCashier
         isOpen={openModalDisable}
         onClose={() => setOpenModalDisable(false)}
         onConfirm={confirmToggleDisable}
       />
-    </>
+    </Box>
   );
 };
