@@ -14,8 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { ModalDisableCashier } from "../modals/modal-disable-cashier";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { ModalCreateCashier } from "../modals/modal-create-new-cashier";
 
-export const TableEmployee = ({ onClose }) => {
+export const TableEmployee = ({ onClose, isOpen }) => {
   const [cashier, setCashier] = useState([]);
   const toast = useToast();
   const [openModalDisable, setOpenModalDisable] = useState(false);
@@ -155,6 +156,11 @@ export const TableEmployee = ({ onClose }) => {
           ))}
         </Tbody>
       </Table>
+      <ModalCreateCashier
+        isOpen={isOpen}
+        onClose={onClose}
+        fetchCashier={fetchCashier}
+      />
       <ModalDisableCashier
         isOpen={openModalDisable}
         onClose={() => setOpenModalDisable(false)}
