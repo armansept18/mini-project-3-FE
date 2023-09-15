@@ -19,7 +19,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
   const [isTickVisible, setIsTickVisible] = useState(
     Array(product.length).fill(false)
   );
-
+  // console.log(product, "inni ashdhasd");
   const toggleStick = (index) => {
     const newIsTick = [...isTickVisible];
     newIsTick[index] = !newIsTick[index];
@@ -33,7 +33,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
 
   return (
     <>
-      {product.product?.map((item, i) => {
+      {product?.map((item, i) => {
         return (
           <div
             className="bg-white flex justify-between w-full p-4  bg-gray-200 mt-2 items-center"

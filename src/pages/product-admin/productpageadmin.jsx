@@ -13,7 +13,7 @@ import { SearchBar } from "../../components/cardproduct/search-bar";
 import { SortingBar } from "../../components/cardproduct/sorting-product";
 import { ModalProduct } from "../../components/cardproduct/product-modal";
 
-export const ProductPageAdmin = ({id}) => {
+export const ProductPageAdmin = ({ id }) => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState({ search: "", category: "" });
   const [sortField, setSortField] = useState(null);
@@ -23,7 +23,7 @@ export const ProductPageAdmin = ({id}) => {
   const [editProduct, setEditProduct] = useState(null);
   const nav = useNavigate();
 
-  const fetchSearch = (page, pageSize) => {
+  const fetchSearch = () => {
     return api
       .get("/products/search", {
         params: {
@@ -44,11 +44,13 @@ export const ProductPageAdmin = ({id}) => {
     fetchSearch();
   }, [search, sortOrder]);
 
-  // const fetchProduct = async (page, pageSize) => {
-  //   await api
-  //     .get("/products", { params: { page, pageSize } })
-  //     .then((result) => setProducts(result.data));
-  // };
+  const fetchProduct = async (page, pageSize) => {
+    await api
+      .get("/products/", {
+        params: { order: sortField, product_name: sortOrder, page, pageSize },
+      })
+      .then((result) => setProducts(result.data));
+  };
   // useEffect(() => {
   //   fetchProduct();
   // }, []);
