@@ -11,27 +11,24 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 import { PagButton } from "./itempagination/pagbutton";
 
-export const PaginationCakraUi = ({ product, fetchProduct }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+export const PaginationCakraUi = ({ product, page, setPage }) => {
+  console.log(product, "Ini product di pagination");
 
+  console.log(page, "ini page");
   const handlePageChange = (newPage) => {
-    if (newPage >= 1) {
-      setCurrentPage(newPage);
+    if (page >= 1) {
+      setPage(page);
     }
   };
 
-  const totalPages = product?.product?.length - 1;
+  const totalPages = product?.length;
   console.log(totalPages);
-  useEffect(() => {
-    fetchProduct(currentPage, itemsPerPage);
-  }, [currentPage]);
 
   return (
     <Flex alignItems="center" justifyContent="center" className="mt-16">
       <Button
-        onClick={() => handlePageChange(currentPage - 1)}
-        isDisabled={currentPage === 1}
+        onClick={() => handlePageChange(page - 1)}
+        isDisabled={page === 1}
         colorScheme="gray"
         variant="outline"
         className=""
@@ -42,14 +39,14 @@ export const PaginationCakraUi = ({ product, fetchProduct }) => {
         <Button
           key={index}
           onClick={() => handlePageChange(index + 1)}
-          colorScheme={index + 1 === currentPage ? "brand" : "gray"}
+          colorScheme={index + 1 === page ? "brand" : "gray"}
         >
           {index + 1}
         </Button>
       ))}
       <Button
-        onClick={() => handlePageChange(currentPage + 1)}
-        isDisabled={currentPage === totalPages}
+        onClick={() => handlePageChange(page + 1)}
+        isDisabled={page === totalPages}
         colorScheme="gray"
         variant="outline"
       >
