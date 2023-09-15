@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const DashboardPage = () => {
   const nav = useNavigate();
   function toCashier() {
-    nav("/cashier-product");
+    nav("/cashier");
   }
   return (
     <>
