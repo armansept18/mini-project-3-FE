@@ -1,12 +1,21 @@
 import debounce from "lodash.debounce";
-import api from "../api/api";
 import { useCallback, useEffect, useState } from "react";
-import { Input, InputGroup, InputLeftElement, Select } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Select,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import api from "../../api/api";
+import { ModalProduct } from "./product-modal";
 
 export const SearchBar = ({ onSearch }) => {
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -14,31 +23,7 @@ export const SearchBar = ({ onSearch }) => {
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
-
-  const debouncedFilter = useCallback(
-    debounce((query) => {
-      onSearch(category, query);
-    }, 500),
-    [category]
-  );
-  const searching = (query) => {
-    if (!query) return setSearch("");
-    debouncedFilter(query);
-  };
-  // const fetchProduct = () => {
-  //   api
-  //     .get("/products/search", {
-  //       params: {
-  //         search,
-  //       },
-  //     })
-  //     .then((result) => setProduct.send(result.data))
-  //     .catch((err) => console.log(err));
-  // };
-  useEffect(() => {
-    debouncedFilter(search);
-    return debouncedFilter.cancel;
-  }, [search, category]);
+  
 
   return (
     <>
@@ -47,7 +32,7 @@ export const SearchBar = ({ onSearch }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "75px",
+          gap: "55px",
         }}
       >
         <Select
@@ -67,10 +52,12 @@ export const SearchBar = ({ onSearch }) => {
           </InputLeftElement>
           <Input
             placeholder="Cari Produk Disini!"
-            value={search}
+            // value={search}
             onChange={handleSearchChange}
           />
         </InputGroup>
+        <Button onClick={onOpen}>Tambah Produk</Button>
+        <ModalProduct isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </div>
     </>
   );
