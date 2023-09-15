@@ -11,7 +11,7 @@ const CategoryToName = (category_id) => {
     case 2:
       return "Snack";
     default:
-      return "Tidak Diketahui";
+      return "-";
   }
 };
 
@@ -51,7 +51,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
                   marginLeft: "32px",
                 }}
                 // src={item.image}
-                src={`http://localhost:3000/image-static/${product.image}`}
+                src={`http://localhost:3000/static/${item.image}`}
                 alt=""
               />
             </div>

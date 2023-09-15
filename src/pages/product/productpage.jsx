@@ -4,16 +4,14 @@ import { NavTemplate } from "../../components/template/template";
 import { SortingBar } from "../../components/cardproduct/sorting-product";
 import { SearchBar } from "../../components/cardproduct/search-bar";
 import api from "../../api/api";
-import debounce from "lodash.debounce";
 import { useToast } from "@chakra-ui/react";
 import { ModalProduct } from "../../components/cardproduct/product-modal";
 
 export const ProductPage = ({ id }) => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState({ search: "", category: "" });
-  const [category, setCategory] = useState("");
   const [sortField, setSortField] = useState(null);
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOrder, setSortOrder] = useState({ orderby: "", sortby: "asc" });
   const toast = useToast();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
@@ -24,6 +22,8 @@ export const ProductPage = ({ id }) => {
         params: {
           product_name: search.search,
           category_id: search.category,
+          orderby: sortOrder.orderBy,
+          sortby: sortOrder.sortBy,
         },
       })
       .then((res) => {
@@ -32,15 +32,16 @@ export const ProductPage = ({ id }) => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    console.log(search);
+    console.log(sortOrder);
     fetchSearch();
-  }, [search]);
+  }, [search, sortOrder]);
 
   const fetchProduct = async () => {
     try {
       const response = await api.get("/products/", {
         params: {
-          product_name: search,
+          order: sortField,
+          product_name: sortOrder,
         },
       });
       console.log(response.data);
@@ -49,6 +50,11 @@ export const ProductPage = ({ id }) => {
       console.error(`Error fetching products:`, error);
     }
   };
+  // useEffect(() => {
+  // console.log(sortField);
+  //   console.log(sortOrder);
+  //   fetchProduct();
+  // }, [sortField, sortOrder]);
 
   const handleSort = async (field, order) => {
     setSortField(field);
@@ -66,7 +72,7 @@ export const ProductPage = ({ id }) => {
   };
 
   const handleDelete = () => {
-    // const token = localStorage.getItem('auth');
+    const token = localStorage.getItem("auth");
     api
       .delete(`/products/${id}`)
       .then((result) => {
@@ -95,7 +101,7 @@ export const ProductPage = ({ id }) => {
     <>
       <NavTemplate>
         <SearchBar setSearch={setSearch} />
-        <SortingBar onSort={handleSort} />
+        <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
         <div class="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
           <CardProduct
             product={products}
