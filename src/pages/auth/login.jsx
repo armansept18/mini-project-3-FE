@@ -85,7 +85,7 @@ export const LoginPage = () => {
           if (decoded.role_id === 1) {
             return nav("/admin");
           } else if (decoded.role_id === 2) {
-            return nav("/cashier-cashier");
+            return nav("/cashier");
           }
         } else {
           toast({
