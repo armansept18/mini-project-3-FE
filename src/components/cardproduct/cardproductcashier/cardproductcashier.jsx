@@ -1,4 +1,8 @@
 export const CardCoffe = ({ item }) => {
+  const formatIdr = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
   return (
     <>
       <div
@@ -28,7 +32,9 @@ export const CardCoffe = ({ item }) => {
             </span>
           </div>
           <div className="flex justify-center">
-            <span style={{ fontSize: "14px" }}>Rp. {item.price}</span>
+            <span style={{ fontSize: "14px" }}>
+              {formatIdr.format(item.price)}
+            </span>
           </div>
         </div>
       </div>

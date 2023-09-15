@@ -13,6 +13,11 @@ export const CardProduct = ({ product }) => {
     setIsTickVisible(newIsTick);
   };
 
+  const formatIdr = Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+
   return (
     <>
       {product.product?.map((item, i) => {
