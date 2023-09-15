@@ -100,14 +100,16 @@ export const ProductPage = ({ id }) => {
   return (
     <>
       <NavTemplate>
-        <SearchBar setSearch={setSearch} />
-        <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
-        <div class="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
-          <CardProduct
-            product={products}
-            onEdit={openEditModal}
-            onDelete={(item) => handleDelete(item)}
-          />
+        <div className=" col-auto">
+          <SearchBar setSearch={setSearch} />
+          <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
+          <div class="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
+            <CardProduct
+              product={products}
+              onEdit={openEditModal}
+              onDelete={(item) => handleDelete(item)}
+            />
+          </div>
         </div>
       </NavTemplate>
       {isEditModalOpen && (
