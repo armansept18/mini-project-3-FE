@@ -12,19 +12,18 @@ import { SearchIcon } from "@chakra-ui/icons";
 import api from "../../api/api";
 import { ModalProduct } from "./product-modal";
 
-export const SearchBar = ({ onSearch }) => {
-  const [category, setCategory] = useState("");
-  const [search, setSearch] = useState("");
+export const SearchBar = ({ setSearch }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
   const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+    setSearch((search) => {
+      return { ...search, [event.target.id]: event.target.value };
+    });
   };
-  
-
+  const debouncedChangeHandler = useCallback(
+    debounce(handleSearchChange, 300),
+    []
+  );
   return (
     <>
       <div
@@ -40,8 +39,9 @@ export const SearchBar = ({ onSearch }) => {
           width={"300px"}
           backgroundColor={"#F1F1F1"}
           placeholder="Kategori Produk :"
-          value={category}
-          onChange={handleCategoryChange}
+          // value={category}
+          id="category"
+          onChange={debouncedChangeHandler}
         >
           <option value="1">Coffee</option>
           <option value="2">Snack</option>
@@ -53,10 +53,11 @@ export const SearchBar = ({ onSearch }) => {
           <Input
             placeholder="Cari Produk Disini!"
             // value={search}
-            onChange={handleSearchChange}
+            id="search"
+            onChange={debouncedChangeHandler}
           />
         </InputGroup>
-        <Button onClick={onOpen}>Tambah Produk</Button>
+        <Button colorScheme="green" onClick={onOpen}>Tambah Produk</Button>
         <ModalProduct isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </div>
     </>

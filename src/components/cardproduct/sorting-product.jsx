@@ -37,7 +37,6 @@ export const SortingBar = ({ onSort }) => {
     api
       .get(sortingRoute, { params: { order: sortOrder } })
       .then((response) => {
-        // Handle the sorted data from the backend
         onSort(response.data);
       })
       .catch((error) => {
@@ -56,7 +55,7 @@ export const SortingBar = ({ onSort }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: "140px",
+        gap: "50px",
       }}
     >
       <span onClick={() => handleSortClick("product_name")}>

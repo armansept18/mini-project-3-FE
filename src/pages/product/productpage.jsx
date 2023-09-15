@@ -8,7 +8,7 @@ import debounce from "lodash.debounce";
 import { useToast } from "@chakra-ui/react";
 import { ModalProduct } from "../../components/cardproduct/product-modal";
 
-export const ProductPage = ({ id, onSearch }) => {
+export const ProductPage = ({ id }) => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState({ search: "", category: "" });
   const [category, setCategory] = useState("");
@@ -18,41 +18,29 @@ export const ProductPage = ({ id, onSearch }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
 
-  const fetchSearch = (query) => {
+  const fetchSearch = () => {
     return api
       .get("/products/search", {
         params: {
-          product_name: query,
+          product_name: search.search,
+          category_id: search.category,
         },
       })
-      .then((res) => res.data)
+      .then((res) => {
+        setProducts(res.data);
+      })
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-    if (search) {
-      fetchSearch(search).then((data) => {
-        setSearch(data || []);
-      });
-    } else {
-      fetchProduct("").then((data) => {
-        setSearch(data || []);
-      });
-    }
+    console.log(search);
+    fetchSearch();
   }, [search]);
-
-  // const debouncedFilter = useCallback(
-  //   debounce((query) => setSearch(query), 2023),
-  //   []
-  // );
-  // const onSearch = (query) => {
-  //   debouncedFilter(query);
-  // };
 
   const fetchProduct = async () => {
     try {
       const response = await api.get("/products/", {
         params: {
-          product_name: search
+          product_name: search,
         },
       });
       console.log(response.data);
@@ -61,22 +49,10 @@ export const ProductPage = ({ id, onSearch }) => {
       console.error(`Error fetching products:`, error);
     }
   };
-  useEffect(() => {
-    fetchProduct();
-  }, [search]);
 
   const handleSort = async (field, order) => {
     setSortField(field);
     setSortOrder(order);
-
-    // try {
-    //   const response = await api.get("products", {
-    //     params: { product_name: search, category_id: category, order },
-    //   });
-    //   setProducts(response.data);
-    // } catch (error) {
-    //   console.error(`Error sorting products`, error);
-    // }
   };
 
   const openEditModal = (product) => {
@@ -118,12 +94,12 @@ export const ProductPage = ({ id, onSearch }) => {
   return (
     <>
       <NavTemplate>
-        <SearchBar onSearch={onSearch} />
+        <SearchBar setSearch={setSearch} />
         <SortingBar onSort={handleSort} />
         <div class="col-auto items-center justify-center h-24 rounded max-md:mt-28 md:ml-72 md:max-w-5xl">
           <CardProduct
             product={products}
-            onEdit={openEditModal} // Pass your edit function here
+            onEdit={openEditModal}
             onDelete={(item) => handleDelete(item)}
           />
         </div>
