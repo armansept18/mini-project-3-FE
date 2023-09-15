@@ -32,6 +32,7 @@ export const routes = [
   new RouteClass("admin", <HomePageAdmin />, true),
   new RouteClass("cashier", <CashierLandingPage />, true),
   new RouteClass("dashboard", <DashboardPage />, true),
+  new RouteClass("product", <ProductPageAdmin />, true),
   new RouteClass("employee", <CashierPage />, true),
   new RouteClass("coffee", <PageCoffee />),
   new RouteClass("noncoffee", <PageNonCoffee />),

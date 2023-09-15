@@ -6,7 +6,7 @@ import { CardTransaction } from "../../../components/cardtransaction/cardtransac
 import { PaginationCakraUiCashier } from "../../../components/pagination/pagination-cashier";
 
 export const PageNonCoffee = () => {
-  const category_id = 3;
+  const category_id = 2;
   const [product, setProduct] = useState([]);
 
   const fetchProduct = async (page, pageSize) => {
