@@ -256,7 +256,7 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
             position: "top",
           });
         }
-
+        window.location.reload();
         onClose();
         return { success: true, res };
       } catch (error) {

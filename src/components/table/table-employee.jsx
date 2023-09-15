@@ -101,9 +101,6 @@ export const TableEmployee = ({ onClose }) => {
   useEffect(() => {
     fetchCashier();
   }, []);
-  useEffect(() => {
-    fetchCashier();
-  }, [onClose, deleteCashier]);
 
   return (
     <Box overflowX="auto">
