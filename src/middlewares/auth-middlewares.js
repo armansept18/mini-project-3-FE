@@ -35,10 +35,10 @@ export const userLogin = (values) => {
         type: types.login,
         payload: user,
       });
-      console.log("user", user);
+
       return { success: true, user };
     } catch (error) {
-      // localStorage.removeItem("auth");
+      localStorage.removeItem("auth");
       return { success: false, error: error.message };
     }
   };

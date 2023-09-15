@@ -76,7 +76,7 @@ export const NavBarAdmin = ({ openSlide }) => {
                       <RiArrowDropDownLine className="text-2xl cursor-pointer" />
                     </div>
                     {isDropdownOpen && (
-                      <div className="absolute top-12 right-0 bg-white border rounded-lg shadow-lg p-2">
+                      <div className="absolute top-8 right-3 bg-white border rounded-lg shadow-lg p-2">
                         <div onClick={handleLogout} className="cursor-pointer">
                           Logout
                         </div>

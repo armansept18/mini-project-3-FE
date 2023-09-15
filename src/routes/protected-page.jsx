@@ -7,8 +7,8 @@ export const ProtectedPage = ({ children, needLogin = false }) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (needLogin && userSelector.role_id !== 1) {
-      return nav("/home/cashier");
+    if (needLogin && userSelector.role_id == 2) {
+      return nav("/cashier-product");
     } else if (needLogin && userSelector.role_id === 1) {
       return;
     }

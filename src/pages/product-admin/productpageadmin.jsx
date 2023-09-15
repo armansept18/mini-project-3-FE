@@ -6,9 +6,12 @@ import {
 } from "../../components/template/template";
 import api from "../../api/api";
 import { PaginationCakraUi } from "../../components/pagination/pagination";
+import { Button } from "@chakra-ui/button";
+import { useNavigate } from "react-router";
 
 export const ProductPageAdmin = () => {
   const [product, setProduct] = useState([]);
+  const nav = useNavigate();
 
   const fetchProduct = async (page, pageSize) => {
     await api
@@ -18,6 +21,10 @@ export const ProductPageAdmin = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  function toAdmin() {
+    nav("/admin");
+  }
   return (
     <>
       <NavTemplateAdmin>
@@ -25,6 +32,7 @@ export const ProductPageAdmin = () => {
           <CardProduct product={product} />
 
           <PaginationCakraUi product={product} fetchProduct={fetchProduct} />
+          <Button onClick={toAdmin}>to Admin</Button>
         </div>
       </NavTemplateAdmin>
     </>

@@ -21,9 +21,9 @@ import {
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import api from "../../../api/api";
+import api from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { receiveUser, userLogin } from "../../../middlewares/auth-middlewares";
+import { receiveUser, userLogin } from "../../middlewares/auth-middlewares";
 
 export const ModalCreateCashier = ({ isOpen, onClose }) => {
   const [show, setShow] = useState(false);
@@ -79,7 +79,7 @@ export const ModalCreateCashier = ({ isOpen, onClose }) => {
       } catch (error) {
         toast({
           title: "failed create new cashier",
-          description: error?.message || "An error occurred",
+          description: "email already registered",
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -260,6 +260,14 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
         onClose();
         return { success: true, res };
       } catch (error) {
+        toast({
+          title: "failed to create cashier",
+          description: "Invalid admin email or password. Please try again.",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
         return console.log(error?.message);
       }
     },
@@ -286,7 +294,7 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
               isInvalid={formik2.errors.password && formik2.touched.password}
             >
               <FormLabel fontWeight={"normal"} mt="2%">
-                Admin Password
+                {userSelector.first_name}'s Password
               </FormLabel>
               <InputGroup size="md">
                 <Input
