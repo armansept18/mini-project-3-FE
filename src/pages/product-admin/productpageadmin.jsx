@@ -21,6 +21,9 @@ export const ProductPageAdmin = ({ id }) => {
   const toast = useToast();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+
   const nav = useNavigate();
 
   const fetchSearch = () => {
@@ -31,7 +34,8 @@ export const ProductPageAdmin = ({ id }) => {
           category_id: search.category,
           orderby: sortOrder.orderBy,
           sortby: sortOrder.sortBy,
-          // page, pageSize
+          page,
+          pageSize,
         },
       })
       .then((res) => {
@@ -107,7 +111,7 @@ export const ProductPageAdmin = ({ id }) => {
             onDelete={(item) => handleDelete(item)}
           />
 
-          {/* <PaginationCakraUi product={products} fetchSearch={fetchSearch} /> */}
+          <PaginationCakraUi product={products} page={page} setPage={setPage} />
           <Button onClick={toAdmin}>to Admin</Button>
         </div>
       </NavTemplateAdmin>
