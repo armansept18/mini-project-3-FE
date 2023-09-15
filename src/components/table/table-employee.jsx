@@ -15,6 +15,7 @@ import {
 import { ModalDisableCashier } from "../modals/modal-disable-cashier";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { ModalCreateCashier } from "../modals/modal-create-new-cashier";
+import { ModalDeleteCashier } from "../modals/modal-delete-cashier";
 
 export const TableEmployee = ({ onClose, isOpen }) => {
   const [cashier, setCashier] = useState([]);
@@ -24,6 +25,18 @@ export const TableEmployee = ({ onClose, isOpen }) => {
     email: "",
     isDisabled: false,
   });
+  //delete
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [emailToDelete, setEmailToDelete] = useState("");
+
+  function openDeleteModalWithCashier(emailToDelete) {
+    setEmailToDelete(emailToDelete);
+    setOpenDeleteModal(true);
+  }
+
+  function closeDeleteModal() {
+    setOpenDeleteModal(false);
+  }
 
   const fetchCashier = async () => {
     await api.get("/users/cashier").then((result) => setCashier(result.data));
@@ -146,7 +159,7 @@ export const TableEmployee = ({ onClose, isOpen }) => {
                     ml={"3"}
                     size={"sm"}
                     boxShadow={"lg"}
-                    onClick={() => deleteCashier(employee.email)}
+                    onClick={() => openDeleteModalWithCashier(employee.email)}
                   >
                     <DeleteIcon />
                   </Button>
@@ -165,6 +178,14 @@ export const TableEmployee = ({ onClose, isOpen }) => {
         isOpen={openModalDisable}
         onClose={() => setOpenModalDisable(false)}
         onConfirm={confirmToggleDisable}
+      />
+      <ModalDeleteCashier
+        isOpen={openDeleteModal}
+        onClose={closeDeleteModal}
+        onConfirm={() => {
+          deleteCashier(emailToDelete);
+          closeDeleteModal();
+        }}
       />
     </Box>
   );
