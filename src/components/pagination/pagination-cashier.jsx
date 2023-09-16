@@ -12,44 +12,42 @@ import React, { useEffect, useState } from "react";
 import { PagButton } from "./itempagination/pagbutton";
 
 export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 10;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1) {
-      setCurrentPage(newPage);
+      setPage(newPage);
     }
   };
 
-  const totalPages = product?.product?.length - 1;
-  console.log(totalPages);
   useEffect(() => {
-    fetchProduct(currentPage, itemsPerPage);
-  }, [currentPage]);
+    fetchProduct(page, itemsPerPage);
+  }, [page]);
 
   return (
     <Flex alignItems="center" justifyContent="center" className="mt-16">
       <Button
-        onClick={() => handlePageChange(currentPage - 1)}
-        isDisabled={currentPage === 1}
+        onClick={() => handlePageChange(page - 1)}
+        isDisabled={page === 1}
         colorScheme="gray"
         variant="outline"
         className=""
       >
         <Icon as={IoIosArrowBack} />
       </Button>
-      {[...Array.from({ length: totalPages })].map((val, index) => (
+      {[...Array.from({ length: page })].map((val, index) => (
         <Button
           key={index}
           onClick={() => handlePageChange(index + 1)}
-          colorScheme={index + 1 === currentPage ? "brand" : "gray"}
+          colorScheme={index + 1 === page ? "brand" : "gray"}
         >
           {index + 1}
         </Button>
       ))}
       <Button
-        onClick={() => handlePageChange(currentPage + 1)}
-        isDisabled={currentPage === totalPages}
+        onClick={() => handlePageChange(page + 1)}
+        isDisabled={product?.products?.length < 10}
         colorScheme="gray"
         variant="outline"
       >

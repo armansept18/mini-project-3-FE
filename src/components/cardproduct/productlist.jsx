@@ -19,7 +19,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
   const [isTickVisible, setIsTickVisible] = useState(
     Array(product.length).fill(false)
   );
-  // console.log(product, "inni ashdhasd");
+  console.log(product, "inni ashdhasd");
   const toggleStick = (index) => {
     const newIsTick = [...isTickVisible];
     newIsTick[index] = !newIsTick[index];

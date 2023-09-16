@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import api from "../../../api/api";
-import { NavTemplateCashier } from "../../../components/template/template";
-import { CardCoffe } from "../../../components/cardproduct/cardproductcashier/cardproductcashier";
-import { CardTransaction } from "../../../components/cardtransaction/cardtransaction";
-import { PaginationCakraUiCashier } from "../../../components/pagination/pagination-cashier";
+import api from "../../api/api";
+import { NavTemplateCashier } from "../../components/template/template";
+import { CardCoffe } from "../../components/cardproduct/cardproductcashier/cardproductcashier";
+import { CardTransaction } from "../../components/cardtransaction/cardtransaction";
+import { PaginationCakraUiCashier } from "../../components/pagination/pagination-cashier";
 
 export const PageNonCoffee = () => {
   const category_id = 2;
@@ -11,7 +11,7 @@ export const PageNonCoffee = () => {
 
   const fetchProduct = async (page, pageSize) => {
     try {
-      const result = await api.get("/products/search", {
+      const result = await api.get("/products/", {
         params: { category_id, page, pageSize },
       });
       setProduct(result.data);
@@ -19,9 +19,11 @@ export const PageNonCoffee = () => {
       console.error(err?.message);
     }
   };
-  useEffect(() => {
-    fetchProduct(); // Call the async function without arguments
-  }, []);
+
+  console.log(product, "INI PRODUCT DI COFFE");
+  // useEffect(() => {
+  //   fetchProduct(); // Call the async function without arguments
+  // }, []);
 
   return (
     <>
@@ -36,7 +38,7 @@ export const PageNonCoffee = () => {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-              {product?.map((item) => (
+              {product?.products?.map((item) => (
                 <CardCoffe item={item} />
               ))}
             </div>
