@@ -5,7 +5,7 @@ import {
   NavTemplateAdmin,
 } from "../../components/template/template";
 import api from "../../api/api";
-import { PaginationCakraUi } from "../../components/pagination/pagination";
+import { PaginationCakraUi } from "../../components/pagination/paginationAdmin";
 import { Button } from "@chakra-ui/button";
 import { useNavigate } from "react-router";
 import { useToast } from "@chakra-ui/toast";
@@ -23,7 +23,7 @@ export const ProductPageAdmin = ({ id }) => {
   const [editProduct, setEditProduct] = useState(null);
   const [page, setPage] = useState(1);
   const pageSize = 5;
-
+  console.log(page, "ini page yang ada di product");
   const nav = useNavigate();
 
   const fetchSearch = () => {
@@ -46,18 +46,18 @@ export const ProductPageAdmin = ({ id }) => {
   useEffect(() => {
     console.log(sortOrder);
     fetchSearch();
-  }, [search, sortOrder]);
+  }, [search, sortOrder, page]);
 
-  const fetchProduct = async (page, pageSize) => {
-    await api
-      .get("/products/", {
-        params: { order: sortField, product_name: sortOrder, page, pageSize },
-      })
-      .then((result) => setProducts(result.data));
-  };
+  // const fetchProduct = async (page, pageSize) => {
+  //   await api
+  //     .get("/products/", {
+  //       params: { order: sortField, product_name: sortOrder, page, pageSize },
+  //     })
+  //     .then((result) => setProducts(result.data));
+  // };
   // useEffect(() => {
   //   fetchProduct();
-  // }, []);
+  // }, [page]);
 
   const openEditModal = (product) => {
     setEditProduct(product);
@@ -112,7 +112,6 @@ export const ProductPageAdmin = ({ id }) => {
           />
 
           <PaginationCakraUi product={products} page={page} setPage={setPage} />
-          <Button onClick={toAdmin}>to Admin</Button>
         </div>
       </NavTemplateAdmin>
       {isEditModalOpen && (
