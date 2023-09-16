@@ -25,7 +25,7 @@ import api from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveUser, userLogin } from "../../middlewares/auth-middlewares";
 
-export const ModalCreateCashier = ({ isOpen, onClose }) => {
+export const ModalCreateCashier = ({ isOpen, onClose, fetchCashier }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
@@ -73,7 +73,7 @@ export const ModalCreateCashier = ({ isOpen, onClose }) => {
           isClosable: true,
           position: "top",
         });
-
+        fetchCashier();
         onClose();
         return { success: true, res };
       } catch (error) {
@@ -256,7 +256,6 @@ const Submodal = ({ isOpen, onClose, handleFormik }) => {
             position: "top",
           });
         }
-        window.location.reload();
         onClose();
         return { success: true, res };
       } catch (error) {
