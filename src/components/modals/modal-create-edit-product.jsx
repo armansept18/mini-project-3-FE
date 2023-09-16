@@ -31,26 +31,27 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
   const ref = useRef();
   const toast = useToast();
   const [previewImage, setPreviewImage] = useState(
-    edit ? edit.image_url : defaultImage
+    edit ? edit.image : defaultImage
   );
   const categoryOptions = [
     { value: 1, label: "Coffee" },
-    { value: 2, label: "Snack" },
+    { value: 2, label: "Non Coffee" },
+    { value: 3, label: "Food" },
+    { value: 4, label: "Snack" },
   ];
   const formik = useFormik({
     initialValues: {
-      image_url: edit?.image_url || "",
+      image: edit?.image || "",
       product_name: edit?.product_name || "",
       description: edit?.description || "",
       category_id: edit?.category_id || 0,
       price: edit?.price || 0,
       stock: edit?.stock || 0,
-      image: null,
     },
     validationSchema: Yup.object().shape({
       product_name: Yup.string().required("Harap Isi Nama Produk!"),
-      price: Yup.number().required('Harap Cantumkan Harga!'),
-      stock: Yup.number().required("Harap Cantumkan Stok Produk!")
+      price: Yup.number().required("Harap Cantumkan Harga!"),
+      stock: Yup.number().required("Harap Cantumkan Stok Produk!"),
     }),
     onSubmit: async (values) => {
       try {
@@ -62,8 +63,8 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
         formData.append("price", values.price);
         formData.append("stock", values.stock);
 
-        if(values.image) {
-          formData.append('image', values.image);
+        if (values.image) {
+          formData.append("image", values.image);
         }
 
         if (edit) {
@@ -111,13 +112,13 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
     formik.resetForm();
     setPreviewImage(edit ? edit.image_url : defaultImage);
   }, [isOpen, edit]);
-  
+
   const handleImageChange = async (e) => {
     const image = await renderImage(e);
     formik.setFieldValue("image", e.target.files[0]);
     formik.setFieldValue("image_url", image);
     setPreviewImage(image);
-  }
+  };
 
   return (
     <>
@@ -135,23 +136,30 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
           <ModalHeader>{edit ? "Edit Produk" : "Tambah Produk"}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
+            <FormControl className="flex flex-col justify-center items-center">
               <FormLabel>Gambar Produk</FormLabel>
               <Image
-                src={formik.values.image_url}
-                w="100vw"
+                src={previewImage}
+                w={"100vw"}
                 h={"100vh"}
                 maxW={"180px"}
                 maxH={"180px"}
                 aspectRatio={1}
                 objectFit={"cover"}
                 onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
+                  // currentTarget.onerror = null;
                   currentTarget.src = defaultImage;
                 }}
                 cursor={"pointer"}
                 onClick={() => ref.current.click()}
               />
+              <p
+                className="mt-1 mb-1 font-thin text-xs"
+                style={{ cursor: "pointer" }}
+                onClick={() => ref.current.click()}
+              >
+                Tekan untuk ubah gambar
+              </p>
               <input
                 className="hidden"
                 ref={ref}
@@ -166,7 +174,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
                 ref={initialRef}
                 name="product_name"
                 value={formik.values.product_name}
-                onChange={formik.handleChange}
+                onChange={formik.handleChange("product_name")}
                 placeHolder="Masukkan Nama Produk"
               />
             </FormControl>
@@ -184,7 +192,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
               <Select
                 name="category_id"
                 value={formik.values.category_id}
-                onChange={formik.handleChange}
+                onChange={formik.handleChange("category_id")}
                 placeholder="Pilih Kategori"
               >
                 {categoryOptions.map((option) => (
@@ -200,7 +208,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
                 name="price"
                 type="number"
                 value={formik.values.price}
-                onChange={formik.handleChange}
+                onChange={formik.handleChange("price")}
                 placeHolder="Harga Produk"
               />
             </FormControl>
@@ -210,7 +218,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
                 name="stock"
                 type="number"
                 value={formik.values.stock}
-                onChange={formik.handleChange}
+                onChange={formik.handleChange("stock")}
                 placeHolder="Stok Tersedia"
               />
             </FormControl>

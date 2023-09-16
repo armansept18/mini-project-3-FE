@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import api from "../../api/api";
-import { ModalProduct } from "./product-modal";
+import { ModalProduct } from "../modals/modal-create-edit-product";
 
 export const SearchBar = ({ setSearch }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,17 +26,10 @@ export const SearchBar = ({ setSearch }) => {
   );
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "55px",
-        }}
-      >
+      <div className="flex justify-center mt-6 items-center gap-10">
         <Select
-          size={"md"}
-          width={"300px"}
+          size={"sm"}
+          width={"180px"}
           backgroundColor={"#F1F1F1"}
           placeholder="Kategori Produk :"
           // value={category}
@@ -44,20 +37,25 @@ export const SearchBar = ({ setSearch }) => {
           onChange={debouncedChangeHandler}
         >
           <option value="1">Coffee</option>
-          <option value="2">Snack</option>
+          <option value="2">Non Coffee</option>
+          <option value="3">Food</option>
+          <option value="4">Snack</option>
         </Select>
-        <InputGroup size={"md"} width={"450px"} backgroundColor={"#F0F0F0"}>
+        <InputGroup size={"md"} width={"500px"} backgroundColor={"#F0F0F0"}>
           <InputLeftElement pointerEvents={"none"}>
-            <SearchIcon />
+            <SearchIcon boxSize={3} />
           </InputLeftElement>
           <Input
             placeholder="Cari Produk Disini!"
             // value={search}
             id="search"
             onChange={debouncedChangeHandler}
+            size={"sm"}
           />
         </InputGroup>
-        <Button colorScheme="green" onClick={onOpen}>Tambah Produk</Button>
+        <Button colorScheme="green" onClick={onOpen}>
+          Tambah Produk
+        </Button>
         <ModalProduct isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </div>
     </>
