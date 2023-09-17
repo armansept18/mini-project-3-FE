@@ -1,6 +1,9 @@
 import { Button } from "@chakra-ui/react";
 import { NavTemplateAdmin } from "../../components/template/template";
 import { useNavigate } from "react-router-dom";
+import { LineChart } from "../../components/dashboard/line-chart";
+import { PieChartCategory, PieChartProduct } from "../../components/dashboard/pie-chart";
+import { ReportCard } from "../../components/dashboard/report-card";
 
 export const DashboardPage = () => {
   const nav = useNavigate();
@@ -10,11 +13,15 @@ export const DashboardPage = () => {
   return (
     <>
       <NavTemplateAdmin>
-        <div class="flex items-center justify-center h-24 rounded bg-gray-50 max-md:mt-28">
-          <h1>INI PAGE DASHBOARD MANAGEMENT</h1>
-          <Button onClick={toCashier} ml={"8"}>
-            to Cashier Page
-          </Button>
+        <div className="flex flex-col justify-center items-center">
+          <ReportCard />
+          <div className="flex flex-col justify-center items-center">
+            <LineChart />
+            <div className="flex justify-center items-center gap-10">
+              <PieChartProduct />
+              <PieChartCategory />
+            </div>
+          </div>
         </div>
       </NavTemplateAdmin>
     </>

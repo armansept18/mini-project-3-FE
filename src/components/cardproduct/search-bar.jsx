@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputLeftElement,
   Select,
+  Stack,
   useDisclosure,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -26,13 +27,21 @@ export const SearchBar = ({ setSearch }) => {
   );
   return (
     <>
-      <div className="flex justify-center mt-6 items-center gap-10">
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        spacing={{ base: 4, md: 2 }}
+        alignItems="flex-start"
+        justify="center"
+        marginLeft={{ base: 0, md: "256px" }} // Adjust marginLeft for sidebar
+        marginTop={{ base: "102px", md: 0 }} // Adjust marginTop for navbar
+        px={{ base: 4, md: 0 }} // Add horizontal padding for responsiveness
+      >
         <Select
-          size={"sm"}
-          width={"180px"}
-          backgroundColor={"#F1F1F1"}
+          size="sm"
+          width={{ base: "100%", md: "35%" }} // Adjust width based on screen size
+          maxWidth="180px"
+          backgroundColor="#F1F1F1"
           placeholder="Kategori Produk :"
-          // value={category}
           id="category"
           onChange={debouncedChangeHandler}
         >
@@ -41,23 +50,35 @@ export const SearchBar = ({ setSearch }) => {
           <option value="3">Food</option>
           <option value="4">Snack</option>
         </Select>
-        <InputGroup size={"md"} width={"500px"} backgroundColor={"#F0F0F0"}>
-          <InputLeftElement pointerEvents={"none"}>
+        <InputGroup
+          size="md"
+          width="100%"
+          maxWidth={{ base: "100%", md: "550px" }} // Adjust maxWidth based on screen size
+          backgroundColor="#F0F0F0"
+        >
+          <InputLeftElement pointerEvents="none">
             <SearchIcon boxSize={3} />
           </InputLeftElement>
           <Input
             placeholder="Cari Produk Disini!"
-            // value={search}
             id="search"
             onChange={debouncedChangeHandler}
-            size={"sm"}
+            size="sm"
           />
         </InputGroup>
-        <Button colorScheme="green" onClick={onOpen}>
+        <Button
+          colorScheme="green"
+          onClick={onOpen}
+          size={{ base: "sm", md: "md" }}
+          width="100%"
+          maxWidth={{ base: "100%", md: "150px" }}
+          marginStart={{ base: 0, md: 4 }}
+          marginTop={{ base: 4, md: 0 }}
+        >
           Tambah Produk
         </Button>
         <ModalProduct isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
-      </div>
+      </Stack>
     </>
   );
 };

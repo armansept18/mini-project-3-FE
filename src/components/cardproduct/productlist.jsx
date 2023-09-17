@@ -36,33 +36,36 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
   });
 
   const handleDelete = (item) => {
-    api
-      .delete(`/products/${item.id}`)
-      .then((result) => {
-        console.log(result.data.message);
-        toast({
-          title: "Berhasil Dihapus!",
-          status: "success",
-          description: "Produk Telah Dihapus",
-          isClosable: true,
-          position: "top",
-          duration: 2023,
+    const shouldDelete = window.confirm("Anda Yakin Akan Hapus Produk Ini?");
+    if (shouldDelete) {
+      api
+        .delete(`/products/${item.id}`)
+        .then((result) => {
+          console.log(result.data.message);
+          toast({
+            title: "Berhasil Dihapus!",
+            status: "success",
+            description: "Produk Telah Dihapus",
+            isClosable: true,
+            position: "top",
+            duration: 2023,
+          });
+          window.location.reload();
+          onDelete(item);
+        })
+        .catch((error) => {
+          console.error("Error Hapus Produk:", error);
+          toast({
+            title: "Gagal Menghapus!",
+            description: error?.response?.data,
+            status: "error",
+            position: "top",
+            isClosable: true,
+            duration: 2023,
+          });
         });
-        window.location.reload();
-        onDelete(item);
-      })
-      .catch((error) => {
-        console.error("Error Hapus Produk:", error);
-        toast({
-          title: "Gagal Menghapus!",
-          description: error?.response?.data,
-          status: "error",
-          position: "top",
-          isClosable: true,
-          duration: 2023,
-        });
-      });
-    }
+      }
+  };
   return (
     <>
       {product?.map((item, i) => {
@@ -110,7 +113,10 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
             </div>
             <div className="flex items-center gap-5">
               <EditIcon cursor={"pointer"} onClick={() => onEdit(item)} />
-              <DeleteIcon cursor={"pointer"} onClick={() => handleDelete(item)} />
+              <DeleteIcon
+                cursor={"pointer"}
+                onClick={() => handleDelete(item)}
+              />
               <hr style={{ color: "black" }} />
             </div>
           </div>
