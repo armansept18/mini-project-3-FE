@@ -1,34 +1,52 @@
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+} from "@chakra-ui/react";
 export const TableSalesReport = ({ transaction }) => {
   const headerKeys = Object.keys(transaction?.transactions[0]);
-  console.log(headerKeys);
+  // console.log(headerKeys);
+
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString();
+  };
   return (
     <>
-      <table class="table-auto border border-black">
-        <thead className="border border-black  text-black">
-          <tr className="border border-black ">
-            {headerKeys.map((header) => {
-              return <th className="border border-black">{header}</th>;
+      <TableContainer>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>No Invoice</Th>
+              <Th>Chasier Name</Th>
+              <Th>Customer Name</Th>
+              <Th>Product Name</Th>
+              <Th>Total Price</Th>
+              <Th>Transaction Date </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {transaction?.transactions?.map((item) => {
+              return (
+                <Tr>
+                  <Td className="text-center">{item.no_inv}</Td>
+                  <Td>{item.User.first_name}</Td>
+                  <Td>{item.customer_name}</Td>
+                  <Td>{item.Product.product_name}</Td>
+                  <Td>{item.total_price}</Td>
+                  <Td>{formatDate(item.transaction_date)}</Td>
+                </Tr>
+              );
             })}
-          </tr>
-        </thead>
-        <tbody className="border border-black">
-          {transaction?.transactions?.map((item) => {
-            return (
-              <tr className="border border-black">
-                <td className="border border-black">{item?.id}</td>
-                <td className="border border-black">{item?.no_inv}</td>
-                <td className="border border-black">{item?.cashier_id}</td>
-                <td className="border border-black">{item?.customer_name}</td>
-                <td className="border border-black">{item?.product_id}</td>
-                <td className="border border-black">{item?.total_price}</td>
-                <td className="border border-black">
-                  {item?.transaction_date}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+          </Tbody>
+        </Table>
+      </TableContainer>
     </>
   );
 };

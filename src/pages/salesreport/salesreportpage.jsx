@@ -3,6 +3,7 @@ import { TableSalesReport } from "../../components/tablesalesreport/tablesalesre
 import { NavTemplateAdmin } from "../../components/template/template";
 import api from "../../api/api";
 import { Spinner } from "@chakra-ui/spinner";
+import { SortingReport } from "../../components/tablesalesreport/sortingreport";
 
 export const SalesReportPage = () => {
   const [transaction, setTransaction] = useState([]);
@@ -28,19 +29,34 @@ export const SalesReportPage = () => {
 
   useEffect(() => {
     fetchTransaction();
-  }, []);
+  }, [sortOrder]);
   return (
     <>
       <NavTemplateAdmin>
-        <div className="flex justify-center md:mt-4">
-          {isLoading ? (
-            <Spinner size={"lg"} />
-          ) : (
-            <TableSalesReport
-              transaction={transaction}
-              fetchTransaction={fetchTransaction}
-            />
-          )}
+        <div className="col-auto items-center md:mt-4">
+          <div className="flex justify-end md:mr-24">
+            <div
+              className="border border-black "
+              style={{ boxShadow: "1px 1px 2px black" }}
+            >
+              <SortingReport
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end md:mr-28">
+            {isLoading ? (
+              <div className="flex justify-end md:mr-96 md:mt-52">
+                <Spinner size={"lg"} />
+              </div>
+            ) : (
+              <TableSalesReport
+                transaction={transaction}
+                fetchTransaction={fetchTransaction}
+              />
+            )}
+          </div>
         </div>
       </NavTemplateAdmin>
     </>
