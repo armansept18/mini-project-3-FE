@@ -12,12 +12,14 @@ import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { PiHamburgerBold, PiCoffeeBold } from "react-icons/pi";
 import { GiManualJuicer } from "react-icons/gi";
 import { FaBowlFood } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export const SideBarCashier = ({ isSlideOpen }) => {
   // console.log(isSlideOpen);
   const nav = useNavigate();
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const userSelector = useSelector((state) => state.auth);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -86,7 +88,7 @@ export const SideBarCashier = ({ isSlideOpen }) => {
                     <Avatar className="text-sm" size={"sm"} />
                   </div>
                   <div className="w-2"></div>
-                  <div>Andre</div>
+                  <div>{userSelector.first_name}</div>
                 </div>
               </div>
               <div className="p-2 flex justify-between items-center ">

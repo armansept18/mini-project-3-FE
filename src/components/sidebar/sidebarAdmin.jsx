@@ -10,6 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
+import { useSelector } from "react-redux";
 import { BiCategory } from "react-icons/bi";
 
 export const SideBarAdmin = ({ isSlideOpen }) => {
@@ -17,6 +18,7 @@ export const SideBarAdmin = ({ isSlideOpen }) => {
   const nav = useNavigate();
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const userSelector = useSelector((state) => state.auth);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -85,7 +87,7 @@ export const SideBarAdmin = ({ isSlideOpen }) => {
                     <Avatar className="text-sm" size={"sm"} />
                   </div>
                   <div className="w-2"></div>
-                  <div>Andre</div>
+                  <div>{userSelector.first_name}</div>
                 </div>
               </div>
               <div className="p-2 flex justify-between items-center ">

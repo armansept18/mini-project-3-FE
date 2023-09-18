@@ -24,6 +24,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
     Array(product.length).fill(false)
   );
   const toast = useToast();
+
   const toggleStick = (index) => {
     const newIsTick = [...isTickVisible];
     newIsTick[index] = !newIsTick[index];

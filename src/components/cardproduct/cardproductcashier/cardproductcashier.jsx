@@ -1,15 +1,35 @@
+import { useEffect, useState } from "react";
+import { useCart } from "./cartContext";
+
 export const CardCoffe = ({ item }) => {
+  //useContext
+  const { addToCart } = useCart();
+
+  //transaction
+  /*   const [cart, setCart] = useState({});
+
+  const addCart = (item) => {
+    setCart(item);
+  };
+
+  useEffect(() => {
+    console.log("cart", cart);
+  }, [cart]); */
+
+  //andre
   const formatIdr = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
   });
+
   return (
     <>
       <div
-        className="bg-gray-100 p-2 mt-10 max-md:w-36 max-md:mt-40 "
+        className="bg-gray-100 p-2 mt-10 max-md:w-36 max-md:mt-40 cursor-pointer transition duration-300 ease-in-out transform hover:bg-blue-300 hover:scale-105"
         style={{ borderRadius: "12px", boxShadow: "2px 2px 3px black" }}
+        onClick={() => addToCart(item)}
       >
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <img
             style={{
               borderRadius: "12px",
