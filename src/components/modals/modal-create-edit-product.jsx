@@ -153,7 +153,6 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
                 aspectRatio={1}
                 objectFit={"cover"}
                 onError={({ currentTarget }) => {
-                  // currentTarget.onerror = null;
                   currentTarget.src = defaultImage;
                 }}
                 cursor={"pointer"}
