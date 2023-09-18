@@ -137,7 +137,10 @@ export const TableEmployee = ({ onClose, isOpen }) => {
         </Thead>
         <Tbody>
           {cashier.map((employee, index) => (
-            <Tr key={index}>
+            <Tr
+              key={index}
+              // className="hover:scale-95 transform hover:shadow-md hover:bg-blue-50"
+            >
               <Td>{index + 1}</Td>
               <Td>{employee.first_name}</Td>
               <Td>{employee.last_name}</Td>
