@@ -10,6 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { TbReportAnalytics } from "react-icons/tb";
+import { BiCategory } from "react-icons/bi";
 
 export const SideBarAdmin = ({ isSlideOpen }) => {
   // console.log(isSlideOpen);
@@ -168,6 +169,18 @@ export const SideBarAdmin = ({ isSlideOpen }) => {
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <MdProductionQuantityLimits className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   <span className="flex-1 ml-3 whitespace-nowrap">Product</span>
+                </a>
+              </li>
+
+              <li
+                onClick={() => nav("/management-product")}
+                className="cursor-pointer mb-4"
+              >
+                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <BiCategory className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                  <span className="flex-1 ml-3 whitespace-nowrap">
+                    Management Product
+                  </span>
                 </a>
               </li>
 

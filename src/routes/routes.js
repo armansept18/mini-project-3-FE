@@ -18,6 +18,7 @@ import { PageFood } from "../pages/product-cashier/pagefood";
 import { PageNonCoffee } from "../pages/product-cashier/noncoffee";
 import { PageSnack } from "../pages/product-cashier/snack";
 import { Report, SalesReportPage } from "../pages/salesreport/salesreportpage";
+import { PageManagementProduct } from "../pages/managementproduct/managementproduct";
 
 class RouteClass {
   constructor(path, element, needLogin = false) {
@@ -40,6 +41,7 @@ export const routes = [
   new RouteClass("food", <PageFood />),
   new RouteClass("snack", <PageSnack />),
   new RouteClass("report", <SalesReportPage />),
+  new RouteClass("management-product", <PageManagementProduct />),
 
   new RouteClass("*", <Redirect />),
 ];
