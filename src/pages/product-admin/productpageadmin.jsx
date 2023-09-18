@@ -5,7 +5,7 @@ import {
   NavTemplateAdmin,
 } from "../../components/template/template";
 import api from "../../api/api";
-import { PaginationCakraUi } from "../../components/pagination/pagination";
+import { PaginationCakraUi } from "../../components/pagination/paginationAdmin";
 import { Button } from "@chakra-ui/button";
 import { useNavigate } from "react-router";
 import { useToast } from "@chakra-ui/toast";
@@ -21,6 +21,9 @@ export const ProductPageAdmin = ({ id }) => {
   const toast = useToast();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+  console.log(page, "ini page yang ada di product");
   const nav = useNavigate();
 
   const fetchSearch = () => {
@@ -31,7 +34,8 @@ export const ProductPageAdmin = ({ id }) => {
           category_id: search.category,
           orderby: sortOrder.orderBy,
           sortby: sortOrder.sortBy,
-          // page, pageSize
+          page,
+          pageSize,
         },
       })
       .then((res) => {
@@ -42,18 +46,18 @@ export const ProductPageAdmin = ({ id }) => {
   useEffect(() => {
     console.log(sortOrder);
     fetchSearch();
-  }, [search, sortOrder]);
+  }, [search, sortOrder, page]);
 
-  const fetchProduct = async (page, pageSize) => {
-    await api
-      .get("/products/", {
-        params: { order: sortField, product_name: sortOrder, page, pageSize },
-      })
-      .then((result) => setProducts(result.data));
-  };
+  // const fetchProduct = async (page, pageSize) => {
+  //   await api
+  //     .get("/products/", {
+  //       params: { order: sortField, product_name: sortOrder, page, pageSize },
+  //     })
+  //     .then((result) => setProducts(result.data));
+  // };
   // useEffect(() => {
   //   fetchProduct();
-  // }, []);
+  // }, [page]);
 
   const openEditModal = (product) => {
     setEditProduct(product);
@@ -71,8 +75,7 @@ export const ProductPageAdmin = ({ id }) => {
         <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
         <div className="col-auto items-center justify-center h-24 rounded max-md:mt-5 md:ml-72 md:max-w-5xl">
           <CardProduct product={products} onEdit={openEditModal} />
-
-          {/* <PaginationCakraUi product={products} fetchSearch={fetchSearch} /> */}
+          <PaginationCakraUi product={products} page={page} setPage={setPage} />
         </div>
       </NavTemplateAdmin>
       {isEditModalOpen && (

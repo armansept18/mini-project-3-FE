@@ -1,34 +1,18 @@
-import {
-  Flex,
-  Icon,
-  useColorModeValue,
-  Button,
-  chakra,
-} from "@chakra-ui/react";
+import { Flex, Icon, Button } from "@chakra-ui/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { HiDotsHorizontal } from "react-icons/hi";
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import React, { useEffect, useState } from "react";
-import { PagButton } from "./itempagination/pagbutton";
 
-export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
-  const [page, setPage] = useState(1);
-  const itemsPerPage = 10;
+import React, { useEffect, useState } from "react";
+
+export const PaginationCakraUi = ({ product, page, setPage }) => {
+  const itemsPerPage = 5;
 
   const handlePageChange = (newPage) => {
-    if (newPage >= 1) {
-      setPage(newPage);
-    }
+    if (newPage > 1) setPage(newPage);
   };
-
-  useEffect(() => {
-    fetchProduct(page, itemsPerPage);
-  }, [page]);
-
   return (
     <Flex alignItems="center" justifyContent="center" className="mt-16">
       <Button
-        onClick={() => handlePageChange(page - 1)}
+        onClick={() => handlePageChange(setPage(page - 1))}
         isDisabled={page === 1}
         colorScheme="gray"
         variant="outline"
@@ -42,12 +26,13 @@ export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
           onClick={() => handlePageChange(index + 1)}
           colorScheme={index + 1 === page ? "brand" : "gray"}
         >
+          {console.log(index + 1)}
           {index + 1}
         </Button>
       ))}
       <Button
-        onClick={() => handlePageChange(page + 1)}
-        isDisabled={product?.products?.length < 10}
+        onClick={() => handlePageChange(setPage(page + 1))}
+        isDisabled={product.length < itemsPerPage}
         colorScheme="gray"
         variant="outline"
       >
