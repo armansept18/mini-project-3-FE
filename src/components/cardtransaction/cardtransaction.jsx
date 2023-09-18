@@ -10,7 +10,6 @@ import { useToast } from "@chakra-ui/react";
 
 export const CardTransaction = () => {
   const { cart, incrementCart, decrementCart, clearCart } = useCart();
-  // console.log(cart);
   const toast = useToast();
 
   async function submit() {

@@ -2,21 +2,8 @@ import { useEffect, useState } from "react";
 import { useCart } from "./cartContext";
 
 export const CardCoffe = ({ item }) => {
-  //useContext
   const { addToCart } = useCart();
 
-  //transaction
-  /*   const [cart, setCart] = useState({});
-
-  const addCart = (item) => {
-    setCart(item);
-  };
-
-  useEffect(() => {
-    console.log("cart", cart);
-  }, [cart]); */
-
-  //andre
   const formatIdr = new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
