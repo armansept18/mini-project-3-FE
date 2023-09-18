@@ -6,6 +6,7 @@ import { CardTransaction } from "../../components/cardtransaction/cardtransactio
 import { PaginationCakraUiCashier } from "../../components/pagination/pagination-cashier";
 import { CartProvider } from "../../components/cardproduct/cardproductcashier/cartContext";
 
+
 export const PageSnack = () => {
   const category_id = 4;
   const [product, setProduct] = useState([]);
@@ -56,6 +57,34 @@ export const PageSnack = () => {
           </div>
         </NavTemplateCashier>
       </CartProvider>
+      <NavTemplateCashier>
+        <div className="md:flex md:justify-between md:ml-56 md:h-full">
+          <div></div>
+          <div className="col-auto">
+            <div className="md:h-16 flex justify-center">
+              <span className="font-bold text-2xl p-4 border-b-4 border-black">
+                Snack
+              </span>
+            </div>
+
+            <div className="grid grid-cols-4 gap-4">
+              {product?.products?.map((item) => (
+                <CardCoffe item={item} />
+              ))}
+            </div>
+            <div>
+              <PaginationCakraUiCashier
+                product={product}
+                fetchProduct={fetchProduct}
+              />
+            </div>
+          </div>
+
+          <div>
+            <CardTransaction />
+          </div>
+        </div>
+      </NavTemplateCashier>
     </>
   );
 };

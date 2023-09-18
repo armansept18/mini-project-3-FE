@@ -20,9 +20,6 @@ export const PageFood = () => {
       console.error(err?.message);
     }
   };
-  // useEffect(() => {
-  //   fetchProduct(); // Call the async function without arguments
-  // }, []);
 
   return (
     <>
@@ -57,6 +54,35 @@ export const PageFood = () => {
           </div>
         </NavTemplateCashier>
       </CartProvider>
+      <NavTemplateCashier>
+        <div className="md:flex md:justify-between md:ml-56  md:h-full">
+          <div></div>
+          <div className="col-auto">
+            <div className="md:h-16 flex justify-center">
+              <span className="font-bold text-2xl p-4 border-b-4 border-black">
+                Food
+              </span>
+            </div>
+
+            <div className="grid grid-cols-4 gap-4">
+              {product?.products?.map((item) => (
+                <CardCoffe item={item} />
+              ))}
+            </div>
+            <div>
+              {" "}
+              <PaginationCakraUiCashier
+                product={product}
+                fetchProduct={fetchProduct}
+              />
+            </div>
+          </div>
+
+          <div>
+            <CardTransaction />
+          </div>
+        </div>
+      </NavTemplateCashier>
     </>
   );
 };
