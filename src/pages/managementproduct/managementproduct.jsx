@@ -10,8 +10,11 @@ import { ModalAddCategoryName } from "../../components/modals/modaladdcategory";
 export const PageManagementProduct = () => {
   const [category, setCategory] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1); // Initialize with a default category ID
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
+  const [selectCategoryModal, setSelectedCategoryModal] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState(null);
+
   const fetchCategory = async () => {
     await api
       .get("/productcategories")
@@ -22,7 +25,7 @@ export const PageManagementProduct = () => {
   const fetchProduct = async () => {
     await api
       .get("/products/withcategory", {
-        params: { categoryid_product: selectedCategoryId }, // Use selectedCategoryId here
+        params: { categoryid_product: selectedCategoryId },
       })
       .then((result) => setProducts(result.data))
       .catch((err) => console.log(err?.message));
@@ -31,20 +34,41 @@ export const PageManagementProduct = () => {
   useEffect(() => {
     fetchCategory();
     fetchProduct();
-  }, [selectedCategoryId]); // Trigger fetchProduct when selectedCategoryId changes
+  }, [selectedCategoryId]);
 
   const handleCategorySelect = (selectCategoryId) => {
-    setSelectedCategoryId(selectCategoryId); // Update selectedCategoryId, not category
+    setSelectedCategoryId(selectCategoryId);
   };
 
+  const handleCategorySelectModalEdit = (id) => {
+    setSelectedCategoryModal(id);
+  };
+  const openModaledit = (product) => {
+    setEditProduct(product);
+    setIsOpen(true);
+  };
+  console.log(editProduct, "ini edit product");
+
+  const closeModalEdit = (product) => {
+    setEditProduct(null);
+    setIsOpen(false);
+  };
   return (
     <>
       <NavTemplateAdmin>
-        <ModalAddCategoryName
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          fetchCategory={fetchCategory}
-        />
+        {isOpen && (
+          <ModalAddCategoryName
+            isOpen={isOpen}
+            onClose={closeModalEdit}
+            fetchCategory={fetchCategory}
+            edit={editProduct}
+            category={category}
+            onSelectCategoryEdit={handleCategorySelectModalEdit}
+            idSeselectCategoryModal={selectCategoryModal}
+            fetchProduct={fetchProduct}
+          />
+        )}
+
         <div className="text-center ">
           <span className="border-b-2 border-black font-semibold text-xl">
             Manage Category
@@ -55,8 +79,8 @@ export const PageManagementProduct = () => {
             <div>
               <SelectCategory
                 category={category}
-                setCategory={setCategory}
                 onSelectCategory={handleCategorySelect}
+                onSelectCategoryEdit={handleCategorySelectModalEdit}
               />
             </div>
             <div className="md:w-5"></div>
@@ -67,6 +91,7 @@ export const PageManagementProduct = () => {
             products={products}
             setOrderCategory={setSelectedCategoryId} // Update selectedCategoryId, not orderCategory
             category={category}
+            isEdit={openModaledit}
           />
         </div>
       </NavTemplateAdmin>

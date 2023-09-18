@@ -12,7 +12,7 @@ import {
 
 import { BiEditAlt } from "react-icons/bi";
 
-export const TableManagementCategory = ({ products }) => {
+export const TableManagementCategory = ({ products, isEdit }) => {
   return (
     <>
       <div className="flex justify-between ">
@@ -44,7 +44,7 @@ export const TableManagementCategory = ({ products }) => {
                         <Td>{item.product_name}</Td>
                         <Td key={item.id} className="flex justify-between">
                           {item.ProductCategory?.category_name}
-                          <BiEditAlt />
+                          <BiEditAlt onClick={() => isEdit(item)} />
                         </Td>
                       </Tr>
                     </>
