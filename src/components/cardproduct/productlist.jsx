@@ -65,7 +65,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
             duration: 2023,
           });
         });
-      }
+    }
   };
   return (
     <>
