@@ -57,7 +57,7 @@ export const LoginPage = () => {
       try {
         const result = await dispatch(userLogin(values));
         const isDisable = result.user.isDisable;
-        console.log("result", result);
+        // console.log("result", result);
 
         if (isDisable) {
           toast({
@@ -81,7 +81,7 @@ export const LoginPage = () => {
           const tokenLocal = localStorage.getItem("auth");
           const decoded = jwt_decode(tokenLocal);
 
-          console.log("decoded", decoded);
+          // console.log("decoded", decoded);
           if (decoded.role_id === 1) {
             return nav("/admin");
           } else if (decoded.role_id === 2) {
