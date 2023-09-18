@@ -152,9 +152,9 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
                 maxH={"180px"}
                 aspectRatio={1}
                 objectFit={"cover"}
-                onError={(e) => {
+                onError={({ currentTarget }) => {
                   // currentTarget.onerror = null;
-                  e.target.src = defaultImage;
+                  currentTarget.src = defaultImage;
                 }}
                 cursor={"pointer"}
                 onClick={() => ref.current.click()}
@@ -236,9 +236,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
             </FormControl>
             <FormControl
               mr="1%"
-              isInvalid={
-                formik.errors.stock && formik.touched.stock
-              }
+              isInvalid={formik.errors.stock && formik.touched.stock}
             >
               <FormLabel>Stok Produk</FormLabel>
               <Input
@@ -251,7 +249,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
               <FormErrorMessage>{formik.errors.stock}</FormErrorMessage>
             </FormControl>
           </ModalBody>
-          <ModalFooter gap={'20px'}>
+          <ModalFooter>
             <Button
               colorScheme={"green"}
               onClick={formik.handleSubmit}
@@ -259,7 +257,7 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
             >
               Simpan
             </Button>
-            <Button onClick={onClose}>Batal</Button>
+            <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
