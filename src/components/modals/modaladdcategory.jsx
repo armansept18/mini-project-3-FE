@@ -29,13 +29,18 @@ export const ModalAddCategoryName = ({
 }) => {
   console.log(idSeselectCategoryModal);
   const toast = useToast();
+  const validationSchemaAdd = yup.object().shape({
+    category_name: yup.string().required("Category name harus di isi!"),
+  });
+
+  const validationSchemaEdit = yup.object().shape({
+    category_name: yup.string(),
+  });
   const formik = useFormik({
     initialValues: {
       category_name: "",
     },
-    // validationSchema: yup.object().shape({
-    //   category_name: yup.string().required("Category name harus di isi!"),
-    // }),
+    validationSchema: edit ? validationSchemaEdit : validationSchemaAdd,
     onSubmit: async (values) => {
       try {
         if (edit) {
@@ -107,7 +112,12 @@ export const ModalAddCategoryName = ({
 
           <ModalFooter>
             {edit ? (
-              <Button colorScheme="blue" mr={3} onClick={formik.handleSubmit}>
+              <Button
+                disabled={idSeselectCategoryModal === undefined}
+                colorScheme="blue"
+                mr={3}
+                onClick={formik.handleSubmit}
+              >
                 Edit Category
               </Button>
             ) : (

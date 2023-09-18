@@ -44,7 +44,10 @@ export const TableManagementCategory = ({ products, isEdit }) => {
                         <Td>{item.product_name}</Td>
                         <Td key={item.id} className="flex justify-between">
                           {item.ProductCategory?.category_name}
-                          <BiEditAlt onClick={() => isEdit(item)} />
+                          <BiEditAlt
+                            onClick={() => isEdit(item)}
+                            className="cursor-pointer"
+                          />
                         </Td>
                       </Tr>
                     </>
