@@ -10,7 +10,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 export const TableSalesReport = ({ transaction }) => {
-  const headerKeys = Object.keys(transaction?.transactions[0]);
+  // const headerKeys = Object.keys(transaction?.transactions[0]);
   // console.log(headerKeys);
 
   const formatDate = (isoDate) => {
@@ -32,18 +32,18 @@ export const TableSalesReport = ({ transaction }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {transaction?.transactions?.map((item) => {
+            {/* {transaction?.transactions?.map((item) => { */}
               return (
                 <Tr>
-                  <Td className="text-center">{item.no_inv}</Td>
-                  <Td>{item.User.first_name}</Td>
-                  <Td>{item.customer_name}</Td>
-                  <Td>{item.Product.product_name}</Td>
-                  <Td>{item.total_price}</Td>
-                  <Td>{formatDate(item.transaction_date)}</Td>
+                  <Td className="text-center">{""}</Td>
+                  <Td>{"item.User.first_name"}</Td>
+                  <Td>{"item.customer_name"}</Td>
+                  <Td>{"item.Product.product_name"}</Td>
+                  <Td>{"item.total_price"}</Td>
+                  <Td>{"formatDate(item.transaction_date)"}</Td>
                 </Tr>
               );
-            })}
+            {/* })} */}
           </Tbody>
         </Table>
       </TableContainer>
