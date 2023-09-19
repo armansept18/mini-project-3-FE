@@ -7,7 +7,10 @@ export function useCart() {
 }
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
 
   const addToCart = (item) => {
     // Check if the item is already in the cart
@@ -66,7 +69,7 @@ export function CartProvider({ children }) {
   }
 
   useEffect(() => {
-    console.log("cart", cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   return (

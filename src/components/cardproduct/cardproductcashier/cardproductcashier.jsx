@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCart } from "./cartContext";
+import useSound from "use-sound";
+import boopSfx from "../../../assets/sounds/y2mate.com - Button click sound  sound effect_64kbps.mp3";
 
 export const CardCoffe = ({ item }) => {
   const { addToCart } = useCart();
@@ -9,12 +11,17 @@ export const CardCoffe = ({ item }) => {
     currency: "IDR",
   });
 
+  const [play] = useSound(boopSfx, { volume: 0.3 });
+
   return (
     <>
       <div
-        className="bg-gray-100 p-2 mt-10 max-md:w-36 max-md:mt-40 cursor-pointer transition duration-300 ease-in-out transform hover:bg-blue-300 hover:scale-105"
+        className="bg-gray-100 p-2 mt-10 max-md:w-36 max-md:mt-40 cursor-pointer transition duration-300 ease-in-out transform hover:bg-blue-100 hover:scale-100"
         style={{ borderRadius: "12px", boxShadow: "2px 2px 3px black" }}
-        onClick={() => addToCart(item)}
+        onClick={() => {
+          addToCart(item);
+          play();
+        }}
       >
         <div className="flex justify-center ">
           <img
@@ -25,7 +32,7 @@ export const CardCoffe = ({ item }) => {
               height: "100px",
             }}
             className="object-fill"
-            src={`http://localhost:2000/static/${item.image}`}
+            src={item.image}
             alt=""
           />
         </div>
