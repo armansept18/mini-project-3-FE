@@ -19,7 +19,7 @@ const CategoryToName = (category_id) => {
   }
 };
 
-export const CardProduct = ({ product, onEdit, onDelete }) => {
+export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
   const [isTickVisible, setIsTickVisible] = useState(
     Array(product.length).fill(false)
   );
@@ -55,20 +55,21 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
             position: "top",
             duration: 2023,
           });
-          window.location.reload();
+
           onDelete(item);
         })
         .catch((error) => {
           console.error("Error Hapus Produk:", error);
-          toast({
-            title: "Gagal Menghapus!",
-            description: error?.response?.data,
-            status: "error",
-            position: "top",
-            isClosable: true,
-            duration: 2023,
-          });
+          // toast({
+          //   title: "Gagal Menghapus!",
+          //   description: error?.response?.data,
+          //   status: "error",
+          //   position: "top",
+          //   isClosable: true,
+          //   duration: 2023,
+          // });
         });
+      fetchSearch(1, 1);
     }
   };
   return (
