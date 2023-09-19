@@ -107,7 +107,7 @@ export const PieChartProduct = () => {
       ],
     },
   });
-  
+
   return (
     <div className="flex justify-center items-center mt-10">
       <Chart
@@ -119,4 +119,4 @@ export const PieChartProduct = () => {
       />
     </div>
   );
-}
+};
