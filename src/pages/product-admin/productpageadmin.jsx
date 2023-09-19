@@ -75,7 +75,11 @@ export const ProductPageAdmin = ({ id }) => {
         <SearchBar setSearch={setSearch} />
         <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
         <div className="col-auto items-center justify-center h-24 rounded max-md:mt-5 md:ml-72 md:max-w-5xl">
-          <CardProduct product={products} onEdit={openEditModal} />
+          <CardProduct
+            product={products}
+            onEdit={openEditModal}
+            fetchSearch={fetchSearch}
+          />
           <PaginationCakraUiAdmin
             fetchSearch={fetchSearch}
             totalItem={totalItem}
