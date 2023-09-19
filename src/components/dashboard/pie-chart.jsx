@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import api from "../../api/api";
 
 export const PieChartCategory = () => {
   const [state, setState] = useState({
-    series: [14, 25, 17, 39],
+    series: [],
     options: {
       chart: {
         width: 200,
         type: "donut",
       },
       title: {
-          text: "Kategori Paling Laris",
-          align: "left",
-          style: {
-            fontSize: "16px",
-            color: "#666",
-          },
+        text: "Kategori Paling Laris",
+        align: "left",
+        style: {
+          fontSize: "16px",
+          color: "#666",
         },
-      labels: ["Coffee", "Non Coffee", "Food", "Snack"],
+      },
+      labels: [],
       responsive: [
         {
           breakpoint: 480,
@@ -33,6 +34,30 @@ export const PieChartCategory = () => {
       ],
     },
   });
+
+  useEffect(() => {
+    api
+      .get("/transactiondetails/soldproductcategory")
+      .then((response) => {
+        const data = response.data;
+
+        const categoryNames = data.map((item) => item.category_name);
+        const productCounts = data.map((item) => parseInt(item.total_sold));
+
+        setState((prevState) => ({
+          ...prevState,
+          options: {
+            ...prevState.options,
+            labels: categoryNames,
+          },
+          series: productCounts,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div className="flex justify-center items-center mt-10">
       <Chart
@@ -40,7 +65,7 @@ export const PieChartCategory = () => {
         series={state.series}
         type="donut"
         width="400"
-        className='shadow-xl'
+        className="shadow-xl"
       />
     </div>
   );
@@ -48,7 +73,9 @@ export const PieChartCategory = () => {
 
 export const PieChartProduct = () => {
   const [state, setState] = useState({
-    series: [44, 55, 13, 43],
+    series: [
+      // total data nama produk yang terjual
+    ],
     options: {
       chart: {
         width: 200,
@@ -62,7 +89,9 @@ export const PieChartProduct = () => {
           color: "#666",
         },
       },
-      labels: ["Caramel Coffee", "Coffee Latte", "Siomay", "Nasi Goreng"],
+      labels: [
+        // data nama produk paling banyak terjual
+      ],
       responsive: [
         {
           breakpoint: 480,
@@ -78,6 +107,7 @@ export const PieChartProduct = () => {
       ],
     },
   });
+
   return (
     <div className="flex justify-center items-center mt-10">
       <Chart
@@ -89,4 +119,4 @@ export const PieChartProduct = () => {
       />
     </div>
   );
-}
+};

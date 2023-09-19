@@ -31,10 +31,14 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
     setIsTickVisible(newIsTick);
   };
 
-  const formatIdr = Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  });
+  const formatIdr = (price) => {
+    return price.toLocaleString("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+  };
 
   const handleDelete = (item) => {
     const shouldDelete = window.confirm("Anda Yakin Akan Hapus Produk Ini?");
@@ -105,7 +109,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
               <hr style={{ color: "black" }} />
             </div>
             <div className="flex items-center">
-              <span>{item.price}</span>
+              <span>{formatIdr(item.price)}</span>
               <hr style={{ color: "black" }} />
             </div>
             <div className="flex items-center">
