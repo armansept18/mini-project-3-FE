@@ -3,18 +3,28 @@ import { TableManagementCategory } from "../../components/table/tablemanagementc
 import { NavTemplateAdmin } from "../../components/template/template";
 import api from "../../api/api";
 import { SelectCategory } from "../../components/selectoption/selectoptioncategory";
-
 import { Button } from "@chakra-ui/react";
 import { ModalAddCategoryName } from "../../components/modals/modaladdcategory";
+import { connect } from "react-redux";
 
-export const PageManagementProduct = () => {
+import { Spinner } from "@chakra-ui/react";
+import {
+  startLoading,
+  stopLoading,
+} from "../../middlewares/loading-middleware";
+
+export const PageManagementProduct = ({
+  isLoading,
+  startLoading,
+  stopLoading,
+}) => {
   const [category, setCategory] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [selectCategoryModal, setSelectedCategoryModal] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
-
+  console.log(isLoading, "INI LOADING");
   const fetchCategory = async () => {
     await api
       .get("/productcategories")
@@ -23,14 +33,20 @@ export const PageManagementProduct = () => {
   };
 
   const fetchProduct = async () => {
-    await api
-      .get("/products/withcategory", {
-        params: { categoryid_product: selectedCategoryId },
-      })
-      .then((result) => setProducts(result.data))
-      .catch((err) => console.log(err?.message));
+    try {
+      // startLoading();
+      await api
+        .get("/products/withcategory", {
+          params: { categoryid_product: selectedCategoryId },
+        })
+        .then((result) => setProducts(result.data))
+        .catch((err) => console.log(err?.message));
+    } catch (err) {
+      console.log(err?.message);
+      // stopLoading();
+    }
   };
-  console.log(selectedCategoryId);
+
   useEffect(() => {
     fetchCategory();
     fetchProduct();
@@ -69,13 +85,13 @@ export const PageManagementProduct = () => {
           />
         )}
 
-        <div className="text-center ">
+        <div className="text-center max-md:mt-28">
           <span className="border-b-2 border-black font-semibold text-xl">
             Manage Category
           </span>
         </div>
-        <div>
-          <div className="flex justify-end md: mr-20">
+        <div className="max-md:col-auto max-md:items-center max-md:mt-10">
+          <div className="flex md:justify-end md: md:mr-20 max-md:justify-center">
             <div>
               <SelectCategory
                 category={category}
@@ -83,18 +99,33 @@ export const PageManagementProduct = () => {
                 onSelectCategoryEdit={handleCategorySelectModalEdit}
               />
             </div>
-            <div className="md:w-5"></div>
-            <Button onClick={() => setIsOpen(true)}>Add Category Name</Button>
+            <div className="md:w-5 max-md:w-5"></div>
+            <Button onClick={() => setIsOpen(true)} size={"md"}>
+              Add Category Name
+            </Button>
           </div>
-
-          <TableManagementCategory
-            products={products}
-            setOrderCategory={setSelectedCategoryId} // Update selectedCategoryId, not orderCategory
-            category={category}
-            isEdit={openModaledit}
-          />
+          {/* {isLoading && (
+            <div className="text-center">
+              <Spinner size="xl" />
+            </div>
+          )} */}
+          <div className="max-md:flex max-md:justify-center max-md:mt-6 ">
+            <TableManagementCategory
+              products={products}
+              setOrderCategory={setSelectedCategoryId} // Update selectedCategoryId, not orderCategory
+              category={category}
+              isEdit={openModaledit}
+            />
+          </div>
         </div>
       </NavTemplateAdmin>
     </>
   );
 };
+// const mapStateToProps = (state) => ({
+//   isLoading: state.loading.isLoading,
+// });
+
+// export default connect(mapStateToProps, { startLoading, stopLoading })(
+//   PageManagementProduct
+// );

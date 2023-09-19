@@ -49,7 +49,7 @@ export const ModalAddCategoryName = ({
           });
 
           toast({
-            title: "success add new category name",
+            title: "Success change category",
             status: "success",
             duration: 4000,
             isClosable: true,
@@ -61,7 +61,7 @@ export const ModalAddCategoryName = ({
         } else {
           await api.post("/productcategories", { ...values });
           toast({
-            title: "success add new category name",
+            title: "Success add new category",
             status: "success",
             duration: 4000,
             isClosable: true,

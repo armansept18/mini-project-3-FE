@@ -19,12 +19,13 @@ export const SelectCategory = ({
   return (
     <>
       <Select
+        size="md"
         placeholder="Select Category"
         onChange={edit ? handleCategoryChangeEdit : handleCategoryChange}
       >
         {Array.isArray(category) ? (
           category.map((item) => (
-            <option key={item.id} value={item.id}>
+            <option key={item.id} value={item.id} className="max-md:text-sm">
               {item.category_name}
             </option>
           ))
