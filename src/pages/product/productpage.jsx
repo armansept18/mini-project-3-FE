@@ -9,6 +9,7 @@ import { ModalProduct } from "../../components/cardproduct/product-modal";
 
 export const ProductPage = ({ id }) => {
   const [products, setProducts] = useState([]);
+  const [category, setCategory] =useState([]);
   const [search, setSearch] = useState({ search: "", category: "" });
   const [sortField, setSortField] = useState(null);
   const [sortOrder, setSortOrder] = useState({ orderby: "", sortby: "asc" });
@@ -50,11 +51,6 @@ export const ProductPage = ({ id }) => {
       console.error(`Error fetching products:`, error);
     }
   };
-  // useEffect(() => {
-  // console.log(sortField);
-  //   console.log(sortOrder);
-  //   fetchProduct();
-  // }, [sortField, sortOrder]);
 
   const handleSort = async (field, order) => {
     setSortField(field);
