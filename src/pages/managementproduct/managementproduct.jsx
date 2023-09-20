@@ -86,7 +86,7 @@ export const PageManagementProduct = ({
         )}
 
         <div className="text-center max-md:mt-28 md:ml-44">
-          <span className="border-b-2 border-black font-semibold text-xl  ">
+          <span className="border-b-2 border-black font-semibold text-2xl  ">
             Manage Category
           </span>
         </div>

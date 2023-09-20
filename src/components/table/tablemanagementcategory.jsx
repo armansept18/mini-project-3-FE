@@ -17,13 +17,13 @@ export const TableManagementCategory = ({ products, isEdit }) => {
     <>
       <div className="flex md:justify-center md:ml-48">
         <div className="md:p-5 md:w-4/5">
-          <TableContainer className=" max-md:text-base">
+          <TableContainer className=" max-md:text-base p-4">
             <Table variant="simple">
               <Thead>
                 <Tr>
                   <Th
                     className="text-center bg-slate-200"
-                    style={{ borderRadius: "12px" }}
+                    style={{ borderRadius: "12px", padding: "20px" }}
                   >
                     NAME PRODUCT
                   </Th>
@@ -35,13 +35,27 @@ export const TableManagementCategory = ({ products, isEdit }) => {
                   </Th>
                 </Tr>
               </Thead>
-              <Tbody>
+              <Tbody className="">
                 {products?.product?.map((item, index) => {
                   return (
                     <>
                       <Tr>
-                        <Td>{item.product_name}</Td>
-                        <Td key={item.id} className="flex justify-between">
+                        <Td
+                          style={{
+                            borderRadius: "12px",
+                            boxShadow: "1px 1px 2x black",
+                          }}
+                        >
+                          {item.product_name}
+                        </Td>
+                        <Td
+                          style={{
+                            borderRadius: "12px",
+                            boxShadow: "1px 1px 2px black",
+                          }}
+                          key={item.id}
+                          className="flex justify-between"
+                        >
                           {item.ProductCategory?.category_name}
                           <BiEditAlt
                             onClick={() => isEdit(item)}
