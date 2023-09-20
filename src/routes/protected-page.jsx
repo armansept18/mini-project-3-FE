@@ -1,12 +1,17 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { receiveUser } from "../middlewares/auth-middlewares";
 
 export const ProtectedPage = ({ children, needLogin = false }) => {
   const userSelector = useSelector((state) => state.auth);
   const nav = useNavigate();
 
   const auth = localStorage.getItem("auth");
+  const dispatch = useDispatch();
+  const getUser = async () => {
+    await dispatch(receiveUser());
+  };
 
   useEffect(() => {
     if (needLogin && !auth) {
@@ -14,7 +19,7 @@ export const ProtectedPage = ({ children, needLogin = false }) => {
     } else if (needLogin && userSelector.role_id !== 1) {
       return nav("/cashier");
     } else return;
-  }, [children]);
+  }, [children, userSelector.id]);
 
   return children;
 };
