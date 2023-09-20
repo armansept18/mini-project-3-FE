@@ -1,12 +1,10 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
   Heading,
   SimpleGrid,
   Text,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import api from "../../api/api";
@@ -21,59 +19,61 @@ export const ReportCard = () => {
       setTotalPenjualan(response.data.salesTotal);
       console.log(response.data.salesTotal);
     });
-    console.log(totalPenjualan);
+
     api.get("/transactions/total-transaction").then((response) => {
       setTotalTransaksi(response.data.transactionTotal);
     });
-    console.log(totalTransaksi);
+
     api.get("/transactiondetails/total-sold").then((response) => {
       setTotalProdukTerjual(response.data.totalSoldProduct);
     });
-    console.log(totalProdukTerjual);
   }, []);
 
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+
   return (
-    <>
-      <SimpleGrid
-        className="flex justify-center items-center mt-10"
-        maxWidth={800}
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
+    <SimpleGrid
+      className="flex justify-center items-center mt-10"
+      columns={[1, 2, 3]}
+      spacing={4}
+      marginLeft={isLargerThan768 ? "268px" : "0"} 
+    >
+      <Card
+        boxShadow="dark-lg"
+        backgroundColor="gray.100"
+        width={isLargerThan768 ? "auto" : "100%"}
       >
-        <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
-          <CardBody>
-            <Text>Total Sales Alltime</Text>
-            <Heading className="mt-3" size={"sm"}>
-              Rp {totalPenjualan.toLocaleString("id-ID")}
-            </Heading>
-            <span className="">
-              View here <ChevronDownIcon />
-            </span>
-          </CardBody>
-        </Card>
-        <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
-          <CardBody>
-            <Text>Total Transaction Alltime</Text>
-            <Heading className="mt-3" size={"sm"}>
-              {totalTransaksi} Transactions
-            </Heading>
-            <span>
-              View here <ChevronDownIcon />
-            </span>
-          </CardBody>
-        </Card>
-        <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
-          <CardBody>
-            <Text>Total Sold Products Alltime</Text>
-            <Heading className="mt-3" size={"sm"}>
-              {totalProdukTerjual} Products
-            </Heading>
-            <span>
-              View here <ChevronDownIcon />
-            </span>
-          </CardBody>
-        </Card>
-      </SimpleGrid>
-    </>
+        <CardBody>
+          <Text>Total Sales Alltime</Text>
+          <Heading className="mt-3" size="sm">
+            Rp {totalPenjualan.toLocaleString("id-ID")}
+          </Heading>
+        </CardBody>
+      </Card>
+      <Card
+        boxShadow="dark-lg"
+        backgroundColor="gray.100"
+        width={isLargerThan768 ? "auto" : "100%"}
+      >
+        <CardBody>
+          <Text>Total Transaction Alltime</Text>
+          <Heading className="mt-3" size="sm">
+            {totalTransaksi} Transactions
+          </Heading>
+        </CardBody>
+      </Card>
+      <Card
+        boxShadow="dark-lg"
+        backgroundColor="gray.100"
+        width={isLargerThan768 ? "auto" : "100%"}
+      >
+        <CardBody>
+          <Text>Total Sold Products Alltime</Text>
+          <Heading className="mt-3" size="sm">
+            {totalProdukTerjual} Products
+          </Heading>
+        </CardBody>
+      </Card>
+    </SimpleGrid>
   );
 };
