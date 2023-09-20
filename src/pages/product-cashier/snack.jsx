@@ -10,6 +10,7 @@ export const PageSnack = () => {
   const category_id = 4;
   const [products, setProducts] = useState([]);
   const [totalItem, setTotalItem] = useState(0);
+  const [filteredProduct, setFilteredProduct] = useState([]);
 
   const fetchProduct = async (page, pageSize) => {
     try {
@@ -25,10 +26,24 @@ export const PageSnack = () => {
     }
   };
 
+  const fetchSearch = async (product_name) => {
+    try {
+      const response = await api.get("/products/find", {
+        params: {
+          product_name: product_name,
+        },
+      });
+
+      setFilteredProduct(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <CartProvider>
-        <NavTemplateCashier>
+        <NavTemplateCashier fetchSearch={fetchSearch}>
           <div className="md:flex md:justify-between md:ml-56 md:h-full">
             <div></div>
             <div className="col-auto">
@@ -39,9 +54,9 @@ export const PageSnack = () => {
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {products?.map((item) => (
-                  <CardCoffe item={item} />
-                ))}
+                {filteredProduct.length
+                  ? filteredProduct?.map((item) => <CardCoffe item={item} />)
+                  : products?.map((item) => <CardCoffe item={item} />)}
               </div>
               <div>
                 <PaginationCakraUiCashier

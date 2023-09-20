@@ -6,20 +6,11 @@ import { Avatar } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import api from "../../api/api";
-import { useDebounce } from "use-debounce";
 
-export const NavBarCashier = ({ openSlide, fetchSearch }) => {
+export const NavBarLPCashier = ({ openSlide }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const nav = useNavigate();
   const userSelector = useSelector((state) => state.auth);
-  //search
-  const [search, setSearch] = useState("");
-
-  const [debouncedSearch] = useDebounce(search, 1000);
-
-  useEffect(() => {
-    fetchSearch(debouncedSearch);
-  }, [debouncedSearch]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -36,38 +27,6 @@ export const NavBarCashier = ({ openSlide, fetchSearch }) => {
           <nav class="bg-gray-100 dark:bg-gray-100 ">
             <div class="flex justify-between border-b-4 ">
               <div className="flex items-center">
-                {/* search input */}
-                <div class="relative w-full ml-60">
-                  <input
-                    type="text"
-                    id="simple-search"
-                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5  dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search product..."
-                    required
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
-                <button
-                  class="p-2.5 ml-2 text-sm font-thin text-white bg-blue-300 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  onClick={fetchSearch}
-                >
-                  <svg
-                    class="w-4 h-4"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                  <span class="sr-only">Search</span>
-                </button>
                 <button
                   onClick={openSlide}
                   data-drawer-target="sidebar-multi-level-sidebar"

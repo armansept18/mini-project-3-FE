@@ -12,6 +12,7 @@ export const CardCoffe = ({ item }) => {
   });
 
   const [play] = useSound(boopSfx, { volume: 0.3 });
+  console.log("item", item);
 
   return (
     <>

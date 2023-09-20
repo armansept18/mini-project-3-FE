@@ -4,11 +4,13 @@ import { routes } from "./routes/routes";
 import api from "./api/api";
 import { useDispatch } from "react-redux";
 import { types } from "./redux/types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { receiveUser } from "./middlewares/auth-middlewares";
+import loading from "./assets/icons/loading.gif";
 
 function App() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   async function dispatcher() {
     try {
@@ -28,9 +30,14 @@ function App() {
 
   useEffect(() => {
     dispatcher();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }, []);
 
-  return (
+  return isLoading ? (
+    <>{loading}</>
+  ) : (
     <Routes>
       {routes.map((route, i) => (
         <Route {...route} key={i} />

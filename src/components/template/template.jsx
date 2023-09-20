@@ -16,10 +16,10 @@ export const NavTemplateAdmin = ({ children }) => {
   );
 };
 
-export const NavTemplateCashier = ({ children }) => {
+export const NavTemplateCashier = ({ children, fetchSearch }) => {
   return (
     <>
-      <NavBarCashier />
+      <NavBarCashier fetchSearch={fetchSearch} />
       <div>
         <div>{children}</div>
       </div>

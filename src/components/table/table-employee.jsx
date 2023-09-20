@@ -71,6 +71,7 @@ export const TableEmployee = ({ onClose, isOpen }) => {
           title: "Password Changed",
           description: "The password has been changed successfully.",
           status: "success",
+          position: "top",
           duration: 3000,
           isClosable: true,
         });
