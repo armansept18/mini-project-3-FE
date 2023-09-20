@@ -85,24 +85,26 @@ export const PageManagementProduct = ({
           />
         )}
 
-        <div className="text-center max-md:mt-28">
-          <span className="border-b-2 border-black font-semibold text-xl">
+        <div className="text-center max-md:mt-28 md:ml-44">
+          <span className="border-b-2 border-black font-semibold text-2xl  ">
             Manage Category
           </span>
         </div>
         <div className="max-md:col-auto max-md:items-center max-md:mt-10">
           <div className="flex md:justify-end md: md:mr-20 max-md:justify-center">
-            <div>
+            <div className="md:mt-4">
               <SelectCategory
                 category={category}
                 onSelectCategory={handleCategorySelect}
                 onSelectCategoryEdit={handleCategorySelectModalEdit}
               />
             </div>
-            <div className="md:w-5 max-md:w-5"></div>
-            <Button onClick={() => setIsOpen(true)} size={"md"}>
-              Add Category Name
-            </Button>
+            <div className="md:w-5 max-md:w-5 "></div>
+            <div className="md:mt-4">
+              <Button onClick={() => setIsOpen(true)} size={"md"}>
+                Add Category Name
+              </Button>
+            </div>
           </div>
           {/* {isLoading && (
             <div className="text-center">
