@@ -1,5 +1,5 @@
 import photo from "../../assets/pictures/ngopi.jpeg";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CartProvider,
   useCart,
@@ -7,18 +7,27 @@ import {
 import emptyCart from "../../assets/icons/cart.svg";
 import api from "../../api/api";
 import { useToast } from "@chakra-ui/react";
+import useSound from "use-sound";
+import boopSfx from "../../assets/sounds/y2mate.com - Button click sound  sound effect_64kbps.mp3";
+import submitSfx from "../../assets/sounds/submit.mp3";
+import errorSfx from "../../assets/sounds/error.mp3";
 
 export const CardTransaction = () => {
   const { cart, incrementCart, decrementCart, clearCart } = useCart();
   const toast = useToast();
+  const [playClear] = useSound(boopSfx, { volume: 0.3 });
+  const [playSubmit] = useSound(submitSfx, { volume: 0.3 });
+  const [playError] = useSound(errorSfx, { volume: 0.3 });
 
   async function submit() {
     try {
       // prepare data that are want to send to back end
-      const products = cart.map((cartItem) => ({
+      /*  const products = cart.map((cartItem) => ({
         id: cartItem.id,
         quantity: cartItem.quantity,
-      }));
+      })); */
+
+      const products = JSON.parse(localStorage.getItem("cart"));
 
       const requestData = {
         products: products,
@@ -26,14 +35,14 @@ export const CardTransaction = () => {
 
       const response = await api.post("/transactions/create", requestData);
       if (response.status === 200) {
-        // Transaction created successfully
         const responseData = response.data;
         console.log("Transaction created:", responseData);
+        playSubmit(); // ?
         toast({
           title: "Success",
           description: "Success Create Transaction",
           status: "success",
-          duration: 2000,
+          duration: 2200,
           isClosable: true,
           position: "top",
         });
@@ -50,10 +59,11 @@ export const CardTransaction = () => {
         });
       }
     } catch (error) {
-      console.error("Error creating transaction:", error);
+      console.log("Error creating transaction:", error?.response?.data);
+      playError();
       toast({
         title: "Error creating transaction",
-        description: `Cart Kosong!`,
+        description: error?.response?.data,
         status: "error",
         duration: 2000,
         isClosable: true,
@@ -64,6 +74,12 @@ export const CardTransaction = () => {
 
   const isCartEmpty = cart.length === 0;
 
+  const total = cart.reduce((total, item) => {
+    const unitPrice = item.price;
+    const quantity = item.quantity;
+    return total + unitPrice * quantity;
+  }, 0);
+
   return (
     <>
       <div className="bg-gray-900 rounded-xl md:w-96 md:h-full p-2 flex flex-col">
@@ -73,7 +89,7 @@ export const CardTransaction = () => {
         </div>
 
         {isCartEmpty ? (
-          <div className="flex flex-col items-center justify-center hover:bg-blue-300 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-24 cursor-pointer">
+          <div className="flex flex-col items-center justify-center bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-24">
             <img src={emptyCart} alt="empty cart" className="w-10 h-10" />
             <div>Cart Empty!</div>
           </div>
@@ -119,12 +135,30 @@ export const CardTransaction = () => {
           ))
         )}
 
-        <div
-          className="flex items-center justify-center hover:bg-blue-300 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-24 cursor-pointer"
-          onClick={submit}
-        >
-          Submit
-        </div>
+        {isCartEmpty ? null : (
+          <>
+            <div className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl">
+              Total : Rp {Number(total).toLocaleString(`id-ID`)}
+            </div>
+            <div
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl"
+              onClick={() => {
+                submit();
+              }}
+            >
+              Submit
+            </div>
+            <div
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl"
+              onClick={() => {
+                clearCart();
+                playClear();
+              }}
+            >
+              Clear
+            </div>
+          </>
+        )}
       </div>
     </>
   );

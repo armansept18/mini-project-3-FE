@@ -13,9 +13,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { ModalDisableCashier } from "../modals/modal-disable-cashier";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { ModalCreateCashier } from "../modals/modal-create-new-cashier";
 import { ModalDeleteCashier } from "../modals/modal-delete-cashier";
+import { ModalChangePassword } from "../modals/modal-change-password";
 
 export const TableEmployee = ({ onClose, isOpen }) => {
   const [cashier, setCashier] = useState([]);
@@ -27,15 +28,72 @@ export const TableEmployee = ({ onClose, isOpen }) => {
   });
   //delete
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openChangeModal, setOpenChangeModal] = useState(false);
   const [emailToDelete, setEmailToDelete] = useState("");
+  const [emailToChange, setEmailToChange] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
 
   function openDeleteModalWithCashier(emailToDelete) {
     setEmailToDelete(emailToDelete);
     setOpenDeleteModal(true);
   }
 
+  function OpenChangePasswordModal(emailToChange) {
+    setEmailToChange(emailToChange);
+    setOpenChangeModal(true);
+  }
+
   function closeDeleteModal() {
     setOpenDeleteModal(false);
+  }
+
+  function closeChangeModal() {
+    setOpenChangeModal(false);
+  }
+
+  async function confirmChangePassword(emailToChange, newPassword) {
+    try {
+      // const { email } = emailToChange;
+      // console.log("email", email);
+
+      const response = await api.patch(
+        `/users/changePassword/${emailToChange}`,
+        {
+          newPassword: newPassword,
+        }
+      );
+
+      // console.log("newPassword", newPassword);
+      console.log("response", response);
+
+      if (response.status === 200) {
+        toast({
+          title: "Password Changed",
+          description: "The password has been changed successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        closeChangeModal();
+      } else {
+        toast({
+          title: "Error",
+          description: "An error occurred while changing the password.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.log(error?.message);
+      toast({
+        title: "Error",
+        description: "An error occurred while changing the password.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   }
 
   const fetchCashier = async () => {
@@ -62,12 +120,12 @@ export const TableEmployee = ({ onClose, isOpen }) => {
             : employee
         )
       );
-      // Show a success toast message
       toast({
         title: isDisabled ? "User Enabled" : "User Disabled",
         description: isDisabled
           ? "The user has been enabled successfully."
           : "The user has been disabled successfully.",
+        position: "top",
         status: "success",
         duration: 3000,
         isClosable: true,
@@ -166,6 +224,14 @@ export const TableEmployee = ({ onClose, isOpen }) => {
                   >
                     <DeleteIcon />
                   </Button>
+                  <Button
+                    ml={"3"}
+                    size={"sm"}
+                    boxShadow={"lg"}
+                    onClick={() => OpenChangePasswordModal(employee.email)}
+                  >
+                    <EditIcon />
+                  </Button>
                 </Flex>
               </Td>
             </Tr>
@@ -189,6 +255,14 @@ export const TableEmployee = ({ onClose, isOpen }) => {
           deleteCashier(emailToDelete);
           closeDeleteModal();
         }}
+      />
+      <ModalChangePassword
+        isOpen={openChangeModal}
+        onClose={closeChangeModal}
+        onConfirm={(emailToChange, newPassword) => {
+          confirmChangePassword(emailToChange, newPassword);
+        }}
+        emailToChange={emailToChange}
       />
     </Box>
   );
