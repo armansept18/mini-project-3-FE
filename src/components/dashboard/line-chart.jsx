@@ -9,11 +9,12 @@ export const LineChart = ({ chartData }) => {
           chart: {
             id: "basic-bar",
           },
+          colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
           xaxis: {
             categories: chartData.map((data) => data.category_name),
           },
           title: {
-            text: "Grafik Penjualan per Kategori",
+            text: "Total Sold Product-Category Per Day",
             align: "center",
             style: {
               fontSize: "16px",
@@ -32,7 +33,7 @@ export const LineChart = ({ chartData }) => {
         }}
         series={[
           {
-            name: "Total Penjualan per Kategori",
+            name: "Product Category Sold",
             data: chartData.map((data) => data.total_sold),
           },
         ]}

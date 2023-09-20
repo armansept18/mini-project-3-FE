@@ -30,16 +30,13 @@ export const DashboardPage = () => {
     <>
       <NavTemplateAdmin>
         <div className="flex flex-col justify-center items-center mt-10">
+          <p className="font-bold text-xl">Sales Report</p>
           <div className="flex justify-center items-center mt-10">
             <ReportCard />
-            <Button className=" ml-5" onClick={toCashier} colorScheme="green">
-              {"To Cashier Page >"}
-            </Button>
           </div>
           <div className="mt-20 justify-start items-start">
-            <p>Pilih Tanggal Transaksi :</p>
+            <p>Select Transaction Date :</p>
             <SelectDateCakra fetchTotalSoldByDate={fetchTotalSoldByDate} />
-            {/* <input type="date" onChange={(e) => setDate(e.target.value)} /> */}
           </div>
           <div className="flex flex-col justify-center items-center mt-10">
             <LineChart chartData={chartData} />
@@ -48,6 +45,9 @@ export const DashboardPage = () => {
               <PieChartCategory />
             </div>
           </div>
+          <Button className="mt-10" onClick={toCashier} colorScheme="green">
+            {"To Cashier Page >"}
+          </Button>
         </div>
       </NavTemplateAdmin>
     </>
