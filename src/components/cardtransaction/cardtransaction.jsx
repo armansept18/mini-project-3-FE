@@ -137,7 +137,7 @@ export const CardTransaction = () => {
 
         {isCartEmpty ? null : (
           <>
-            <div className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl">
+            <div className="flex items-center justify-center bg-gray-400 rounded-xl mt-5 p-4 md:w-full h-10 text-xl">
               Total : Rp {Number(total).toLocaleString(`id-ID`)}
             </div>
             <div
