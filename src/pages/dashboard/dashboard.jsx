@@ -14,33 +14,18 @@ import api from "../../api/api";
 
 export const DashboardPage = () => {
   const [date, setDate] = useState("");
-  const [chartData, setChartData] = useState({
-    categories: [],
-    quantities: [],
-  });
+  const [chartData, setChartData] = useState([]);
 
   const nav = useNavigate();
   function toCashier() {
     nav("/cashier");
   }
 
-  useEffect(() => {
-    if (date) {
-      api
-        .get(`/transactiondetails/bydate?dateFrom=${date}`)
-        .then((response) => {
-          const data = response.data;
-          const categories = data.map(
-            (item) => item.Product.ProductCategories.category_name
-          );
-          const quantities = data.map((item) => item.quantity);
-          setChartData({ categories, quantities });
-        })
-        .catch((error) => {
-          console.error("Error Transaction Detail By Date :", error);
-        });
-    }
-  }, []);
+  const fetchTotalSoldByDate = async (dateTo, dateFrom) => {
+    await api
+      .get("/transactiondetails/bydate", { params: { dateTo, dateFrom } })
+      .then((result) => setChartData(result.data));
+  };
   return (
     <>
       <NavTemplateAdmin>
@@ -53,8 +38,8 @@ export const DashboardPage = () => {
           </div>
           <div className="mt-20 justify-start items-start">
             <p>Pilih Tanggal Transaksi :</p>
-            {/* <SelectDateCakra /> */}
-            <input type="date" onChange={(e) => setDate(e.target.value)} />
+            <SelectDateCakra fetchTotalSoldByDate={fetchTotalSoldByDate} />
+            {/* <input type="date" onChange={(e) => setDate(e.target.value)} /> */}
           </div>
           <div className="flex flex-col justify-center items-center mt-10">
             <LineChart chartData={chartData} />

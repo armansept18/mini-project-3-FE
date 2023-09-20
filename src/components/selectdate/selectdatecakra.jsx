@@ -1,21 +1,39 @@
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const SelectDateCakra = () => {
-  const [date, setDate] = useState(new Date());
+export const SelectDateCakra = ({ fetchTotalSoldByDate }) => {
+  // Mendapatkan tanggal saat ini
+  const currentDate = new Date();
+
+  // Mengatur default state dateFrom dan dateTo dengan salinan objek Date
+  const [dateFrom, setDateFrom] = useState(currentDate);
+  const [dateTo, setDateTo] = useState(currentDate);
+
+  useEffect(() => {
+    const formattedDateFrom = dateFrom.toISOString().split("T")[0];
+    const formattedDateTo = dateTo.toISOString().split("T")[0];
+    fetchTotalSoldByDate(formattedDateFrom, formattedDateTo);
+  }, [dateFrom, dateTo]);
+
   return (
     <>
-      <div className="flex ">
+      <div>
+        <span>dateFrom</span>
+
+        <span className="md: ml-44">dateTo</span>
+      </div>
+
+      <div className="flex">
         <SingleDatepicker
           name="date-input"
-          date={date}
-          onDateChange={setDate}
+          date={dateTo}
+          onDateChange={setDateTo}
         />
         <div className="w-4"></div>
         <SingleDatepicker
           name="date-input"
-          date={date}
-          onDateChange={setDate}
+          date={dateFrom}
+          onDateChange={setDateFrom}
         />
       </div>
     </>
