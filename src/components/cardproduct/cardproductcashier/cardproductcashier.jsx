@@ -32,7 +32,7 @@ export const CardCoffe = ({ item }) => {
               height: "100px",
             }}
             className="object-fill"
-            src={item.image}
+            src={`http://localhost:2000/static/${item.image}`}
             alt=""
           />
         </div>
