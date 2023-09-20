@@ -14,14 +14,14 @@
 }
 @media (max-width: 1180px) {
   .bar-chart {
-    margin-left: 140px;
+    margin-left: 240px;
     width: 680px;
     height: 300px;
   }
 }
 @media (max-width: 1024px) {
   .bar-chart {
-    margin-left: 180px;
+    margin-left: 240px;
     width: 650px;
     height: 300px;
   }
@@ -38,10 +38,10 @@
     width: 440px;
   }
 }
-@media (max-width: 717px) {
+@media (max-width: 720px) {
   .bar-chart {
     margin-left: 0px;
-    width: 400px;
+    width: 440px;
     height: 150px;
   }
 }

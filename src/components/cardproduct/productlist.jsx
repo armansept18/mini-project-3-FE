@@ -94,7 +94,7 @@ export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
                 style={{
                   boxShadow: "1px 2px 3px black",
                   border: "1px solid white",
-                  marginLeft: "32px",
+                  // marginLeft: "32px",
                 }}
                 // src={item.image}
                 src={`http://localhost:2000/static/${item.image}`}
@@ -117,7 +117,7 @@ export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
               <span>{item.stock}</span>
               <hr style={{ color: "black" }} />
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3">
               <EditIcon cursor={"pointer"} onClick={() => onEdit(item)} />
               <DeleteIcon
                 cursor={"pointer"}

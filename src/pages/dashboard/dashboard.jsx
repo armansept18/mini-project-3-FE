@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { SelectDateCakra } from "../../components/selectdate/selectdatecakra";
 import { useEffect } from "react";
 import api from "../../api/api";
+import "../../styles/dashboard-admin-responsive.css";
 
 export const DashboardPage = () => {
   const [date, setDate] = useState("");
@@ -30,22 +31,28 @@ export const DashboardPage = () => {
     <>
       <NavTemplateAdmin>
         <div className="flex flex-col justify-center items-center mt-10">
-          <p className="font-bold text-xl ml-64">Sales Report</p>
+          <p className="sales-report-text font-bold text-xl mt-20">
+            Sales Report
+          </p>
           <div className="flex justify-center items-center mt-10">
             <ReportCard />
           </div>
-          <div className="mt-20 justify-start items-start">
-            <p>Select Transaction Date :</p>
+          <div className="select-date flex flex-col mt-20 justify-center items-center text-left">
+            <p className="">Select Transaction Date :</p>
             <SelectDateCakra fetchTotalSoldByDate={fetchTotalSoldByDate} />
           </div>
           <div className="flex flex-col justify-center items-center mt-10">
             <LineChart chartData={chartData} />
-            <div className="flex justify-center items-center mt-7 gap-10">
+            <div className="pie-chart flex flex-wrap justify-center items-center mt-7 gap-10">
               <PieChartProduct />
               <PieChartCategory />
             </div>
           </div>
-          <Button className="mt-10" onClick={toCashier} colorScheme="green">
+          <Button
+            className="button-to-cashier mt-10"
+            onClick={toCashier}
+            colorScheme="green"
+          >
             {"To Cashier Page >"}
           </Button>
         </div>
