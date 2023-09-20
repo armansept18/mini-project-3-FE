@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import DatePicker from "react-date-picker";
-import api from "../../api/api";
 
 export const LineChart = ({ chartData }) => {
   const { categories, quantities } = chartData;
@@ -15,7 +13,7 @@ export const LineChart = ({ chartData }) => {
         categories,
       },
       title: {
-        text: "Grafik Penjualan per Kategori",
+        text: "Total Product Category Selling Report",
         align: "center",
         style: {
           fontSize: "16px",
@@ -34,41 +32,11 @@ export const LineChart = ({ chartData }) => {
     },
     series: [
       {
-        name: "Total Penjualan per Kategori",
+        name: "Total Category Selling",
         data: quantities,
       },
     ],
   };
-
-  // useEffect(() => {
-  //   api
-  //     .get("/transactiondetails/soldproductcategory")
-  //     .then((response) => {
-  //       const data = response.data;
-
-  //       const categoryNames = data.map((item) => item.category_name);
-  //       const productCounts = data.map((item) => parseInt(item.total_sold));
-
-  //       setState((prevState) => ({
-  //         ...prevState,
-  //         options: {
-  //           ...prevState.options,
-  //           xaxis: {
-  //             categories: categoryNames,
-  //           },
-  //         },
-  //         series: [
-  //           {
-  //             ...prevState.series[0],
-  //             data: productCounts,
-  //           },
-  //         ],
-  //       }));
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
 
   return (
     <>

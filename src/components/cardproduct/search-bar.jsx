@@ -41,7 +41,7 @@ export const SearchBar = ({ setSearch }) => {
           width={{ base: "100%", md: "35%" }} 
           maxWidth="180px"
           backgroundColor="#F1F1F1"
-          placeholder="Kategori Produk :"
+          placeholder="Products Category :"
           id="category"
           onChange={debouncedChangeHandler}
         >
@@ -60,7 +60,7 @@ export const SearchBar = ({ setSearch }) => {
             <SearchIcon boxSize={3} />
           </InputLeftElement>
           <Input
-            placeholder="Cari Produk Disini!"
+            placeholder="Find Your Products Here!"
             id="search"
             onChange={debouncedChangeHandler}
             size="sm"
@@ -75,7 +75,7 @@ export const SearchBar = ({ setSearch }) => {
           marginStart={{ base: 0, md: 4 }}
           marginTop={{ base: 4, md: 0 }}
         >
-          Tambah Produk
+          Add Product
         </Button>
         <ModalProduct isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </Stack>

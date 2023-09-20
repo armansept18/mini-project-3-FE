@@ -42,7 +42,7 @@ export const ReportCard = () => {
       >
         <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
           <CardBody>
-            <Text>Total Penjualan</Text>
+            <Text>Total Sales Alltime</Text>
             <Heading className="mt-3" size={"sm"}>
               Rp {totalPenjualan.toLocaleString("id-ID")}
             </Heading>
@@ -53,9 +53,9 @@ export const ReportCard = () => {
         </Card>
         <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
           <CardBody>
-            <Text>Total Transaksi</Text>
+            <Text>Total Transaction Alltime</Text>
             <Heading className="mt-3" size={"sm"}>
-              {totalTransaksi} Transaksi
+              {totalTransaksi} Transactions
             </Heading>
             <span>
               View here <ChevronDownIcon />
@@ -64,9 +64,9 @@ export const ReportCard = () => {
         </Card>
         <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
           <CardBody>
-            <Text>Total Produk Terjual</Text>
+            <Text>Total Sold Products Alltime</Text>
             <Heading className="mt-3" size={"sm"}>
-              {totalProdukTerjual} Produk
+              {totalProdukTerjual} Products
             </Heading>
             <span>
               View here <ChevronDownIcon />

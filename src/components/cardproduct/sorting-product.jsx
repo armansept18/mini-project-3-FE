@@ -9,10 +9,10 @@ import '../../styles/sorting-bar-responsive.css';
 
 export const SortingBar = ({ setSortOrder, sortOrder }) => {
   const columnName = [
-    { column_name: "Nama Produk", sortname: "product_name" },
-    { column_name: "Kategori", sortname: "category_id" },
-    { column_name: "Harga", sortname: "price" },
-    { column_name: "Stok", sortname: "stock" },
+    { column_name: "Product Name", sortname: "product_name" },
+    { column_name: "Category", sortname: "category_id" },
+    { column_name: "Price", sortname: "price" },
+    { column_name: "Stock", sortname: "stock" },
   ];
 
   const handleColumnClick = (sortname) => {
