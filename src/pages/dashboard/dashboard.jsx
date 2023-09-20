@@ -30,7 +30,7 @@ export const DashboardPage = () => {
     <>
       <NavTemplateAdmin>
         <div className="flex flex-col justify-center items-center mt-10">
-          <p className="font-bold text-xl">Sales Report</p>
+          <p className="font-bold text-xl ml-64">Sales Report</p>
           <div className="flex justify-center items-center mt-10">
             <ReportCard />
           </div>

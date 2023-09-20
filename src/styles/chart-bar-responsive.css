@@ -1,0 +1,75 @@
+@media (min-width: 1280px) {
+  .bar-chart {
+    margin-left: 240px;
+    width: 968px;
+    height: 150px;
+  }
+}
+@media (max-width: 1280px) {
+  .bar-chart {
+    margin-left: 240px;
+    width: 700px;
+    height: 300px;
+  }
+}
+@media (max-width: 1180px) {
+  .bar-chart {
+    margin-left: 140px;
+    width: 680px;
+    height: 300px;
+  }
+}
+@media (max-width: 1024px) {
+  .bar-chart {
+    margin-left: 180px;
+    width: 650px;
+    height: 300px;
+  }
+}
+@media (max-width: 912px) {
+  .bar-chart {
+    margin-left: 240px;
+    width: 480px;
+  }
+}
+@media (max-width: 820px) {
+  .bar-chart {
+    margin-left: 240px;
+    width: 440px;
+  }
+}
+@media (max-width: 717px) {
+  .bar-chart {
+    margin-left: 0px;
+    width: 400px;
+    height: 150px;
+  }
+}
+@media (max-width: 675px) {
+  .bar-chart {
+    margin-left: 0px;
+    width: 350px;
+    height: 150px;
+  }
+}
+@media (max-width: 540px) {
+  .bar-chart {
+    margin-left: 0;
+    width: 400px;
+    height: 150px;
+  }
+}
+@media (max-width: 420px) {
+  .bar-chart {
+    margin-left: 0px;
+    width: 350px;
+    height: 150px;
+  }
+}
+@media (max-width: 390px) {
+  .bar-chart {
+    margin-left: 0px;
+    width: 300px;
+    height: 150px;
+  }
+}

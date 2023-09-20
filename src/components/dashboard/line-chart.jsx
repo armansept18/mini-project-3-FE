@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import "../../styles/chart-bar-responsive.css";
 
 export const LineChart = ({ chartData }) => {
   return (
@@ -9,7 +10,7 @@ export const LineChart = ({ chartData }) => {
           chart: {
             id: "basic-bar",
           },
-          colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
+          colors: ["#2E93fA", "#66DA26", "#546E7A", "#E91E63", "#FF9800"],
           xaxis: {
             categories: chartData.map((data) => data.category_name),
           },
@@ -17,7 +18,7 @@ export const LineChart = ({ chartData }) => {
             text: "Total Sold Product-Category Per Day",
             align: "center",
             style: {
-              fontSize: "16px",
+              fontSize: "14px",
               color: "#666",
             },
           },
@@ -38,9 +39,9 @@ export const LineChart = ({ chartData }) => {
           },
         ]}
         type="bar"
-        width="1024"
+        // width="1024"
         height="300"
-        className="mt-10 shadow-xl"
+        className="bar-chart mt-10 shadow-xl"
       />
     </>
   );
