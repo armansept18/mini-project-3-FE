@@ -1,5 +1,5 @@
 import photo from "../../assets/pictures/ngopi.jpeg";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   CartProvider,
   useCart,
@@ -28,7 +28,6 @@ export const CardTransaction = () => {
       })); */
 
       const products = JSON.parse(localStorage.getItem("cart"));
-      console.log("products", products);
 
       const requestData = {
         products: products,
@@ -36,7 +35,6 @@ export const CardTransaction = () => {
 
       const response = await api.post("/transactions/create", requestData);
       if (response.status === 200) {
-        // Transaction created successfully
         const responseData = response.data;
         console.log("Transaction created:", responseData);
         playSubmit(); // ?
@@ -61,11 +59,11 @@ export const CardTransaction = () => {
         });
       }
     } catch (error) {
-      console.error("Error creating transaction:", error);
-      playError(); // ?
+      console.log("Error creating transaction:", error?.response?.data);
+      playError();
       toast({
         title: "Error creating transaction",
-        description: `Cart Kosong!`,
+        description: error?.response?.data,
         status: "error",
         duration: 2000,
         isClosable: true,
@@ -75,6 +73,12 @@ export const CardTransaction = () => {
   }
 
   const isCartEmpty = cart.length === 0;
+
+  const total = cart.reduce((total, item) => {
+    const unitPrice = item.price;
+    const quantity = item.quantity;
+    return total + unitPrice * quantity;
+  }, 0);
 
   return (
     <>
@@ -133,8 +137,11 @@ export const CardTransaction = () => {
 
         {isCartEmpty ? null : (
           <>
+            <div className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl">
+              Total : Rp {Number(total).toLocaleString(`id-ID`)}
+            </div>
             <div
-              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-16 cursor-pointer text-xl"
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl"
               onClick={() => {
                 submit();
               }}
@@ -142,7 +149,7 @@ export const CardTransaction = () => {
               Submit
             </div>
             <div
-              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-16 cursor-pointer text-xl"
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl"
               onClick={() => {
                 clearCart();
                 playClear();

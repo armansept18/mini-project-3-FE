@@ -6,12 +6,14 @@ export const ProtectedPage = ({ children, needLogin = false }) => {
   const userSelector = useSelector((state) => state.auth);
   const nav = useNavigate();
 
+  const auth = localStorage.getItem("auth");
+
   useEffect(() => {
-    if (needLogin && userSelector.role_id !== 1) {
+    if (needLogin && !auth) {
+      return nav("/login");
+    } else if (needLogin && userSelector.role_id !== 1) {
       return nav("/cashier");
-    } else if (needLogin && userSelector.role_id == 1) {
-      return;
-    }
+    } else return;
   }, [children]);
 
   return children;
