@@ -35,28 +35,28 @@ export const PieChartCategory = () => {
     },
   });
 
-  useEffect(() => {
-    api
-      .get("/transactiondetails/soldproductcategory")
-      .then((response) => {
-        const data = response.data;
+  // useEffect(() => {
+  //   api
+  //     .get("/transactiondetails/soldproductcategory")
+  //     .then((response) => {
+  //       const data = response.data;
 
-        const categoryNames = data.map((item) => item.category_name);
-        const productCounts = data.map((item) => parseInt(item.total_sold));
+  //       const categoryNames = data.map((item) => item.category_name);
+  //       const productCounts = data.map((item) => parseInt(item.total_sold));
 
-        setState((prevState) => ({
-          ...prevState,
-          options: {
-            ...prevState.options,
-            labels: categoryNames,
-          },
-          series: productCounts,
-        }));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  //       setState((prevState) => ({
+  //         ...prevState,
+  //         options: {
+  //           ...prevState.options,
+  //           labels: categoryNames,
+  //         },
+  //         series: productCounts,
+  //       }));
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
 
   return (
     <div className="flex justify-center items-center mt-10">

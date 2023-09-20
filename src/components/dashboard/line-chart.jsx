@@ -3,14 +3,16 @@ import Chart from "react-apexcharts";
 import DatePicker from "react-date-picker";
 import api from "../../api/api";
 
-export const LineChart = () => {
-  const [state, setState] = useState({
+export const LineChart = ({ chartData }) => {
+  const { categories, quantities } = chartData;
+
+  const state = {
     options: {
       chart: {
         id: "basic-bar",
       },
       xaxis: {
-        categories: [],
+        categories,
       },
       title: {
         text: "Grafik Penjualan per Kategori",
@@ -33,40 +35,40 @@ export const LineChart = () => {
     series: [
       {
         name: "Total Penjualan per Kategori",
-        data: [],
+        data: quantities,
       },
     ],
-  });
+  };
 
-  useEffect(() => {
-    api
-      .get("/transactiondetails/soldproductcategory")
-      .then((response) => {
-        const data = response.data;
+  // useEffect(() => {
+  //   api
+  //     .get("/transactiondetails/soldproductcategory")
+  //     .then((response) => {
+  //       const data = response.data;
 
-        const categoryNames = data.map((item) => item.category_name);
-        const productCounts = data.map((item) => parseInt(item.total_sold));
+  //       const categoryNames = data.map((item) => item.category_name);
+  //       const productCounts = data.map((item) => parseInt(item.total_sold));
 
-        setState((prevState) => ({
-          ...prevState,
-          options: {
-            ...prevState.options,
-            xaxis: {
-              categories: categoryNames,
-            },
-          },
-          series: [
-            {
-              ...prevState.series[0],
-              data: productCounts,
-            },
-          ],
-        }));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+  //       setState((prevState) => ({
+  //         ...prevState,
+  //         options: {
+  //           ...prevState.options,
+  //           xaxis: {
+  //             categories: categoryNames,
+  //           },
+  //         },
+  //         series: [
+  //           {
+  //             ...prevState.series[0],
+  //             data: productCounts,
+  //           },
+  //         ],
+  //       }));
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     });
+  // }, []);
 
   return (
     <>

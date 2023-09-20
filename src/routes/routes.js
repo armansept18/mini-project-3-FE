@@ -41,7 +41,6 @@ export const routes = [
   new RouteClass("food", <PageFood />, true),
   new RouteClass("snack", <PageSnack />, true),
 
-  new RouteClass("report", <SalesReportPage />, true),
   new RouteClass("management-product", <PageManagementProduct />, true),
 
   new RouteClass("*", <Redirect />),

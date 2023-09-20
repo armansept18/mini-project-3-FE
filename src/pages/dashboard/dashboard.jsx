@@ -9,13 +9,38 @@ import {
 import { ReportCard } from "../../components/dashboard/report-card";
 import React, { useState } from "react";
 import { SelectDateCakra } from "../../components/selectdate/selectdatecakra";
+import { useEffect } from "react";
+import api from "../../api/api";
 
 export const DashboardPage = () => {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState("");
+  const [chartData, setChartData] = useState({
+    categories: [],
+    quantities: [],
+  });
+
   const nav = useNavigate();
   function toCashier() {
     nav("/cashier");
   }
+
+  useEffect(() => {
+    if (date) {
+      api
+        .get(`/transactiondetails/bydate?dateFrom=${date}`)
+        .then((response) => {
+          const data = response.data;
+          const categories = data.map(
+            (item) => item.Product.ProductCategories.category_name
+          );
+          const quantities = data.map((item) => item.quantity);
+          setChartData({ categories, quantities });
+        })
+        .catch((error) => {
+          console.error("Error Transaction Detail By Date :", error);
+        });
+    }
+  }, []);
   return (
     <>
       <NavTemplateAdmin>
@@ -28,10 +53,11 @@ export const DashboardPage = () => {
           </div>
           <div className="mt-20 justify-start items-start">
             <p>Pilih Tanggal Transaksi :</p>
-            <SelectDateCakra />
+            {/* <SelectDateCakra /> */}
+            <input type="date" onChange={(e) => setDate(e.target.value)} />
           </div>
           <div className="flex flex-col justify-center items-center mt-10">
-            <LineChart />
+            <LineChart chartData={chartData} />
             <div className="flex justify-center items-center mt-7 gap-10">
               <PieChartProduct />
               <PieChartCategory />
