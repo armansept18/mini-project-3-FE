@@ -19,7 +19,7 @@ const CategoryToName = (category_id) => {
   }
 };
 
-export const CardProduct = ({ product, onEdit, onDelete }) => {
+export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
   const [isTickVisible, setIsTickVisible] = useState(
     Array(product.length).fill(false)
   );
@@ -31,10 +31,14 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
     setIsTickVisible(newIsTick);
   };
 
-  const formatIdr = Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-  });
+  const formatIdr = (price) => {
+    return price.toLocaleString("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+  };
 
   const handleDelete = (item) => {
     const shouldDelete = window.confirm("Anda Yakin Akan Hapus Produk Ini?");
@@ -51,25 +55,26 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
             position: "top",
             duration: 2023,
           });
-          window.location.reload();
+
           onDelete(item);
         })
         .catch((error) => {
           console.error("Error Hapus Produk:", error);
-          toast({
-            title: "Gagal Menghapus!",
-            description: error?.response?.data,
-            status: "error",
-            position: "top",
-            isClosable: true,
-            duration: 2023,
-          });
+          // toast({
+          //   title: "Gagal Menghapus!",
+          //   description: error?.response?.data,
+          //   status: "error",
+          //   position: "top",
+          //   isClosable: true,
+          //   duration: 2023,
+          // });
         });
+      fetchSearch(1, 1);
     }
   };
   return (
     <>
-      {product?.map((item, i) => {
+      {product?.product?.map((item, i) => {
         return (
           <div
             className="bg-white flex justify-between w-full p-4  bg-gray-200 mt-2 items-center"
@@ -105,7 +110,7 @@ export const CardProduct = ({ product, onEdit, onDelete }) => {
               <hr style={{ color: "black" }} />
             </div>
             <div className="flex items-center">
-              <span>{item.price}</span>
+              <span>{formatIdr(item.price)}</span>
               <hr style={{ color: "black" }} />
             </div>
             <div className="flex items-center">

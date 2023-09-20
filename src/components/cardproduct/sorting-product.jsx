@@ -25,7 +25,7 @@ export const SortingBar = ({ setSortOrder, sortOrder }) => {
   };
 
   return (
-    <div className="sorting-bar flex justify-center items-center gap-28 mt-5 ">
+    <div className="sorting-bar flex justify-center items-center gap-32 mt-5 ">
       {columnName.map((val) => (
         <span
           key={val.sortname}

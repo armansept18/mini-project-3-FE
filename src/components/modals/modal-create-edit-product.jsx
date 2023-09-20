@@ -31,15 +31,14 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
   const finalRef = React.useRef(null);
   const ref = useRef();
   const toast = useToast();
-  const [previewImage, setPreviewImage] = useState(
-    edit ? edit.image : defaultImage
-  );
+  const [previewImage, setPreviewImage] = useState({});
   const categoryOptions = [
     { value: 1, label: "Coffee" },
     { value: 2, label: "Non Coffee" },
     { value: 3, label: "Food" },
     { value: 4, label: "Snack" },
   ];
+
   const formik = useFormik({
     initialValues: {
       image: edit?.image || "",
@@ -116,7 +115,9 @@ export const ModalProduct = ({ isOpen, onClose, edit }) => {
 
   useEffect(() => {
     formik.resetForm();
-    setPreviewImage(edit ? edit.image : defaultImage);
+    setPreviewImage(
+      edit?.image ? "http://localhost:2000/static/" + edit?.image : defaultImage
+    );
   }, [isOpen, edit]);
 
   const handleImageChange = async (e) => {

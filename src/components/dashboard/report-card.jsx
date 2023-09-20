@@ -1,7 +1,37 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Card, CardBody, CardFooter, CardHeader, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Heading,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import api from "../../api/api";
 
 export const ReportCard = () => {
+  const [totalPenjualan, setTotalPenjualan] = useState(0);
+  const [totalTransaksi, setTotalTransaksi] = useState(0);
+  const [totalProdukTerjual, setTotalProdukTerjual] = useState(0);
+
+  useEffect(() => {
+    api.get("/transactions/total-sales").then((response) => {
+      setTotalPenjualan(response.data.salesTotal);
+      console.log(response.data.salesTotal);
+    });
+    console.log(totalPenjualan);
+    api.get("/transactions/total-transaction").then((response) => {
+      setTotalTransaksi(response.data.transactionTotal);
+    });
+    console.log(totalTransaksi);
+    api.get("/transactiondetails/total-sold").then((response) => {
+      setTotalProdukTerjual(response.data.totalSoldProduct);
+    });
+    console.log(totalProdukTerjual);
+  }, []);
+
   return (
     <>
       <SimpleGrid
@@ -12,9 +42,9 @@ export const ReportCard = () => {
       >
         <Card boxShadow={"dark-lg"} backgroundColor={"gray.100"}>
           <CardBody>
-            <Text>Total Keuntungan Penjualan</Text>
+            <Text>Total Penjualan</Text>
             <Heading className="mt-3" size={"sm"}>
-              Rp 25.125.320,00
+              Rp {totalPenjualan.toLocaleString("id-ID")}
             </Heading>
             <span className="">
               View here <ChevronDownIcon />
@@ -25,7 +55,7 @@ export const ReportCard = () => {
           <CardBody>
             <Text>Total Transaksi</Text>
             <Heading className="mt-3" size={"sm"}>
-              24 Transaksi
+              {totalTransaksi} Transaksi
             </Heading>
             <span>
               View here <ChevronDownIcon />
@@ -36,7 +66,7 @@ export const ReportCard = () => {
           <CardBody>
             <Text>Total Produk Terjual</Text>
             <Heading className="mt-3" size={"sm"}>
-              57 Produk
+              {totalProdukTerjual} Produk
             </Heading>
             <span>
               View here <ChevronDownIcon />
@@ -46,4 +76,4 @@ export const ReportCard = () => {
       </SimpleGrid>
     </>
   );
-}
+};

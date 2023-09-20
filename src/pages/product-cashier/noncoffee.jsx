@@ -8,23 +8,21 @@ import { CartProvider } from "../../components/cardproduct/cardproductcashier/ca
 
 export const PageNonCoffee = () => {
   const category_id = 2;
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [totalItem, setTotalItem] = useState(0);
 
   const fetchProduct = async (page, pageSize) => {
     try {
       const result = await api.get("/products/", {
         params: { category_id, page, pageSize },
       });
-      setProduct(result.data);
+
+      setTotalItem(result.data.totalPages);
+      setProducts(result.data.products);
     } catch (err) {
       console.error(err?.message);
     }
   };
-
-  console.log(product, "INI PRODUCT DI COFFE");
-  // useEffect(() => {
-  //   fetchProduct(); // Call the async function without arguments
-  // }, []);
 
   return (
     <>
@@ -40,14 +38,15 @@ export const PageNonCoffee = () => {
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {product?.products?.map((item) => (
+                {products?.map((item) => (
                   <CardCoffe item={item} />
                 ))}
               </div>
               <div>
                 <PaginationCakraUiCashier
-                  product={product}
+                  // product={products}
                   fetchProduct={fetchProduct}
+                  totalItem={totalItem}
                 />
               </div>
             </div>

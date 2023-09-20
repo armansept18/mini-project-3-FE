@@ -8,14 +8,18 @@ import { CartProvider } from "../../components/cardproduct/cardproductcashier/ca
 
 export const PageFood = () => {
   const category_id = 3;
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [totalItem, setTotalItem] = useState(0);
 
   const fetchProduct = async (page, pageSize) => {
     try {
+      console.log(category_id, page, pageSize);
       const result = await api.get("/products/", {
         params: { category_id, page, pageSize },
       });
-      setProduct(result.data);
+      console.log(result.data);
+      setTotalItem(result.data.totalPages);
+      setProducts(result.data.products);
     } catch (err) {
       console.error(err?.message);
     }
@@ -35,15 +39,15 @@ export const PageFood = () => {
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {product?.products?.map((item) => (
+                {products?.map((item) => (
                   <CardCoffe item={item} />
                 ))}
               </div>
               <div>
                 {" "}
                 <PaginationCakraUiCashier
-                  product={product}
                   fetchProduct={fetchProduct}
+                  totalItem={totalItem}
                 />
               </div>
             </div>

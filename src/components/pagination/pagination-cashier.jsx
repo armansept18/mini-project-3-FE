@@ -11,9 +11,14 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 import { PagButton } from "./itempagination/pagbutton";
 
-export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
+export const PaginationCakraUiCashier = ({
+  product,
+  fetchProduct,
+  totalItem,
+}) => {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 10;
+
+  const itemsPerPage = 2;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1) {
@@ -22,8 +27,9 @@ export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
   };
 
   useEffect(() => {
+    console.log(totalItem);
     fetchProduct(page, itemsPerPage);
-  }, [page]);
+  }, [page, totalItem]);
 
   return (
     <Flex alignItems="center" justifyContent="center" className="mt-16">
@@ -36,11 +42,11 @@ export const PaginationCakraUiCashier = ({ product, fetchProduct }) => {
       >
         <Icon as={IoIosArrowBack} />
       </Button>
-      {[...Array.from({ length: page })].map((val, index) => (
+      {[...Array(totalItem)].map((val, index) => (
         <Button
           key={index}
           onClick={() => handlePageChange(index + 1)}
-          colorScheme={index + 1 === page ? "brand" : "gray"}
+          colorScheme={index + 1 === page ? "blackAlpha" : "gray"}
         >
           {index + 1}
         </Button>

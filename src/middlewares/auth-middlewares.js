@@ -43,3 +43,15 @@ export const userLogin = (values) => {
     }
   };
 };
+
+export const start_loading = () => {
+  return (dispatch) => {
+    dispatch({ type: types.start_loading });
+  };
+};
+
+export const stop_loading = () => {
+  return (dispatch) => {
+    dispatch({ type: types.stop_loading });
+  };
+};

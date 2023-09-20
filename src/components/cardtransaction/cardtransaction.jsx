@@ -102,7 +102,7 @@ export const CardTransaction = () => {
               {/* ...item content */}
               <div className="flex-shrink-0">
                 <img
-                  src={cartItem.image}
+                  src={`http://localhost:2000/static/${cartItem.image}`}
                   alt="pho"
                   class="w-16 h-16 rounded-full"
                 />

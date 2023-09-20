@@ -32,13 +32,13 @@ export const SearchBar = ({ setSearch }) => {
         spacing={{ base: 4, md: 2 }}
         alignItems="flex-start"
         justify="center"
-        marginLeft={{ base: 0, md: "256px" }} // Adjust marginLeft for sidebar
-        marginTop={{ base: "102px", md: 0 }} // Adjust marginTop for navbar
-        px={{ base: 4, md: 0 }} // Add horizontal padding for responsiveness
+        marginLeft={{ base: 0, md: "256px" }} 
+        marginTop={{ base: "102px", md: 0 }} 
+        px={{ base: 4, md: 0 }} 
       >
         <Select
           size="sm"
-          width={{ base: "100%", md: "35%" }} // Adjust width based on screen size
+          width={{ base: "100%", md: "35%" }} 
           maxWidth="180px"
           backgroundColor="#F1F1F1"
           placeholder="Kategori Produk :"
@@ -53,7 +53,7 @@ export const SearchBar = ({ setSearch }) => {
         <InputGroup
           size="md"
           width="100%"
-          maxWidth={{ base: "100%", md: "550px" }} // Adjust maxWidth based on screen size
+          maxWidth={{ base: "100%", md: "550px" }}
           backgroundColor="#F0F0F0"
         >
           <InputLeftElement pointerEvents="none">
