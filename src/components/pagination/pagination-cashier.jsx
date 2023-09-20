@@ -18,7 +18,7 @@ export const PaginationCakraUiCashier = ({
 }) => {
   const [page, setPage] = useState(1);
 
-  const itemsPerPage = 2;
+  const itemsPerPage = 6;
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1) {

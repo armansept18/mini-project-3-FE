@@ -41,8 +41,6 @@ export const PageCoffee = () => {
     }
   };
 
-
-
   return (
     <>
       <CartProvider>
@@ -55,7 +53,7 @@ export const PageCoffee = () => {
                   Coffee
                 </span>
               </div>
-              <div className="grid grid-cols-4 gap-4 mt-6">
+              <div className="grid grid-cols-4 gap-4 md:mt-6 max-md:grid max-lg:grid-cols-3 max-md:gap-2 max-md:ml-3">
                 {filteredProduct.length
                   ? filteredProduct?.map((item) => <CardCoffe item={item} />)
                   : products?.map((item) => <CardCoffe item={item} />)}
@@ -67,7 +65,7 @@ export const PageCoffee = () => {
               />
             </div>
 
-            <div>
+            <div className="max-md: max:md:mt-28 md:flex xl:w-96">
               <CardTransaction />
             </div>
           </div>

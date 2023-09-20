@@ -18,8 +18,11 @@ export const Employee = () => {
 
   return (
     <>
-      <div className="flex align-middle justify-evenly mb-3 mt-3 font-bold ">
-        <div className="md:ml-64">TABEL DATA EMPLOYEE</div>
+      <div className="flex align-middle justify-evenly mb-3 mt-3 font-bold max-sm:mt-32 ">
+        <div className="md:ml-64 border-b-2 border-black">
+          TABEL DATA EMPLOYEE
+        </div>
+
         <Button onClick={disclousure.onOpen} colorScheme="whatsapp" size={"sm"}>
           <AddIcon />
         </Button>

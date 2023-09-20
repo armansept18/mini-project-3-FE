@@ -5,6 +5,7 @@ import { CardCoffe } from "../../components/cardproduct/cardproductcashier/cardp
 import { CardTransaction } from "../../components/cardtransaction/cardtransaction";
 import { PaginationCakraUiCashier } from "../../components/pagination/pagination-cashier";
 import { CartProvider } from "../../components/cardproduct/cardproductcashier/cartContext";
+import { Input } from "@chakra-ui/input";
 
 export const PageFood = () => {
   const category_id = 3;
@@ -18,7 +19,7 @@ export const PageFood = () => {
       const result = await api.get("/products/", {
         params: { category_id, page, pageSize },
       });
-      console.log(result.data);
+      // console.log(result.data);
       setTotalItem(result.data.totalPages);
       setProducts(result.data.products);
     } catch (err) {
@@ -44,30 +45,27 @@ export const PageFood = () => {
     <>
       <CartProvider>
         <NavTemplateCashier fetchSearch={fetchSearch}>
-          <div className="md:flex md:justify-between md:ml-56  md:h-full">
+          <div className="md:flex md:justify-between md:ml-56 md:h-full">
             <div></div>
             <div className="col-auto">
-              <div className="md:h-16 flex justify-center">
-                <span className="font-bold text-2xl p-4 border-b-4 border-black">
-                  Food
+              <div className="md:h-16 flex flex-col justify-center items-center">
+                <span className="font-bold text-2xl p-4 border-b-4 border-black mt-5">
+                  Coffee
                 </span>
               </div>
-
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-4 md:mt-6 max-md:grid max-lg:grid-cols-3 max-md:gap-2 max-md:ml-3">
                 {filteredProduct.length
                   ? filteredProduct?.map((item) => <CardCoffe item={item} />)
                   : products?.map((item) => <CardCoffe item={item} />)}
               </div>
-              <div>
-                {" "}
-                <PaginationCakraUiCashier
-                  fetchProduct={fetchProduct}
-                  totalItem={totalItem}
-                />
-              </div>
+              <PaginationCakraUiCashier
+                // product={product}
+                fetchProduct={fetchProduct}
+                totalItem={totalItem}
+              />
             </div>
 
-            <div>
+            <div className="max-md: max:md:mt-28 md:flex xl:w-96">
               <CardTransaction />
             </div>
           </div>

@@ -82,7 +82,7 @@ export const CardTransaction = () => {
 
   return (
     <>
-      <div className="bg-gray-900 rounded-xl md:w-96 md:h-full p-2 flex flex-col">
+      <div className="bg-gray-900 rounded-xl  max-sm:w-11/12 lg:w-96 max-lg:w-48  max-lg:ml-4 md:h-full p-2 flex flex-col max:xl:mr-28 max-md:mt-20 ">
         {/* transaction */}
         <div className="text-white flex justify-center border-b-4 p-4">
           <span className="font-semibold text-lg">TRANSACTION</span>
@@ -97,24 +97,35 @@ export const CardTransaction = () => {
           cart.map((cartItem) => (
             <div
               key={cartItem.id}
-              className="flex justify-between items-center bg-gray-300 rounded-xl mt-2 p-4 md:w-full h-24"
+              className="flex justify-between items-center bg-gray-300 rounded-xl mt-2 p-4 max-lg:p-1 md:w-full h-24 max-sm:p-4 "
             >
               {/* ...item content */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 max-lg:w-10 max-lg:h-10 h-10 max-sm:h-10 max-sm:w-10 max-sm:mr-4 xl:h-16 xl:w-16 ">
                 <img
                   src={`http://localhost:2000/static/${cartItem.image}`}
                   alt="pho"
-                  class="w-16 h-16 rounded-full"
+                  className="rounded-full max-lg:h-10 xl:h-16 xl:w-16  "
+                  style={{ borderRadius: "100%" }}
                 />
               </div>
 
               {/* item 2 (description) */}
               <div className="flex-shrink-0 ">
-                <div>{cartItem.product_name}</div>
-                <div>Rp {Number(cartItem.price).toLocaleString(`id-ID`)}</div>
+                <div className="col-auto">
+                  <div>
+                    <span className="max-xl:text-sm">
+                      {cartItem.product_name}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="max-xl:text-sm">
+                      Rp {Number(cartItem.price).toLocaleString(`id-ID`)}
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="flex items-center justify-between w-1/4">
+              <div className="flex items-center justify-between ">
                 <button
                   onClick={() => decrementCart(cartItem.id)}
                   className="flex-shrink-0 w-8 h-8 px-2 py-1 border bg-gray-700 border-gray-600 rounded text-white"
@@ -137,25 +148,28 @@ export const CardTransaction = () => {
 
         {isCartEmpty ? null : (
           <>
-            <div className="flex items-center justify-center bg-gray-400 rounded-xl mt-5 p-4 md:w-full h-10 text-xl">
+            <div className="flex items-center justify-center bg-gray-400 rounded-xl mt-5 p-4 md:w-full h-10 text-xl max-lg:text-base">
               Total : Rp {Number(total).toLocaleString(`id-ID`)}
             </div>
-            <div
-              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl"
-              onClick={() => {
-                submit();
-              }}
-            >
-              Submit
-            </div>
-            <div
-              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl"
-              onClick={() => {
-                clearCart();
-                playClear();
-              }}
-            >
-              Clear
+            <div className="flex justify-between max-sm:justify-center items-center max-sm:p-4">
+              <div
+                className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl max-lg:text-base"
+                onClick={() => {
+                  submit();
+                }}
+              >
+                Submit
+              </div>
+              <div className="max-sm:w-8 xl:w-4"></div>
+              <div
+                className="mt-5 flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl max-lg:text-base"
+                onClick={() => {
+                  clearCart();
+                  playClear();
+                }}
+              >
+                Clear
+              </div>
             </div>
           </>
         )}

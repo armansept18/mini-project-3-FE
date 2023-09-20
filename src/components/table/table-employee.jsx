@@ -176,7 +176,7 @@ export const TableEmployee = ({ onClose, isOpen }) => {
   }, []);
 
   return (
-    <Box overflowX="auto">
+    <Box overflowX="auto" className="max-sm: mt-5">
       <Table
         variant="simple"
         size={["sm", "md", "lg"]} // Responsive table size based on screen size
@@ -185,10 +185,10 @@ export const TableEmployee = ({ onClose, isOpen }) => {
         <Thead>
           <Tr>
             <Th>No.</Th>
-            <Th>First Name</Th>
-            <Th>Last Name</Th>
+            <Th className="max-sm:hidden">First Name</Th>
+            <Th className="max-sm:hidden">Last Name</Th>
             <Th>Email</Th>
-            <Th>Gender</Th>
+            <Th className="max-sm:hidden">Gender</Th>
             <Th display={"flex"} justifyContent={"center"}>
               Action
             </Th>
@@ -201,10 +201,10 @@ export const TableEmployee = ({ onClose, isOpen }) => {
               // className="hover:scale-95 transform hover:shadow-md hover:bg-blue-50"
             >
               <Td>{index + 1}</Td>
-              <Td>{employee.first_name}</Td>
-              <Td>{employee.last_name}</Td>
+              <Td className="max-sm:hidden">{employee.first_name}</Td>
+              <Td className="max-sm:hidden">{employee.last_name}</Td>
               <Td>{employee.email}</Td>
-              <Td>{employee.gender}</Td>
+              <Td className="max-sm:hidden">{employee.gender}</Td>
               <Td>
                 <Flex justify={"space-around"} alignItems={"center"}>
                   <Button
@@ -222,6 +222,7 @@ export const TableEmployee = ({ onClose, isOpen }) => {
                     size={"sm"}
                     boxShadow={"lg"}
                     onClick={() => openDeleteModalWithCashier(employee.email)}
+                    className="max-sm:w-1 text-xs"
                   >
                     <DeleteIcon />
                   </Button>
