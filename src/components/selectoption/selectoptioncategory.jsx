@@ -25,7 +25,7 @@ export const SelectCategory = ({
       >
         {Array.isArray(category) ? (
           category.map((item) => (
-            <option key={item.id} value={item.id} className="max-md:text-sm">
+            <option key={item.id} value={item.id} className=" max-lg:text-sm">
               {item.category_name}
             </option>
           ))

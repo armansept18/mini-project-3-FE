@@ -15,8 +15,8 @@ import { BiEditAlt } from "react-icons/bi";
 export const TableManagementCategory = ({ products, isEdit }) => {
   return (
     <>
-      <div className="flex md:justify-center md:ml-32 ">
-        <div className="md:p-5 md:w-3/5">
+      <div className="flex md:justify-center md:ml-48">
+        <div className="md:p-5 md:w-4/5">
           <TableContainer className=" max-md:text-base">
             <Table variant="simple">
               <Thead>
