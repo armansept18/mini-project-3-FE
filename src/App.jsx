@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { types } from "./redux/types";
 import { useEffect, useState } from "react";
 import { receiveUser } from "./middlewares/auth-middlewares";
+import loading from "./assets/icons/loading.gif";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function App() {
   }, []);
 
   return isLoading ? (
-    <></>
+    <>{loading}</>
   ) : (
     <Routes>
       {routes.map((route, i) => (
