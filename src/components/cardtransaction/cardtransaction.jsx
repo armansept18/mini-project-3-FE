@@ -104,7 +104,7 @@ export const CardTransaction = () => {
                 <img
                   src={`http://localhost:2000/static/${cartItem.image}`}
                   alt="pho"
-                  className="rounded-full max-lg:h-10 xl:h-16 xl:w-16  "
+                  className="rounded-full max-lg:h-10 xl:h-16 xl:w-16  max-xl:w-16"
                   style={{ borderRadius: "100%" }}
                 />
               </div>

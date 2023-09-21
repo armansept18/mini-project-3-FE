@@ -101,8 +101,8 @@ export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
                 alt=""
               />
             </div>
-            <div className="flex items-center">
-              <span>{item.product_name}</span>
+            <div className=" truncate hover:text-clip max-sm:max-w-[30px]">
+              <span className="  ">{item.product_name}</span>
               <hr style={{ color: "black" }} />
             </div>
             <div className="flex items-center">

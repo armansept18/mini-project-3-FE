@@ -49,11 +49,11 @@ export const PageNonCoffee = () => {
             <div></div>
             <div className="col-auto">
               <div className="md:h-16 flex flex-col justify-center items-center">
-                <span className="font-bold text-2xl p-4 border-b-4 border-black mt-5">
+                <span className="font-bold text-2xl p-4 border-b-4 border-black mt-5 max-xl:mt-1">
                   Coffee
                 </span>
               </div>
-              <div className="grid grid-cols-4 gap-4 md:mt-6 max-md:grid max-lg:grid-cols-3 max-md:gap-2 max-md:ml-3">
+              <div className="grid grid-cols-4 gap-4 md:mt-6 max-md:grid max-lg:grid-cols-3 max-md:gap-2 max-md:ml-3 max-xl:mt-6">
                 {filteredProduct.length
                   ? filteredProduct?.map((item) => <CardCoffe item={item} />)
                   : products?.map((item) => <CardCoffe item={item} />)}
