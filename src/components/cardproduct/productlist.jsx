@@ -142,7 +142,7 @@ export const CardProduct = ({
                   minW={["50px", "100px"]}
                 >
                   <img
-                    src={`http://localhost:2000/static/${item.image}`}
+                    src={`https://api-mini-project-3.nazhifsetya.site/static/${item.image}`}
                     className="object-fill w-12 h-12 rounded-xl"
                     style={{
                       boxShadow: "1px 2px 3px black",
