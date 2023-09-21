@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
-import { TiTick } from "react-icons/ti";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import {
+  ArrowUpDownIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  DeleteIcon,
+  EditIcon,
+} from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -30,16 +35,28 @@ const CategoryToName = (category_id) => {
   }
 };
 
-export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
-  const [isTickVisible, setIsTickVisible] = useState(
-    Array(product.length).fill(false)
-  );
+export const CardProduct = ({
+  product,
+  onEdit,
+  onDelete,
+  fetchSearch,
+  setSortOrder,
+  sortOrder,
+}) => {
   const toast = useToast();
+  const columnName = [
+    { column_name: "Product Name", sortname: "product_name" },
+    { column_name: "Category", sortname: "category_id" },
+    { column_name: "Price", sortname: "price" },
+    { column_name: "Stock", sortname: "stock" },
+  ];
+  const handleColumnClick = (sortname) => {
+    const newSortOrder = { orderBy: sortname, sortBy: "asc" };
 
-  const toggleStick = (index) => {
-    const newIsTick = [...isTickVisible];
-    newIsTick[index] = !newIsTick[index];
-    setIsTickVisible(newIsTick);
+    if (sortOrder.orderBy === sortname) {
+      newSortOrder.sortBy = sortOrder.sortBy === "asc" ? "desc" : "asc";
+    }
+    setSortOrder(newSortOrder);
   };
 
   const formatIdr = (price) => {
@@ -84,51 +101,98 @@ export const CardProduct = ({ product, onEdit, onDelete, fetchSearch }) => {
     }
   };
   return (
-    <Box overflowX="auto">
-      <Table variant={"simple"} size={["sm", "md", "lg"]} spacing={3}>
-        <Tbody>
-          {product?.product?.map((item, i) => (
-            <Tr key={i} className="justify-center">
-              <Td
-                className=" max-[473px]:hidden"
-                width={["110px", "110px"]}
-                minW={["100px", "100px"]}
-              >
-                <img
-                  src={`http://localhost:2000/static/${item.image}`}
-                  className="object-fill w-12 h-12 rounded-xl"
-                  style={{
-                    boxShadow: "1px 2px 3px black",
-                    border: "1px solid white",
-                  }}
-                  alt=""
-                />
-              </Td>
-              <Td width={["50px", "200px"]} minW={["50px", "200px"]}>
-                {item.product_name}
-              </Td>
-              <Td width={["50px", "200px"]} minW={["50px", "200px"]}>
-                {CategoryToName(item.category_id)}
-              </Td>
-              <Td width={["50px", "100px"]} minW={["50px", "100px"]}>
-                {formatIdr(item.price)}
-              </Td>
-              <Td width={["50px", "100px"]} minW={["50px", "100px"]}>
-                {item.stock}
-              </Td>
-              <Td width={["50px", "50px"]} minW={["50px", "50px"]}>
-                <EditIcon cursor={"pointer"} onClick={() => onEdit(item)} />
-              </Td>
-              <Td width={["50px", "50px"]} minW={["50px", "50px"]}>
-                <DeleteIcon
-                  cursor={"pointer"}
-                  onClick={() => handleDelete(item)}
-                />
-              </Td>
+    <div className="flex justify-center items-center">
+      <Box overflowX="auto" marginLeft={{ base: 0, md: "256px" }}>
+        <Table variant={"simple"} size={["sm", "md", "lg"]} spacing={3}>
+          <Thead>
+            <Tr>
+              <Th className="max-[480px]:hidden"></Th>
+              {columnName.map((val) => (
+                <Th
+                  className="text-xs"
+                  key={val.sortname}
+                  width={["120px", "120px"]}
+                  minW={["110px", "110px"]}
+                  onClick={() => handleColumnClick(val.sortname)}
+                  style={{ cursor: "pointer", whiteSpace: "nowrap" }}
+                >
+                  {val.column_name}
+                  {sortOrder.orderBy === val.sortname ? (
+                    sortOrder.sortBy === "asc" ? (
+                      <ChevronUpIcon />
+                    ) : (
+                      <ChevronDownIcon />
+                    )
+                  ) : (
+                    <ArrowUpDownIcon
+                      boxSize={3}
+                      onClick={() => handleColumnClick(val.sortname)}
+                    />
+                  )}
+                </Th>
+              ))}
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </Box>
+          </Thead>
+          <Tbody>
+            {product?.product?.map((item, i) => (
+              <Tr key={i} className="justify-center">
+                <Td
+                  className="max-[480px]:hidden"
+                  width={["110px", "110px"]}
+                  minW={["50px", "100px"]}
+                >
+                  <img
+                    src={`http://localhost:2000/static/${item.image}`}
+                    className="object-fill w-12 h-12 rounded-xl"
+                    style={{
+                      boxShadow: "1px 2px 3px black",
+                      border: "1px solid white",
+                    }}
+                    alt=""
+                  />
+                </Td>
+                <Td
+                  className="text-sm"
+                  width={["50px", "200px"]}
+                  minW={["50px", "100px"]}
+                >
+                  {item.product_name}
+                </Td>
+                <Td
+                  className="text-sm"
+                  width={["50px", "200px"]}
+                  minW={["50px", "100px"]}
+                >
+                  {CategoryToName(item.category_id)}
+                </Td>
+                <Td
+                  className="text-sm"
+                  width={["50px", "200px"]}
+                  minW={["50px", "100px"]}
+                >
+                  {formatIdr(item.price)}
+                </Td>
+                <Td
+                  className="text-sm"
+                  width={["50px", "200px"]}
+                  minW={["50px", "100px"]}
+                >
+                  {item.stock}
+                </Td>
+                <Td width={["50px", "50px"]} minW={["50px", "50px"]}>
+                  <EditIcon cursor={"pointer"} onClick={() => onEdit(item)} />
+                </Td>
+                <Td width={["50px", "50px"]} minW={["50px", "50px"]}>
+                  <DeleteIcon
+                    cursor={"pointer"}
+                    onClick={() => handleDelete(item)}
+                  />
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </Box>
+    </div>
   );
 };
