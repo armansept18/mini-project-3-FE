@@ -3,6 +3,8 @@ import { SideBarCashier } from "../../components/sidebar/sidebarCashier";
 import { NavTemplateCashier } from "../../components/template/template";
 const beHonest = require("../../assets/pictures/behonet-removebg-preview.png");
 const workSpirit = require("../../assets/pictures/semangat-removebg-preview.png");
+const loading = require("../../assets/icons/loading.gif");
+
 export const CashierLandingPage = () => {
   return (
     <>

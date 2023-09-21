@@ -7,6 +7,7 @@ import { types } from "./redux/types";
 import { useEffect, useState } from "react";
 import { receiveUser } from "./middlewares/auth-middlewares";
 import loading from "./assets/icons/loading.gif";
+import { Spinner } from "@chakra-ui/react";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,9 @@ function App() {
   }, []);
 
   return isLoading ? (
-    <>{loading}</>
+    <>
+      <Spinner color="red.500" />
+    </>
   ) : (
     <Routes>
       {routes.map((route, i) => (
