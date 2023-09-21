@@ -18,9 +18,9 @@ export const SelectDateCakra = ({ fetchTotalSoldByDate }) => {
   return (
     <>
       <div>
-        <span>dateFrom</span>
+        <span>Date From :</span>
 
-        <span className="md: ml-44">dateTo</span>
+        <span className="md: ml-44">Date To :</span>
       </div>
 
       <div className="flex">

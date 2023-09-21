@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+  .pie-chart {
+    margin-left: 240px;
+  }
+  .sales-report-text {
+    margin-left: 240px;
+  }
+  .select-date {
+    margin-left: 240px;
+  }
+  .button-to-cashier {
+    margin-left: 240px;
+  }
+}

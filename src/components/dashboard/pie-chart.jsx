@@ -7,14 +7,14 @@ export const PieChartCategory = () => {
     series: [],
     options: {
       chart: {
-        width: 200,
+        width: 300,
         type: "pie",
       },
       title: {
         text: "Best Selling Categories Alltime",
-        align: "left",
+        align: "center",
         style: {
-          fontSize: "16px",
+          fontSize: "12px",
           color: "#666",
         },
       },
@@ -24,7 +24,7 @@ export const PieChartCategory = () => {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200,
+              width: "100%",
             },
             legend: {
               position: "bottom",
@@ -64,7 +64,7 @@ export const PieChartCategory = () => {
         options={state.options}
         series={state.series}
         type="pie"
-        width="450"
+        width="138%"
         className="shadow-xl"
       />
     </div>
@@ -76,14 +76,14 @@ export const PieChartProduct = () => {
     series: [],
     options: {
       chart: {
-        width: 200,
+        width: 380,
         type: "donut",
       },
       title: {
         text: "Best Selling Product Alltime",
-        align: "left",
+        align: "center",
         style: {
-          fontSize: "16px",
+          fontSize: "12px",
           color: "#666",
         },
       },
@@ -93,7 +93,7 @@ export const PieChartProduct = () => {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200,
+              width: "100%",
             },
             legend: {
               position: "bottom",
@@ -106,26 +106,9 @@ export const PieChartProduct = () => {
           donut: {
             labels: {
               show: true,
-              name: {
-                show: true,
-              },
+              name: {},
               value: {
                 show: true,
-                formatter: function (val, opt) {
-                  return opt.w.globals.labels[opt.seriesIndex] + ": " + val;
-                },
-              },
-              total: {
-                show: true,
-                label: "Total",
-                formatter: function (w) {
-                  const total = w.globals.seriesTotals.reduce((a, b) => {
-                    return a + b;
-                  }, 0);
-                  const productName = w.config.labels[0];
-
-                  return `${productName}: ${total}`;
-                },
               },
             },
           },
@@ -164,7 +147,7 @@ export const PieChartProduct = () => {
         options={state.options}
         series={state.series}
         type="donut"
-        width="500"
+        width="150%"
         className="shadow-xl"
       />
     </div>
