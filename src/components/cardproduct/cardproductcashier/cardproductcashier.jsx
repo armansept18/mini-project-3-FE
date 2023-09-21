@@ -29,10 +29,10 @@ export const CardCoffe = ({ item }) => {
             style={{
               borderRadius: "12px",
               boxShadow: "1px 1px 2px black",
-              width: "150px",
+              width: "130px",
               height: "90px",
             }}
-            className="object-fill max-md:h-7"
+            className="object-fill max-md:h-7 "
             src={`http://localhost:2000/static/${item.image}`}
             alt=""
           />
