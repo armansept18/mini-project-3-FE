@@ -43,7 +43,6 @@ export const TableManagementCategory = ({ products, isEdit }) => {
                         <Td
                           style={{
                             borderRadius: "12px",
-                            boxShadow: "1px 1px 2px black",
                           }}
                         >
                           {item.product_name}
@@ -51,7 +50,6 @@ export const TableManagementCategory = ({ products, isEdit }) => {
                         <Td
                           style={{
                             borderRadius: "12px",
-                            boxShadow: "1px 1px 2px black",
                           }}
                           key={item.id}
                           className="flex justify-between"
