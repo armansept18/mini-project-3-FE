@@ -10,7 +10,6 @@ import { Button } from "@chakra-ui/button";
 import { useNavigate } from "react-router";
 import { useToast } from "@chakra-ui/toast";
 import { SearchBar } from "../../components/cardproduct/search-bar";
-import { SortingBar } from "../../components/cardproduct/sorting-product";
 import { ModalProduct } from "../../components/modals/modal-create-edit-product";
 
 export const ProductPageAdmin = ({ id }) => {
@@ -48,18 +47,6 @@ export const ProductPageAdmin = ({ id }) => {
   };
   console.log(products);
 
-  // const fetchProduct = async (page, pageSize) => {
-  //   await api
-  //     .get("/products/", {
-  //       params: { order: sortField, product_name: sortOrder, page, pageSize },
-  //     })
-  //     .then((result) => setProducts(result.data));
-  // };
-  // useEffect(() => {
-  //   fetchSearch();
-  // }, [search, sortOrder]);
-  // console.log(sortOrder);
-
   const openEditModal = (product) => {
     setEditProduct(product);
     setIsEditModalOpen(true);
@@ -73,12 +60,13 @@ export const ProductPageAdmin = ({ id }) => {
     <>
       <NavTemplateAdmin>
         <SearchBar setSearch={setSearch} />
-        <SortingBar sortOrder={sortOrder} setSortOrder={setSortOrder} />
-        <div className="col-auto items-center justify-center h-24 rounded max-md:mt-5 md:ml-72 md:max-w-5xl">
+        <div className="mt-10">
           <CardProduct
             product={products}
             onEdit={openEditModal}
             fetchSearch={fetchSearch}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
           />
           <PaginationCakraUiAdmin
             fetchSearch={fetchSearch}

@@ -102,7 +102,7 @@ export const CardTransaction = () => {
               {/* ...item content */}
               <div className="flex-shrink-0 max-lg:w-10 max-lg:h-10 h-10 max-sm:h-10 max-sm:w-10 max-sm:mr-4 xl:h-16 xl:w-16 ">
                 <img
-                  src={`http://localhost:2000/static/${cartItem.image}`}
+                  src={`https://api-mini-project-3.nazhifsetya.site/static/${cartItem.image}`}
                   alt="pho"
                   className="rounded-full max-lg:h-10 xl:h-16 xl:w-16  max-xl:w-16"
                   style={{ borderRadius: "100%" }}
@@ -151,25 +151,22 @@ export const CardTransaction = () => {
             <div className="flex items-center justify-center bg-gray-400 rounded-xl mt-5 p-4 md:w-full h-10 text-xl max-lg:text-base">
               Total : Rp {Number(total).toLocaleString(`id-ID`)}
             </div>
-            <div className="flex justify-between max-sm:justify-center items-center max-sm:p-4">
-              <div
-                className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl max-lg:text-base"
-                onClick={() => {
-                  submit();
-                }}
-              >
-                Submit
-              </div>
-              <div className="max-sm:w-8 xl:w-4"></div>
-              <div
-                className="mt-5 flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl max-lg:text-base"
-                onClick={() => {
-                  clearCart();
-                  playClear();
-                }}
-              >
-                Clear
-              </div>
+            <div
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-5 p-4 md:w-full h-10 cursor-pointer text-xl"
+              onClick={() => {
+                submit();
+              }}
+            >
+              Order
+            </div>
+            <div
+              className="flex items-center justify-center hover:bg-blue-500 bg-gray-300 rounded-xl mt-3 p-4 md:w-full h-10 cursor-pointer text-xl"
+              onClick={() => {
+                clearCart();
+                playClear();
+              }}
+            >
+              Clear
             </div>
           </>
         )}

@@ -14,7 +14,7 @@ export const ModalDeleteCashier = ({ isOpen, onClose, onConfirm }) => {
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>YAKINN LURR?</ModalHeader>
+          <ModalHeader>Are you sure want to delete cashier?</ModalHeader>
           <ModalCloseButton />
 
           <ModalFooter
@@ -23,10 +23,10 @@ export const ModalDeleteCashier = ({ isOpen, onClose, onConfirm }) => {
             alignItems={"center"}
           >
             <Button colorScheme="red" onClick={onClose}>
-              GAK DULU
+              NO
             </Button>
             <Button colorScheme="blue" mr={3} onClick={onConfirm} ml={"5"}>
-              YAKIN POLL
+              Yes, I'm Sure
             </Button>
           </ModalFooter>
         </ModalContent>

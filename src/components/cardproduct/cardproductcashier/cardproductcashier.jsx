@@ -33,7 +33,7 @@ export const CardCoffe = ({ item }) => {
               height: "90px",
             }}
             className="object-fill max-md:h-7 "
-            src={`http://localhost:2000/static/${item.image}`}
+            src={`https://api-mini-project-3.nazhifsetya.site/static/${item.image}`}
             alt=""
           />
         </div>

@@ -34,6 +34,7 @@ import { useEffect, useState } from "react";
 import { userLogin } from "../../middlewares/auth-middlewares";
 import jwt_decode from "jwt-decode";
 import background from "../../assets/pictures/peakpx.jpg";
+import bg2 from "../../assets/pictures/bg.jpg";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -123,10 +124,11 @@ export const LoginPage = () => {
             backgroundImage: `linear-gradient(
       rgba(0, 0, 0, 0.5), 
       rgba(0, 0, 0, 0.5)
-    ), url(${background})`,
+    ), url(${bg2})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
+            backgroundPosition: "center",
+            backgroundBlendMode: "darken",
           }}
         >
           <Stack
@@ -188,9 +190,7 @@ export const LoginPage = () => {
                 direction={{ base: "column", sm: "row" }}
                 align={"start"}
                 justify={"space-between"}
-              >
-                <Text color={"blue.500"}>Forgot password?</Text>
-              </Stack>
+              ></Stack>
               <Button
                 colorScheme={"blue"}
                 variant={"solid"}

@@ -34,7 +34,12 @@ export const PaginationCakraUiAdmin = ({
   }, [page, totalItem, search, sortOrder]);
 
   return (
-    <Flex alignItems="center" justifyContent="center" className="mt-16">
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      className="mt-16"
+      marginLeft={{ base: 0, md: "256px" }}
+    >
       <Button
         onClick={() => handlePageChange(page - 1)}
         isDisabled={page === 1}

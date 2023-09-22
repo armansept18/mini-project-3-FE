@@ -32,13 +32,13 @@ export const SearchBar = ({ setSearch }) => {
         spacing={{ base: 4, md: 2 }}
         alignItems="flex-start"
         justify="center"
-        marginLeft={{ base: 0, md: "256px" }} 
-        marginTop={{ base: "102px", md: 0 }} 
-        px={{ base: 4, md: 0 }} 
+        marginLeft={{ base: 0, md: "256px" }}
+        marginTop={{ base: "102px", md: 0 }}
+        px={{ base: 4, md: 0 }}
       >
         <Select
           size="sm"
-          width={{ base: "100%", md: "35%" }} 
+          width={{ base: "100%", md: "35%" }}
           maxWidth="180px"
           backgroundColor="#F1F1F1"
           placeholder="Products Category :"
