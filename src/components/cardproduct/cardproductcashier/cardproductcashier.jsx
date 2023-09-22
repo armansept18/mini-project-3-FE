@@ -51,6 +51,9 @@ export const CardCoffe = ({ item }) => {
               {formatIdr.format(item.price)}
             </span>
           </div>
+          <div className="flex justify-center mt-1">
+            <span className="text-orange-800 text-14">stock: {item.stock}</span>
+          </div>
         </div>
       </div>
     </>
