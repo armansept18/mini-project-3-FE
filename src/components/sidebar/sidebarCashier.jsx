@@ -14,7 +14,12 @@ import { GiManualJuicer } from "react-icons/gi";
 import { FaBowlFood } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
-export const SideBarCashier = ({ isSlideOpen }) => {
+export const SideBarCashier = ({
+  isSlideOpen,
+  category,
+  fetchCategory,
+  setCategoryId,
+}) => {
   // console.log(isSlideOpen);
   const nav = useNavigate();
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -40,6 +45,9 @@ export const SideBarCashier = ({ isSlideOpen }) => {
     transform: isSlideOpen ? "translateX(-100%)" : "translateX(0)",
   };
 
+  useEffect(() => {
+    // fetchCategory();
+  });
   return (
     <>
       <nav className="max-md:w-full max-md:top-0 max-md:fixed dark:bg-gray-900 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative  md:w-52 z-10 ">
@@ -127,44 +135,37 @@ export const SideBarCashier = ({ isSlideOpen }) => {
                 <div className="flex justify-between border-b-4 "></div>
               </div>
             </div>
+
             {/* Navigation :)*/}
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              <li
-                onClick={() => nav("/coffee")}
-                className="cursor-pointer mb-4"
-              >
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <PiCoffeeBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="flex-1 ml-3 whitespace-nowrap">COFFEE</span>
-                </a>
-              </li>
-
-              <li
-                onClick={() => nav("/noncoffee")}
-                className="cursor-pointer mb-4"
-              >
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <GiManualJuicer className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    NON COFFEE
+            <li onClick={() => nav("/coffee")} className="cursor-pointer mb-4">
+              <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <div className="col-auto">
+                  <span className="flex-1 ml-3 whitespace-nowrap text-lg">
+                    Products
                   </span>
-                </a>
-              </li>
-
-              <li onClick={() => nav("/food")} className="cursor-pointer mb-4">
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <FaBowlFood className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="flex-1 ml-3 whitespace-nowrap">FOOD</span>
-                </a>
-              </li>
-
-              <li onClick={() => nav("/snack")} className="cursor-pointer mb-4">
-                <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <PiHamburgerBold className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                  <span className="flex-1 ml-3 whitespace-nowrap">SNACK</span>
-                </a>
-              </li>
-            </ul>
+                  <div className=" border-b-2 border-b-slate-300 w-24"></div>
+                </div>
+              </a>
+            </li>
+            {category?.map((item) => {
+              return (
+                <>
+                  <ul className="md:flex-col md:min-w-full flex flex-col list-none ml-5">
+                    <li
+                      onClick={() => setCategoryId(item.id)}
+                      className="cursor-pointer mb-4"
+                    >
+                      <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <span className="flex-1 ml-3 whitespace-nowrap">
+                          {item.category_name}
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  ;
+                </>
+              );
+            })}
           </div>
         </div>
       </nav>

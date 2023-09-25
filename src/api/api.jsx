@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_api_url,
+  baseURL: "https://api-mini-project-3.nazhifsetya.site/",
 });
 
 export default api;

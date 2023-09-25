@@ -8,12 +8,20 @@ import { useSelector } from "react-redux";
 import api from "../../api/api";
 import { useDebounce } from "use-debounce";
 
-export const NavBarCashier = ({ openSlide, fetchSearch }) => {
+export const NavBarCashier = ({
+  openSlide,
+  fetchSearch,
+  category,
+  fetchCategory,
+  setCategoryId,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const nav = useNavigate();
   const userSelector = useSelector((state) => state.auth);
   //search
   const [search, setSearch] = useState("");
+
+  console.log(category, "ini category di side bar");
 
   const [debouncedSearch] = useDebounce(search, 1000);
 

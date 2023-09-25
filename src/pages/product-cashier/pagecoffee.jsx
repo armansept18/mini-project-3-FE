@@ -8,14 +8,27 @@ import { CartProvider } from "../../components/cardproduct/cardproductcashier/ca
 import { Input } from "@chakra-ui/input";
 
 export const PageCoffee = () => {
-  const category_id = 1;
   const [products, setProducts] = useState([]);
   const [totalItem, setTotalItem] = useState(0);
   const [filteredProduct, setFilteredProduct] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [category_id, setCategory_id] = useState(0);
+
+  const fetchCategory = async () => {
+    try {
+      await api
+        .get("/productcategories")
+        .then((result) => setCategory(result.data))
+        .catch((err) => console.log(err?.message));
+    } catch (err) {
+      console.log(err?.message);
+    }
+  };
+  console.log(category, "bbgggg");
 
   const fetchProduct = async (page, pageSize) => {
     try {
-      console.log(category_id, page, pageSize);
+      // console.log(category_id, page, pageSize);
       const result = await api.get("/products/", {
         params: { category_id, page, pageSize },
       });
@@ -41,10 +54,20 @@ export const PageCoffee = () => {
     }
   };
 
+  useEffect(() => {
+    fetchCategory();
+    fetchProduct();
+  }, [category_id]);
+
   return (
     <>
       <CartProvider>
-        <NavTemplateCashier fetchSearch={fetchSearch}>
+        <NavTemplateCashier
+          fetchSearch={fetchSearch}
+          category={category}
+          fetchCategory={fetchCategory}
+          setCategoryId={setCategory_id}
+        >
           <div className="md:flex md:justify-between md:ml-56 md:h-full">
             <div></div>
             <div className="col-auto">

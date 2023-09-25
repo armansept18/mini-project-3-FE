@@ -16,14 +16,24 @@ export const NavTemplateAdmin = ({ children }) => {
   );
 };
 
-export const NavTemplateCashier = ({ children, fetchSearch }) => {
+export const NavTemplateCashier = ({
+  children,
+  fetchSearch,
+  category,
+  fetchCategory,
+  setCategoryId,
+}) => {
   return (
     <>
       <NavBarCashier fetchSearch={fetchSearch} />
       <div>
         <div>{children}</div>
       </div>
-      <SideBarCashier />
+      <SideBarCashier
+        category={category}
+        fetchCategory={fetchCategory}
+        setCategoryId={setCategoryId}
+      />
     </>
   );
 };
