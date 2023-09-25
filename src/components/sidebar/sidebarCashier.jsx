@@ -141,7 +141,7 @@ export const SideBarCashier = ({
               <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <div className="col-auto">
                   <span className="flex-1 ml-3 whitespace-nowrap text-lg">
-                    Products
+                    Menu
                   </span>
                   <div className=" border-b-2 border-b-slate-300 w-24"></div>
                 </div>
